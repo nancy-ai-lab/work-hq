@@ -259,7 +259,7 @@ function pColor(n){return PEOPLE_COLORS[n.trim().toLowerCase()]||"background:var
 function initials(n){const p=n.trim().split(/\s+/);return(p.length>1?p[0][0]+p[1][0]:n.trim().slice(0,2)).toUpperCase();}
 async function loadFromSheet(){
   try{
-    const r=await fetch(SCRIPT_URL);
+    const r=await fetch(SCRIPT_URL+"?t="+Date.now(),{redirect:"follow"});
     const data=await r.json();
     if(Array.isArray(data)&&data.length){
       tasks=data.map(t=>({
@@ -277,7 +277,8 @@ async function loadFromSheet(){
 async function saveToSheet(){
   if(syncing)return;syncing=true;
   try{
-    await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"save",tasks})});
+    const encoded=encodeURIComponent(JSON.stringify(tasks));
+    await fetch(SCRIPT_URL+"?action=save&tasks="+encoded,{mode:"no-cors"});
   }catch(e){console.log("Save error",e);}
   syncing=false;
 }
