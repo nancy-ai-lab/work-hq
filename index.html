@@ -243,7 +243,8 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <script>
-let tasks=[],idC=1,pendSubs=[],activeFilter='all',expandedId=null;
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwWOImRyEEeD02oBkjAx032e0Di8jSHEy0nQTW_jN_F2JRjPewxx-4UNp51Shor-x2Z/exec";
+let tasks=[],idC=1,pendSubs=[],activeFilter='all',expandedId=null,syncing=false;
 const MSGS_THEIRS=["You did your part. Now the waiting game begins.","Sent it off! Time to hydrate and wait.","Officially their problem for now. Respectable.","You've done your bit. Gold star pending."];
 const MSGS_BOTH=["Everyone's working on it — nice coordination energy!","It's a collab! Keep the momentum going.","Both sides in motion. Teamwork makes the dream work."];
 const MSGS_CLEAR=["Nothing here! Either you're crushing it or this filter is empty.","All clear in this zone! Love to see it."];
@@ -256,7 +257,31 @@ const energyPill={high:"pill-high",med:"pill-med",low:"pill-low"};
 const PEOPLE_COLORS={alex:"background:var(--pk100);color:var(--pk800)",bruce:"background:var(--b100);color:var(--b800)",ryan:"background:var(--t100);color:var(--t600)",nate:"background:var(--pk100);color:var(--pk800)",matt:"background:var(--a100);color:var(--a600)",maria:"background:var(--a100);color:var(--a600)",jamie:"background:var(--c100);color:var(--c600)"};
 function pColor(n){return PEOPLE_COLORS[n.trim().toLowerCase()]||"background:var(--r50);color:var(--r600)";}
 function initials(n){const p=n.trim().split(/\s+/);return(p.length>1?p[0][0]+p[1][0]:n.trim().slice(0,2)).toUpperCase();}
-function save(){try{localStorage.setItem("nhq3_t",JSON.stringify(tasks));localStorage.setItem("nhq3_id",String(idC));}catch(e){}}
+async function loadFromSheet(){
+  try{
+    const r=await fetch(SCRIPT_URL);
+    const data=await r.json();
+    if(Array.isArray(data)&&data.length){
+      tasks=data.map(t=>({
+        id:+t.id,title:t.title,type:t.type,owner:t.owner,energy:t.energy,
+        due:t.due||null,people:t.people?JSON.parse(t.people):[],
+        notes:t.notes||"",link:t.link||"",
+        subs:t.subs?JSON.parse(t.subs):[],
+        done:t.done==="TRUE"||t.done===true,created:+t.created
+      }));
+      idC=Math.max(...tasks.map(x=>x.id))+1;
+    }
+  }catch(e){console.log("Load error",e);}
+  render();suggest();
+}
+async function saveToSheet(){
+  if(syncing)return;syncing=true;
+  try{
+    await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"save",tasks})});
+  }catch(e){console.log("Save error",e);}
+  syncing=false;
+}
+function save(){saveToSheet();}
 function load(){try{const d=localStorage.getItem("nhq3_t");const i=localStorage.getItem("nhq3_id");if(d){tasks=JSON.parse(d);idC=i?+i:tasks.length+1;}}catch(e){}}
 function daysUntil(ds){if(!ds)return null;const d=new Date(ds);const n=new Date();n.setHours(0,0,0,0);return Math.ceil((d-n)/864e5);}
 function duePill(ds){if(!ds)return"";const d=daysUntil(ds);const cls=d<0?"pill-overdue":"pill-due";const txt=d<0?Math.abs(d)+"d overdue":d===0?"Due today":d===1?"Due tomorrow":"Due in "+d+"d";return`<span class="pill ${cls}">${txt}</span>`;}
@@ -289,7 +314,7 @@ if(hasD){html+=`<div class="card-detail ${exp?"open":""}">`;if(t.notes)html+=`<d
 html+=`</div>`;}html+=`</div>`;}
 document.getElementById("board").innerHTML=html||`<div class="empty-state">${activeFilter==="done"?"No completed tasks yet — go get that first checkmark!":"Nothing here yet. Add a task to get started!"}</div>`;}
 function escH(s){if(!s)return"";const d=document.createElement("div");d.textContent=s;return d.innerHTML;}
-load();greeting();render();suggest();
+loadFromSheet();
 </script>
 </body>
 </html>
