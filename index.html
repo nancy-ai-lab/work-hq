@@ -19,7 +19,7 @@
 --b50:#E6F1FB;--b100:#B5D4F4;--b400:#378ADD;--b600:#185FA5;--b800:#0C447C;
 --g50:#EAF3DE;--g100:#C0DD97;--g400:#639922;--g600:#3B6D11;
 --r50:#FCEBEB;--r100:#F7C1C1;--r400:#E24B4A;--r600:#A32D2D;
---radius:12px;--radius-sm:8px;--radius-pill:99px;
+--radius:12px;--radius-sm:8px;
 }
 @media(prefers-color-scheme:dark){:root{
 --bg:#1c1c1a;--bg2:#242422;--bg3:#2c2c2a;
@@ -35,7 +35,7 @@
 --r50:#501313;--r100:#791F1F;--r400:#E24B4A;--r600:#F09595;
 }}
 body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
-.container{max-width:820px;margin:0 auto;padding:1.5rem 1rem 4rem}
+.container{max-width:820px;margin:0 auto;padding:1.5rem 1rem 4rem;position:relative}
 .topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px}
 .app-title{font-size:24px;font-weight:800;color:var(--text)}
 .app-sub{font-size:13px;font-weight:600;color:var(--text2);margin-top:3px}
@@ -66,9 +66,18 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 .form-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .form-group{display:flex;flex-direction:column;flex:1;min-width:140px}
 .form-label{font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
-input[type=text],input[type=date],select,textarea{background:var(--bg);color:var(--text);border:2px solid var(--border2);border-radius:var(--radius-sm);padding:7px 10px;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none;width:100%;transition:border-color .15s}
-input:focus,select:focus,textarea:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
-textarea{resize:vertical;min-height:64px}
+input[type=text],input[type=date],select{background:var(--bg);color:var(--text);border:2px solid var(--border2);border-radius:var(--radius-sm);padding:7px 10px;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none;width:100%;transition:border-color .15s}
+input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
+.rich-editor-wrap{border:2px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg);overflow:hidden;transition:border-color .15s}
+.rich-editor-wrap:focus-within{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
+.rich-toolbar{display:flex;gap:3px;padding:6px 8px;border-bottom:2px solid var(--border);flex-wrap:wrap;align-items:center}
+.tb-btn{width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;transition:all .15s}
+.tb-btn:hover{background:var(--pk50);border-color:var(--pk200);color:var(--pk800)}
+.tb-btn.active{background:var(--pk100);border-color:var(--pk400);color:var(--pk800)}
+.tb-sep{width:1px;height:20px;background:var(--border2);margin:0 3px}
+.tb-color{width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border2);padding:2px;cursor:pointer;background:transparent}
+.rich-editor{min-height:80px;padding:8px 10px;font-size:13px;font-weight:500;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);outline:none;line-height:1.6}
+.rich-editor[placeholder]:empty::before{content:attr(placeholder);color:var(--text3)}
 .sub-add-row{display:flex;gap:6px;margin-top:6px}
 .sub-add-row input{flex:1}
 .add-sub-btn{font-size:12px;font-weight:700;padding:0 12px;border:2px solid var(--border2);border-radius:var(--radius-sm);background:transparent;color:var(--text2);cursor:pointer;white-space:nowrap}
@@ -124,7 +133,9 @@ textarea{resize:vertical;min-height:64px}
 .card-detail.open{display:flex}
 .detail-section{background:var(--bg2);border-radius:var(--radius-sm);padding:10px 12px;border:2px solid var(--border)}
 .detail-label{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--text3);text-transform:uppercase;margin-bottom:6px}
-.detail-content{font-size:13px;font-weight:600;color:var(--text2);line-height:1.6;white-space:pre-wrap}
+.detail-content{font-size:13px;font-weight:500;color:var(--text2);line-height:1.6}
+.detail-content b,.detail-content strong{font-weight:800;color:var(--text)}
+.detail-content i,.detail-content em{font-style:italic}
 .subtask-list{display:flex;flex-direction:column;gap:5px}
 .subtask{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text2)}
 .sub-chk{width:14px;height:14px;border-radius:3px;border:2px solid var(--border2);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
@@ -141,6 +152,10 @@ textarea{resize:vertical;min-height:64px}
 .det-btn:hover{background:var(--bg2)}
 .det-btn.danger:hover{background:var(--r50);color:var(--r600);border-color:var(--r600)}
 .empty-state{padding:2.5rem;text-align:center;color:var(--text3);font-size:13px;font-weight:600;background:var(--bg2);border-radius:var(--radius);border:2px solid var(--border)}
+.edit-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.45);display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;z-index:100;overflow-y:auto}
+.edit-overlay.open{display:flex}
+.edit-modal{background:var(--bg);border-radius:var(--radius);border:2px solid var(--pk200);padding:20px;width:100%;max-width:580px;margin:auto}
+.edit-modal-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:16px}
 </style>
 </head>
 <body>
@@ -221,7 +236,10 @@ textarea{resize:vertical;min-height:64px}
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Notes / context / guides</label>
-        <textarea id="f-notes" placeholder="Background info, instructions, what to keep in mind..."></textarea>
+        <div class="rich-editor-wrap">
+          <div class="rich-toolbar" id="f-toolbar"></div>
+          <div class="rich-editor" id="f-notes" contenteditable="true" placeholder="Background info, instructions, what to keep in mind..."></div>
+        </div>
       </div>
     </div>
     <div class="form-group" style="margin-bottom:10px">
@@ -242,12 +260,78 @@ textarea{resize:vertical;min-height:64px}
   <div id="board"></div>
 </div>
 
+<div class="edit-overlay" id="edit-overlay" onclick="closeEditOverlay(event)">
+  <div class="edit-modal">
+    <div class="edit-modal-title">Edit task</div>
+    <div class="form-row">
+      <div class="form-group" style="flex:2">
+        <label class="form-label">Task title</label>
+        <input type="text" id="e-title">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Type</label>
+        <select id="e-type">
+          <option value="todo">Quick to-do</option>
+          <option value="project">Project</option>
+          <option value="idea">Someday / idea</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Action owner</label>
+        <select id="e-owner">
+          <option value="mine">My action</option>
+          <option value="theirs">Waiting on someone</option>
+          <option value="both">Both in progress</option>
+          <option value="hold">On hold</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Energy needed</label>
+        <select id="e-energy">
+          <option value="med">Medium</option>
+          <option value="high">High focus</option>
+          <option value="low">Low effort</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Due date</label>
+        <input type="date" id="e-due">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="flex:2">
+        <label class="form-label">People involved</label>
+        <input type="text" id="e-people" placeholder="e.g. Alex, Bruce, Ryan">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Link / reference</label>
+        <input type="text" id="e-link" placeholder="https://...">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Notes / context / guides</label>
+        <div class="rich-editor-wrap">
+          <div class="rich-toolbar" id="e-toolbar"></div>
+          <div class="rich-editor" id="e-notes" contenteditable="true" placeholder="Background info, instructions, what to keep in mind..."></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeEdit()">Cancel</button>
+      <button class="btn-save" onclick="saveEdit()">Save changes</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwWOImRyEEeD02oBkjAx032e0Di8jSHEy0nQTW_jN_F2JRjPewxx-4UNp51Shor-x2Z/exec";
-let tasks=[],idC=1,pendSubs=[],activeFilter='all',expandedId=null,syncing=false;
+let tasks=[],idC=1,pendSubs=[],activeFilter='all',expandedId=null,syncing=false,editingId=null;
+
 const MSGS_THEIRS=["You did your part. Now the waiting game begins.","Sent it off! Time to hydrate and wait.","Officially their problem for now. Respectable.","You've done your bit. Gold star pending."];
 const MSGS_BOTH=["Everyone's working on it — nice coordination energy!","It's a collab! Keep the momentum going.","Both sides in motion. Teamwork makes the dream work."];
-const MSGS_CLEAR=["Nothing here! Either you're crushing it or this filter is empty.","All clear in this zone! Love to see it."];
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 const ownerLabel={mine:"My action",theirs:"Waiting on them",both:"Both in progress",hold:"On hold"};
 const ownerPill={mine:"pill-mine",theirs:"pill-theirs",both:"pill-both",hold:"pill-hold"};
@@ -257,6 +341,36 @@ const energyPill={high:"pill-high",med:"pill-med",low:"pill-low"};
 const PEOPLE_COLORS={alex:"background:var(--pk100);color:var(--pk800)",bruce:"background:var(--b100);color:var(--b800)",ryan:"background:var(--t100);color:var(--t600)",nate:"background:var(--pk100);color:var(--pk800)",matt:"background:var(--a100);color:var(--a600)",maria:"background:var(--a100);color:var(--a600)",jamie:"background:var(--c100);color:var(--c600)"};
 function pColor(n){return PEOPLE_COLORS[n.trim().toLowerCase()]||"background:var(--r50);color:var(--r600)";}
 function initials(n){const p=n.trim().split(/\s+/);return(p.length>1?p[0][0]+p[1][0]:n.trim().slice(0,2)).toUpperCase();}
+
+const HIGHLIGHTS=["#FAC775","#9FE1CB","#B5D4F4","#F4C0D1","#C0DD97"];
+const COLORS=["#D4537E","#378ADD","#1D9E75","#BA7517","#E24B4A","#1a1a18"];
+
+function buildToolbar(tbId, editorId){
+  const tb=document.getElementById(tbId);
+  const tools=[
+    {cmd:"bold",label:"B",style:"font-weight:800"},
+    {cmd:"italic",label:"I",style:"font-style:italic"},
+    {cmd:"underline",label:"U",style:"text-decoration:underline"},
+    {cmd:"strikeThrough",label:"S",style:"text-decoration:line-through"},
+  ];
+  let html=tools.map(t=>`<button type="button" class="tb-btn" style="${t.style}" title="${t.cmd}" onclick="fmt('${t.cmd}','${editorId}')">${t.label}</button>`).join("");
+  html+=`<div class="tb-sep"></div>`;
+  html+=`<select class="tb-color" title="Text color" onchange="fmtColor('foreColor',this.value,'${editorId}');this.value=''" style="width:auto;padding:2px 6px;font-size:12px;font-weight:700;height:28px">
+    <option value="">A color</option>
+    ${COLORS.map(c=>`<option value="${c}" style="background:${c};color:#fff">${c}</option>`).join("")}
+  </select>`;
+  html+=`<select class="tb-color" title="Highlight" onchange="fmtColor('hiliteColor',this.value,'${editorId}');this.value=''" style="width:auto;padding:2px 6px;font-size:12px;font-weight:700;height:28px">
+    <option value="">Highlight</option>
+    ${HIGHLIGHTS.map(c=>`<option value="${c}" style="background:${c}">${c}</option>`).join("")}
+  </select>`;
+  html+=`<div class="tb-sep"></div>`;
+  html+=`<button type="button" class="tb-btn" title="Clear formatting" onclick="fmt('removeFormat','${editorId}')" style="font-size:11px">Aa</button>`;
+  tb.innerHTML=html;
+}
+
+function fmt(cmd,editorId){document.getElementById(editorId).focus();document.execCommand(cmd,false,null);}
+function fmtColor(cmd,val,editorId){if(!val)return;document.getElementById(editorId).focus();document.execCommand(cmd,false,val);}
+
 async function loadFromSheet(){
   try{
     const r=await fetch(SCRIPT_URL+"?t="+Date.now(),{redirect:"follow"});
@@ -283,38 +397,107 @@ async function saveToSheet(){
   syncing=false;
 }
 function save(){saveToSheet();}
-function load(){try{const d=localStorage.getItem("nhq3_t");const i=localStorage.getItem("nhq3_id");if(d){tasks=JSON.parse(d);idC=i?+i:tasks.length+1;}}catch(e){}}
+
 function daysUntil(ds){if(!ds)return null;const d=new Date(ds);const n=new Date();n.setHours(0,0,0,0);return Math.ceil((d-n)/864e5);}
 function duePill(ds){if(!ds)return"";const d=daysUntil(ds);const cls=d<0?"pill-overdue":"pill-due";const txt=d<0?Math.abs(d)+"d overdue":d===0?"Due today":d===1?"Due tomorrow":"Due in "+d+"d";return`<span class="pill ${cls}">${txt}</span>`;}
 function greeting(){const h=new Date().getHours();const g=h<12?"Good morning":h<17?"Good afternoon":"Good evening";const m=["Let's get something off that list today.","One task at a time — you've got this.","What are we tackling today?","Progress, not perfection.","Even one done is a win."];document.getElementById("greeting").textContent=g+"! "+rnd(m);}
+
 function toggleForm(){const f=document.getElementById("add-form");const b=document.getElementById("add-toggle-btn");const isOpen=f.classList.toggle("open");b.textContent=isOpen?"— Close form":"+ Add a new task";if(isOpen)setTimeout(()=>document.getElementById("f-title").focus(),50);}
 function addPendingSub(){const inp=document.getElementById("f-sub");const v=inp.value.trim();if(!v)return;pendSubs.push({text:v,done:false});inp.value="";renderPendSubs();}
-document.addEventListener("keydown",e=>{if(e.target.id==="f-sub"&&e.key==="Enter"){e.preventDefault();addPendingSub();}if(e.key==="Escape"&&document.getElementById("add-form").classList.contains("open"))toggleForm();});
+document.addEventListener("keydown",e=>{if(e.target.id==="f-sub"&&e.key==="Enter"){e.preventDefault();addPendingSub();}if(e.key==="Escape"&&document.getElementById("edit-overlay").classList.contains("open"))closeEdit();});
 function removePendSub(i){pendSubs.splice(i,1);renderPendSubs();}
 function renderPendSubs(){document.getElementById("pending-subs").innerHTML=pendSubs.map((s,i)=>`<div class="psub"><span style="color:var(--pk400);font-size:11px">&#9658;</span>${escH(s.text)}<button class="psub-del" onclick="removePendSub(${i})">&#x2715;</button></div>`).join("");}
-function saveTask(){const title=document.getElementById("f-title").value.trim();if(!title)return;const people=document.getElementById("f-people").value.trim().split(",").map(p=>p.trim()).filter(Boolean);tasks.push({id:idC++,title,type:document.getElementById("f-type").value,owner:document.getElementById("f-owner").value,energy:document.getElementById("f-energy").value,due:document.getElementById("f-due").value||null,people,notes:document.getElementById("f-notes").value.trim(),link:document.getElementById("f-link").value.trim(),subs:pendSubs.map(s=>({...s})),done:false,created:Date.now()});pendSubs=[];["f-title","f-notes","f-link","f-people"].forEach(id=>document.getElementById(id).value="");document.getElementById("f-due").value="";document.getElementById("f-type").value="todo";document.getElementById("f-owner").value="mine";document.getElementById("f-energy").value="med";renderPendSubs();save();render();suggest();toggleForm();}
+
+function saveTask(){
+  const title=document.getElementById("f-title").value.trim();if(!title)return;
+  const people=document.getElementById("f-people").value.trim().split(",").map(p=>p.trim()).filter(Boolean);
+  const notes=document.getElementById("f-notes").innerHTML;
+  tasks.push({id:idC++,title,type:document.getElementById("f-type").value,owner:document.getElementById("f-owner").value,energy:document.getElementById("f-energy").value,due:document.getElementById("f-due").value||null,people,notes,link:document.getElementById("f-link").value.trim(),subs:pendSubs.map(s=>({...s})),done:false,created:Date.now()});
+  pendSubs=[];
+  ["f-title","f-link","f-people"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("f-due").value="";
+  document.getElementById("f-notes").innerHTML="";
+  document.getElementById("f-type").value="todo";document.getElementById("f-owner").value="mine";document.getElementById("f-energy").value="med";
+  renderPendSubs();save();render();suggest();toggleForm();
+}
+
 function toggleDone(id){const t=tasks.find(x=>x.id===id);if(t)t.done=!t.done;save();render();suggest();}
 function toggleSub(tid,si){const t=tasks.find(x=>x.id===tid);if(t&&t.subs[si])t.subs[si].done=!t.subs[si].done;save();render();}
 function deleteTask(id){if(!confirm("Remove this task?"))return;tasks=tasks.filter(x=>x.id!==id);if(expandedId===id)expandedId=null;save();render();suggest();}
 function toggleExpand(id){expandedId=expandedId===id?null:id;render();}
+
+function editTask(id){
+  const t=tasks.find(x=>x.id===id);if(!t)return;
+  editingId=id;
+  document.getElementById("e-title").value=t.title;
+  document.getElementById("e-type").value=t.type;
+  document.getElementById("e-owner").value=t.owner;
+  document.getElementById("e-energy").value=t.energy;
+  document.getElementById("e-due").value=t.due||"";
+  document.getElementById("e-people").value=t.people?t.people.join(", "):"";
+  document.getElementById("e-link").value=t.link||"";
+  document.getElementById("e-notes").innerHTML=t.notes||"";
+  document.getElementById("edit-overlay").classList.add("open");
+}
+function closeEditOverlay(e){if(e.target===document.getElementById("edit-overlay"))closeEdit();}
+function closeEdit(){document.getElementById("edit-overlay").classList.remove("open");editingId=null;}
+function saveEdit(){
+  const t=tasks.find(x=>x.id===editingId);if(!t)return;
+  t.title=document.getElementById("e-title").value.trim()||t.title;
+  t.type=document.getElementById("e-type").value;
+  t.owner=document.getElementById("e-owner").value;
+  t.energy=document.getElementById("e-energy").value;
+  t.due=document.getElementById("e-due").value||null;
+  t.people=document.getElementById("e-people").value.trim().split(",").map(p=>p.trim()).filter(Boolean);
+  t.link=document.getElementById("e-link").value.trim();
+  t.notes=document.getElementById("e-notes").innerHTML;
+  closeEdit();save();render();suggest();
+}
+
 function suggest(){const open=tasks.filter(x=>!x.done);if(!open.length){document.getElementById("nudge-msg").textContent="All done! Nothing left — time to celebrate or add more tasks.";return;}const overdue=open.filter(x=>x.due&&daysUntil(x.due)<0);const today=open.filter(x=>x.due&&daysUntil(x.due)===0);const myMove=open.filter(x=>x.owner==="mine");const waiting=open.filter(x=>x.owner==="theirs");const both=open.filter(x=>x.owner==="both");let msg="";if(overdue.length){msg=`Heads up — "${overdue[0].title}" is overdue! That's first on the list, no arguments.`;}else if(today.length&&today.some(x=>x.owner==="mine")){const t=today.find(x=>x.owner==="mine");msg=`"${t.title}" is due TODAY and it's your move. Go go go.`;}else if(myMove.length){msg=`${myMove.length} task${myMove.length>1?"s need":" needs"} YOUR action. Start with "${myMove[0].title}" — ${myMove[0].energy==="low"?"it's a quick one!":myMove[0].energy==="high"?"grab a coffee first.":"you've got this."}`;}else if(both.length){msg=`"${both[0].title}" is a collab in progress — check in and keep it moving. ${rnd(MSGS_BOTH)}`;}else if(waiting.length){msg=`${waiting.length} item${waiting.length>1?"s are":" is"} waiting on someone else. ${rnd(MSGS_THEIRS)} Maybe follow up on "${waiting[0].title}"?`;}else{const pick=open[Math.floor(Math.random()*Math.min(3,open.length))];msg=`No fires today! Pick something from your list. "${pick.title}" could be a good one.`;}document.getElementById("nudge-msg").textContent=msg;}
+
 function setFilter(f){activeFilter=f;render();}
-function render(){const done=tasks.filter(x=>x.done).length;const total=tasks.length;const pct=total?Math.round(done/total*100):0;document.getElementById("progfill").style.width=pct+"%";document.getElementById("progtxt").textContent=pct+"% done";const open=tasks.filter(x=>!x.done);
-document.getElementById("stats").innerHTML=`<div class="stat stat-mine ${activeFilter==='mine'?'active-filter':''}" onclick="setFilter('mine')"><div class="stat-n">${open.filter(x=>x.owner==="mine").length}</div><div class="stat-l">My action</div></div><div class="stat stat-theirs ${activeFilter==='theirs'?'active-filter':''}" onclick="setFilter('theirs')"><div class="stat-n">${open.filter(x=>x.owner==="theirs").length}</div><div class="stat-l">Waiting on them</div></div><div class="stat stat-both ${activeFilter==='both'?'active-filter':''}" onclick="setFilter('both')"><div class="stat-n">${open.filter(x=>x.owner==="both").length}</div><div class="stat-l">Both in progress</div></div><div class="stat stat-done ${activeFilter==='done'?'active-filter':''}" onclick="setFilter('done')"><div class="stat-n">${done}</div><div class="stat-l">Completed</div></div>`;
-const filters=[["all","All tasks"],["mine","My action"],["theirs","Waiting on them"],["both","Both sides"],["hold","On hold"],["idea","Someday"],["done","Done"]];
-document.getElementById("filters").innerHTML=filters.map(([k,l])=>`<button class="filter-pill ${activeFilter===k?"f-"+k:""}" onclick="setFilter('${k}')">${l}</button>`).join("");
-let visible=tasks.filter(t=>{if(activeFilter==="all")return!t.done;if(activeFilter==="done")return t.done;if(activeFilter==="idea")return t.type==="idea"&&!t.done;return t.owner===activeFilter&&!t.done;});
-visible=[...visible].sort((a,b)=>{if(a.done!==b.done)return a.done?1:-1;const p={mine:0,both:1,theirs:2,hold:3};if(p[a.owner]!==p[b.owner])return p[a.owner]-p[b.owner];const da=a.due?daysUntil(a.due):999,db=b.due?daysUntil(b.due):999;return da-db;});
-const secs=[{key:"mine",label:"My action",dot:"dot-mine"},{key:"both",label:"Both in progress",dot:"dot-both"},{key:"theirs",label:"Waiting on them",dot:"dot-theirs"},{key:"hold",label:"On hold",dot:"dot-hold"},{key:"idea",label:"Someday / ideas",dot:"dot-idea"},{key:"done",label:"Completed",dot:""}];
-let html="";
-for(const sec of secs){const items=sec.key==="done"?visible.filter(x=>x.done):sec.key==="idea"?visible.filter(x=>x.type==="idea"&&!x.done&&x.owner!=="hold"):visible.filter(x=>x.owner===sec.key&&!x.done&&x.type!=="idea");if(!items.length)continue;if(activeFilter!=="all"&&activeFilter!=="done"&&activeFilter!==sec.key&&!(activeFilter==="idea"&&sec.key==="idea"))continue;if(activeFilter==="done"&&sec.key!=="done")continue;
-html+=`<div class="section"><div class="section-head"><div class="section-title"><div class="dot ${sec.dot}"></div>${sec.label}</div><div class="section-count">${items.length}</div></div>`;
-for(const t of items){const exp=expandedId===t.id;const hasD=t.notes||t.link||(t.subs&&t.subs.length)||(t.people&&t.people.length);
-html+=`<div class="card ${t.done?"done":""}"><div class="card-main" onclick="toggleExpand(${t.id})"><div class="chk ${t.done?"on":""}" onclick="event.stopPropagation();toggleDone(${t.id})"></div><div class="card-body"><div class="card-title">${escH(t.title)}</div><div class="card-meta"><span class="pill ${ownerPill[t.owner]}">${ownerLabel[t.owner]}</span><span class="pill ${energyPill[t.energy]}">${energyLabel[t.energy]}</span>${t.type!=="todo"?`<span class="pill pill-type">${typeLabel[t.type]}</span>`:""}${duePill(t.due)}${t.people&&t.people.length?t.people.slice(0,2).map(p=>`<span class="pill pill-person">${escH(p)}</span>`).join(""):""}</div></div>${hasD?`<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(${t.id})">${exp?"&#9650;":"&#9660;"}</button>`:""}</div>`;
-if(hasD){html+=`<div class="card-detail ${exp?"open":""}">`;if(t.notes)html+=`<div class="detail-section"><div class="detail-label">Notes &amp; context</div><div class="detail-content">${escH(t.notes)}</div></div>`;if(t.subs&&t.subs.length)html+=`<div class="detail-section"><div class="detail-label">Steps</div><div class="subtask-list">${t.subs.map((s,i)=>`<div class="subtask"><div class="sub-chk ${s.done?"on":""}" onclick="toggleSub(${t.id},${i})"></div><span class="${s.done?"sub-done":""}">${escH(s.text)}</span></div>`).join("")}</div></div>`;if(t.people&&t.people.length)html+=`<div class="detail-section"><div class="detail-label">People involved</div><div class="people-row">${t.people.map(p=>`<div style="display:flex;align-items:center;gap:6px"><div class="avatar" style="${pColor(p)}">${initials(p)}</div><span class="person-name">${escH(p)}</span></div>`).join("")}</div></div>`;if(t.link)html+=`<div class="detail-section"><div class="detail-label">Reference / link</div><a class="link-item" href="${escH(t.link)}" target="_blank">${escH(t.link)}</a></div>`;html+=`<div class="detail-actions"><button class="det-btn danger" onclick="deleteTask(${t.id})">Remove task</button></div></div>`;}
-html+=`</div>`;}html+=`</div>`;}
-document.getElementById("board").innerHTML=html||`<div class="empty-state">${activeFilter==="done"?"No completed tasks yet — go get that first checkmark!":"Nothing here yet. Add a task to get started!"}</div>`;}
+
+function render(){
+  const done=tasks.filter(x=>x.done).length;const total=tasks.length;const pct=total?Math.round(done/total*100):0;
+  document.getElementById("progfill").style.width=pct+"%";document.getElementById("progtxt").textContent=pct+"% done";
+  const open=tasks.filter(x=>!x.done);
+  document.getElementById("stats").innerHTML=`<div class="stat stat-mine ${activeFilter==='mine'?'active-filter':''}" onclick="setFilter('mine')"><div class="stat-n">${open.filter(x=>x.owner==="mine").length}</div><div class="stat-l">My action</div></div><div class="stat stat-theirs ${activeFilter==='theirs'?'active-filter':''}" onclick="setFilter('theirs')"><div class="stat-n">${open.filter(x=>x.owner==="theirs").length}</div><div class="stat-l">Waiting on them</div></div><div class="stat stat-both ${activeFilter==='both'?'active-filter':''}" onclick="setFilter('both')"><div class="stat-n">${open.filter(x=>x.owner==="both").length}</div><div class="stat-l">Both in progress</div></div><div class="stat stat-done ${activeFilter==='done'?'active-filter':''}" onclick="setFilter('done')"><div class="stat-n">${done}</div><div class="stat-l">Completed</div></div>`;
+  const filters=[["all","All tasks"],["mine","My action"],["theirs","Waiting on them"],["both","Both sides"],["hold","On hold"],["idea","Someday"],["done","Done"]];
+  document.getElementById("filters").innerHTML=filters.map(([k,l])=>`<button class="filter-pill ${activeFilter===k?"f-"+k:""}" onclick="setFilter('${k}')">${l}</button>`).join("");
+  let visible=tasks.filter(t=>{if(activeFilter==="all")return!t.done;if(activeFilter==="done")return t.done;if(activeFilter==="idea")return t.type==="idea"&&!t.done;return t.owner===activeFilter&&!t.done;});
+  visible=[...visible].sort((a,b)=>{if(a.done!==b.done)return a.done?1:-1;const p={mine:0,both:1,theirs:2,hold:3};if(p[a.owner]!==p[b.owner])return p[a.owner]-p[b.owner];const da=a.due?daysUntil(a.due):999,db=b.due?daysUntil(b.due):999;return da-db;});
+  const secs=[{key:"mine",label:"My action",dot:"dot-mine"},{key:"both",label:"Both in progress",dot:"dot-both"},{key:"theirs",label:"Waiting on them",dot:"dot-theirs"},{key:"hold",label:"On hold",dot:"dot-hold"},{key:"idea",label:"Someday / ideas",dot:"dot-idea"},{key:"done",label:"Completed",dot:""}];
+  let html="";
+  for(const sec of secs){
+    const items=sec.key==="done"?visible.filter(x=>x.done):sec.key==="idea"?visible.filter(x=>x.type==="idea"&&!x.done&&x.owner!=="hold"):visible.filter(x=>x.owner===sec.key&&!x.done&&x.type!=="idea");
+    if(!items.length)continue;
+    if(activeFilter!=="all"&&activeFilter!=="done"&&activeFilter!==sec.key&&!(activeFilter==="idea"&&sec.key==="idea"))continue;
+    if(activeFilter==="done"&&sec.key!=="done")continue;
+    html+=`<div class="section"><div class="section-head"><div class="section-title"><div class="dot ${sec.dot}"></div>${sec.label}</div><div class="section-count">${items.length}</div></div>`;
+    for(const t of items){
+      const exp=expandedId===t.id;
+      const hasD=t.notes||t.link||(t.subs&&t.subs.length)||(t.people&&t.people.length);
+      html+=`<div class="card ${t.done?"done":""}"><div class="card-main" onclick="toggleExpand(${t.id})"><div class="chk ${t.done?"on":""}" onclick="event.stopPropagation();toggleDone(${t.id})"></div><div class="card-body"><div class="card-title">${escH(t.title)}</div><div class="card-meta"><span class="pill ${ownerPill[t.owner]}">${ownerLabel[t.owner]}</span><span class="pill ${energyPill[t.energy]}">${energyLabel[t.energy]}</span>${t.type!=="todo"?`<span class="pill pill-type">${typeLabel[t.type]}</span>`:""}${duePill(t.due)}${t.people&&t.people.length?t.people.slice(0,2).map(p=>`<span class="pill pill-person">${escH(p)}</span>`).join(""):""}</div></div>${hasD?`<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(${t.id})">${exp?"&#9650;":"&#9660;"}</button>`:""}</div>`;
+      if(hasD){
+        html+=`<div class="card-detail ${exp?"open":""}">`;
+        if(t.notes)html+=`<div class="detail-section"><div class="detail-label">Notes &amp; context</div><div class="detail-content">${t.notes}</div></div>`;
+        if(t.subs&&t.subs.length)html+=`<div class="detail-section"><div class="detail-label">Steps</div><div class="subtask-list">${t.subs.map((s,i)=>`<div class="subtask"><div class="sub-chk ${s.done?"on":""}" onclick="toggleSub(${t.id},${i})"></div><span class="${s.done?"sub-done":""}">${escH(s.text)}</span></div>`).join("")}</div></div>`;
+        if(t.people&&t.people.length)html+=`<div class="detail-section"><div class="detail-label">People involved</div><div class="people-row">${t.people.map(p=>`<div style="display:flex;align-items:center;gap:6px"><div class="avatar" style="${pColor(p)}">${initials(p)}</div><span class="person-name">${escH(p)}</span></div>`).join("")}</div></div>`;
+        if(t.link)html+=`<div class="detail-section"><div class="detail-label">Reference / link</div><a class="link-item" href="${escH(t.link)}" target="_blank">${escH(t.link)}</a></div>`;
+        html+=`<div class="detail-actions"><button class="det-btn" onclick="editTask(${t.id})">Edit task</button><button class="det-btn danger" onclick="deleteTask(${t.id})">Remove task</button></div></div>`;
+      }
+      html+=`</div>`;
+    }
+    html+=`</div>`;
+  }
+  document.getElementById("board").innerHTML=html||`<div class="empty-state">${activeFilter==="done"?"No completed tasks yet — go get that first checkmark!":"Nothing here yet. Add a task to get started!"}</div>`;
+}
 function escH(s){if(!s)return"";const d=document.createElement("div");d.textContent=s;return d.innerHTML;}
+
+greeting();
+buildToolbar("f-toolbar","f-notes");
+buildToolbar("e-toolbar","e-notes");
 loadFromSheet();
 </script>
 </body>
