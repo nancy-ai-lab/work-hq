@@ -564,6 +564,7 @@ function renderFilters(){
   ];
   const catFilters=[["task","Quick tasks"],["project","Projects"],["recurring","Recurring"],["tracking","Tracking"],["idea","Ideas"]];
   const catColors={task:"f-cat-task",project:"f-cat-project",recurring:"f-cat-recurring",tracking:"f-cat-tracking",idea:"f-cat-idea"};
+  const catActiveBg={task:"var(--b400)",project:"var(--pk400)",recurring:"var(--t400)",tracking:"var(--a400)",idea:"var(--c400)"};
   let html=groups.map(g=>`
     <div class="filter-group">
       <div class="filter-group-label">${g.label}</div>
@@ -572,7 +573,11 @@ function renderFilters(){
   `).join("");
   html+=`<div class="filter-group">
     <div class="filter-group-label">By category <span style="font-size:10px;color:var(--text3);font-weight:600;text-transform:none;letter-spacing:0">(select multiple)</span></div>
-    <div class="filter-row">${catFilters.map(([k,l])=>`<button class="filter-pill ${activeCats.has(k)?catColors[k]:""}" onclick="toggleCat('${k}')">${l}${activeCats.has(k)?' ✓':''}</button>`).join("")}</div>
+    <div class="filter-row">${catFilters.map(([k,l])=>{
+      const active=activeCats.has(k);
+      const style=active?`background:${catActiveBg[k]};color:#fff;border-color:${catActiveBg[k]};transform:scale(1.05)`:'';
+      return `<button class="filter-pill" style="${style}" onclick="toggleCat('${k}')">${l}${active?' ✓':''}</button>`;
+    }).join("")}</div>
   </div>`;
   document.getElementById("filters-wrap").innerHTML=html;
 }
