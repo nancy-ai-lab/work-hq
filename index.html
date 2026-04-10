@@ -115,10 +115,13 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100);
 .filter-pill.f-both{background:var(--a400);color:#fff;border-color:var(--a400)}
 .filter-pill.f-hold{background:var(--c400);color:#fff;border-color:var(--c400)}
 .filter-pill.f-today{background:var(--r400);color:#fff;border-color:var(--r400)}
+.filter-pill.f-this_week{background:var(--a400);color:#fff;border-color:var(--a400)}
+.filter-pill.f-planned_today{background:var(--b400);color:#fff;border-color:var(--b400)}
+.filter-pill.f-planned_week{background:var(--t400);color:#fff;border-color:var(--t400)}
+.filter-pill.f-today{background:var(--r400);color:#fff;border-color:var(--r400)}
 .filter-pill.f-this-week{background:var(--a400);color:#fff;border-color:var(--a400)}
 .filter-pill.f-planned-today{background:var(--b400);color:#fff;border-color:var(--b400)}
 .filter-pill.f-planned-week{background:var(--t400);color:#fff;border-color:var(--t400)}
-.filter-pill.f-cat-task{background:var(--b400);color:#fff;border-color:var(--b400)}
 .filter-pill.f-cat-project{background:var(--pk400);color:#fff;border-color:var(--pk400)}
 .filter-pill.f-cat-recurring{background:var(--t400);color:#fff;border-color:var(--t400)}
 .filter-pill.f-cat-tracking{background:var(--a400);color:#fff;border-color:var(--a400)}
@@ -403,7 +406,7 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100);
 
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwWOImRyEEeD02oBkjAx032e0Di8jSHEy0nQTW_jN_F2JRjPewxx-4UNp51Shor-x2Z/exec";
-let tasks=[],idC=1,pendSubs=[],activeFilter='all',expandedId=null,syncing=false,editingId=null;
+let tasks=[],idC=1,pendSubs=[],activeFilter='all',activeCats=new Set(),expandedId=null,syncing=false,editingId=null;
 
 const MSGS_THEIRS=["You did your part. Now the waiting game begins.","Sent it off! Time to hydrate and wait.","Officially their problem for now. Respectable.","You've done your bit. Gold star pending."];
 const MSGS_BOTH=["Everyone's working on it — nice coordination energy!","It's a collab! Keep the momentum going.","Both sides in motion. Teamwork makes the dream work."];
@@ -544,26 +547,34 @@ function suggest(){
   document.getElementById("nudge-msg").textContent=msg;
 }
 
-function setFilter(f){activeFilter=f;render();}
+function setFilter(f){activeFilter=f;activeCats.clear();render();}
+function toggleCat(cat){
+  if(activeCats.has(cat))activeCats.delete(cat);
+  else activeCats.add(cat);
+  if(activeCats.size>0)activeFilter='multi-cat';
+  else activeFilter='all';
+  render();
+}
 
 function renderFilters(){
   const groups=[
     {label:"Overview",filters:[["all","All tasks"],["done","Done"]]},
     {label:"By ownership",filters:[["mine","Action needed"],["theirs","Awaiting other's action"],["both","Collaborative progress"],["hold","On hold"]]},
     {label:"By date",filters:[["today","Due today"],["this-week","Due this week"],["planned-today","Planned today"],["planned-week","Planned this week"]]},
-    {label:"By category",filters:[["cat-task","Quick tasks"],["cat-project","Projects"],["cat-recurring","Recurring"],["cat-tracking","Tracking"],["cat-idea","Ideas"]]},
   ];
-  document.getElementById("filters-wrap").innerHTML=groups.map(g=>`
+  const catFilters=[["task","Quick tasks"],["project","Projects"],["recurring","Recurring"],["tracking","Tracking"],["idea","Ideas"]];
+  const catColors={task:"f-cat-task",project:"f-cat-project",recurring:"f-cat-recurring",tracking:"f-cat-tracking",idea:"f-cat-idea"};
+  let html=groups.map(g=>`
     <div class="filter-group">
       <div class="filter-group-label">${g.label}</div>
-      <div class="filter-row">${g.filters.map(([k,l])=>`<button class="filter-pill ${activeFilter===k?"f-"+k.replace("-","_").replace("-","_"):""}" style="${activeFilter===k?"transform:scale(1.05)":""}" onclick="setFilter('${k}')">${l}</button>`).join("")}</div>
+      <div class="filter-row">${g.filters.map(([k,l])=>`<button class="filter-pill ${activeFilter===k?"f-"+k.replaceAll("-","_"):""}" onclick="setFilter('${k}')">${l}</button>`).join("")}</div>
     </div>
   `).join("");
-  document.querySelectorAll(".filter-pill").forEach(btn=>{
-    if(btn.getAttribute("onclick")===`setFilter('${activeFilter}')`){
-      btn.style.transform="scale(1.05)";
-    }
-  });
+  html+=`<div class="filter-group">
+    <div class="filter-group-label">By category <span style="font-size:10px;color:var(--text3);font-weight:600;text-transform:none;letter-spacing:0">(select multiple)</span></div>
+    <div class="filter-row">${catFilters.map(([k,l])=>`<button class="filter-pill ${activeCats.has(k)?catColors[k]:""}" onclick="toggleCat('${k}')">${l}${activeCats.has(k)?' ✓':''}</button>`).join("")}</div>
+  </div>`;
+  document.getElementById("filters-wrap").innerHTML=html;
 }
 
 function render(){
@@ -581,6 +592,7 @@ function render(){
   let visible=tasks.filter(t=>{
     if(activeFilter==="all")return!t.done;
     if(activeFilter==="done")return t.done;
+    if(activeFilter==="multi-cat")return activeCats.has(t.cat)&&!t.done;
     if(activeFilter==="today")return t.due&&daysUntil(t.due)===0&&!t.done;
     if(activeFilter==="this-week"){const d=daysUntil(t.due);return t.due&&d>=0&&d<=6&&!t.done;}
     if(activeFilter==="planned-today")return t.plan&&daysUntil(t.plan)===0&&!t.done;
