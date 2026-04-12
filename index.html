@@ -92,9 +92,13 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100);
 .add-sub-btn{font-size:12px;font-weight:700;padding:0 12px;border:2px solid var(--border2);border-radius:var(--radius-sm);background:transparent;color:var(--text2);cursor:pointer;white-space:nowrap;transition:transform .15s cubic-bezier(.34,1.56,.64,1)}
 .add-sub-btn:hover{background:var(--bg3);transform:scale(1.05)}
 .pending-subs{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.psub-wrap{display:flex;flex-direction:column;gap:2px;margin-bottom:4px}
 .psub{font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:6px;animation:popIn .2s cubic-bezier(.34,1.56,.64,1)}
+.psub-indent{margin-left:20px;color:var(--text3)}
 .psub-del{background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;transition:transform .15s}
 .psub-del:hover{transform:scale(1.3);color:var(--r400)}
+.substep{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--text3);margin-left:26px}
+.substep .sub-chk{width:12px;height:12px;border-radius:2px}
 .form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
 .btn-save{font-size:13px;font-weight:700;padding:8px 22px;border-radius:99px;background:var(--pk400);color:#fff;border:none;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 .btn-save:hover{background:var(--pk600);transform:scale(1.06)}
@@ -430,6 +434,9 @@ function buildToolbar(tbId,editorId){
   const tools=[{cmd:"bold",label:"B",style:"font-weight:800"},{cmd:"italic",label:"I",style:"font-style:italic"},{cmd:"underline",label:"U",style:"text-decoration:underline"},{cmd:"strikeThrough",label:"S",style:"text-decoration:line-through"}];
   let html=tools.map(t=>`<button type="button" class="tb-btn" style="${t.style}" onclick="fmt('${t.cmd}','${editorId}')">${t.label}</button>`).join("");
   html+=`<div class="tb-sep"></div>`;
+  html+=`<button type="button" class="tb-btn" title="Bullet list" onclick="fmt('insertUnorderedList','${editorId}')" style="font-size:15px">&#8226;&#8212;</button>`;
+  html+=`<button type="button" class="tb-btn" title="Numbered list" onclick="fmt('insertOrderedList','${editorId}')" style="font-size:12px">1.</button>`;
+  html+=`<div class="tb-sep"></div>`;
   html+=`<select class="tb-color" onchange="fmtColor('foreColor',this.value,'${editorId}');this.value=''" style="width:auto"><option value="">A color</option>${COLORS.map(c=>`<option value="${c}" style="background:${c};color:#fff">${c}</option>`).join("")}</select>`;
   html+=`<select class="tb-color" onchange="fmtColor('hiliteColor',this.value,'${editorId}');this.value=''" style="width:auto"><option value="">Highlight</option>${HIGHLIGHTS.map(c=>`<option value="${c}" style="background:${c}">${c}</option>`).join("")}</select>`;
   html+=`<div class="tb-sep"></div><button type="button" class="tb-btn" onclick="fmt('removeFormat','${editorId}')" style="font-size:11px">Aa</button>`;
@@ -493,6 +500,7 @@ function toggleDone(id){
   } else {t.done=!t.done;save();render();suggest();}
 }
 function toggleSub(tid,si){const t=tasks.find(x=>x.id===tid);if(t&&t.subs[si])t.subs[si].done=!t.subs[si].done;save();render();}
+function toggleSubSub(tid,si,ssi){const t=tasks.find(x=>x.id===tid);if(t&&t.subs[si]&&t.subs[si].subs&&t.subs[si].subs[ssi])t.subs[si].subs[ssi].done=!t.subs[si].subs[ssi].done;save();render();}
 function deleteTask(id){if(!confirm("Remove this task?"))return;tasks=tasks.filter(x=>x.id!==id);if(expandedId===id)expandedId=null;save();render();suggest();}
 function toggleExpand(id){expandedId=expandedId===id?null:id;render();}
 
@@ -655,7 +663,11 @@ function render(){
       if(hasD){
         html+=`<div class="card-detail ${exp?"open":""}">`;
         if(t.notes)html+=`<div class="detail-section"><div class="detail-label">Notes &amp; context</div><div class="detail-content">${t.notes}</div></div>`;
-        if(t.subs&&t.subs.length)html+=`<div class="detail-section"><div class="detail-label">Steps</div><div class="subtask-list">${t.subs.map((s,i)=>`<div class="subtask"><div class="sub-chk ${s.done?"on":""}" onclick="toggleSub(${t.id},${i})"></div><span class="${s.done?"sub-done":""}">${escH(s.text)}</span></div>`).join("")}</div></div>`;
+        if(t.subs&&t.subs.length)html+=`<div class="detail-section"><div class="detail-label">Steps</div><div class="subtask-list">${t.subs.map((s,i)=>`
+          <div>
+            <div class="subtask"><div class="sub-chk ${s.done?"on":""}" onclick="toggleSub(${t.id},${i})"></div><span class="${s.done?"sub-done":""}">${escH(s.text)}</span></div>
+            ${s.subs&&s.subs.length?s.subs.map((ss,j)=>`<div class="substep"><div class="sub-chk ${ss.done?"on":""}" onclick="toggleSubSub(${t.id},${i},${j})"></div><span class="${ss.done?"sub-done":""}">${escH(ss.text)}</span></div>`).join(""):""}
+          </div>`).join("")}</div></div>`;
         if(t.people&&t.people.length)html+=`<div class="detail-section"><div class="detail-label">People involved</div><div class="people-row">${t.people.map(p=>`<div style="display:flex;align-items:center;gap:6px"><div class="avatar" style="${pColor(p)}">${initials(p)}</div><span class="person-name">${escH(p)}</span></div>`).join("")}</div></div>`;
         if(t.link)html+=`<div class="detail-section"><div class="detail-label">Reference / link</div><a class="link-item" href="${escH(t.link)}" target="_blank">${escH(t.link)}</a></div>`;
         html+=`<div class="detail-actions"><button class="det-btn" onclick="editTask(${t.id})">Edit task</button><button class="det-btn danger" onclick="deleteTask(${t.id})">Remove task</button></div></div>`;
