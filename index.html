@@ -254,13 +254,12 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
       </div>
     </div>
 
-    <button class="add-toggle" id="add-toggle-btn" onclick="toggleForm(null)">+ Add a new task</button>
-  <div class="quick-add-row">
-    <button class="quick-btn qb-task" onclick="toggleForm('task')">&#9670; Quick task</button>
-    <button class="quick-btn qb-project" onclick="toggleForm('project')">&#9632; Project</button>
-    <button class="quick-btn qb-recurring" onclick="toggleForm('recurring')">&#8635; Recurring</button>
-    <button class="quick-btn qb-tracking" onclick="toggleForm('tracking')">&#128200; Tracking</button>
-    <button class="quick-btn qb-idea" onclick="toggleForm('idea')">&#128161; Idea</button>
+    <div class="quick-add-row">
+    <button class="quick-btn qb-task" onclick="toggleForm('task')">+ Quick task</button>
+    <button class="quick-btn qb-project" onclick="toggleForm('project')">+ Project</button>
+    <button class="quick-btn qb-recurring" onclick="toggleForm('recurring')">+ Recurring</button>
+    <button class="quick-btn qb-tracking" onclick="toggleForm('tracking')">+ Tracking</button>
+    <button class="quick-btn qb-idea" onclick="toggleForm('idea')">+ Idea</button>
   </div>
 
     <div class="add-form" id="add-form">
@@ -548,22 +547,19 @@ function planPill(ds){if(!ds)return"";const d=daysUntil(ds);const txt=d<0?"Plann
 function greeting(){const h=new Date().getHours();const g=h<12?"Good morning":h<17?"Good afternoon":"Good evening";const m=["Let's get something off that list today.","One task at a time — you've got this.","What are we tackling today?","Progress, not perfection.","Even one done is a win."];document.getElementById("greeting").textContent=g+"! "+rnd(m);}
 
 function toggleForm(cat){
-  const f=document.getElementById("add-form");const b=document.getElementById("add-toggle-btn");
-  const alreadyOpen=f.classList.contains("open");
-  if(alreadyOpen&&!cat){f.classList.remove("open");b.textContent="+ Add a new task";return;}
-  if(alreadyOpen&&cat){
-    document.getElementById("f-cat").value=cat;
-    toggleRecur("f-cat","f-recur-row");
-    setTimeout(()=>document.getElementById("f-title").focus(),50);
-    return;
+  const f=document.getElementById("add-form");
+  const isOpen=f.classList.contains("open");
+  if(isOpen&&document.getElementById("f-cat").value===cat){
+    closeForm();return;
   }
   f.classList.add("open");
-  b.textContent="— Close form";
-  if(cat){document.getElementById("f-cat").value=cat;toggleRecur("f-cat","f-recur-row");}
+  document.getElementById("f-cat").value=cat;
+  toggleRecur("f-cat","f-recur-row");
   setTimeout(()=>document.getElementById("f-title").focus(),50);
 }
 function closeForm(){
-  const f=document.getElementById("add-form");const b=document.getElementById("add-toggle-btn");
+  const f=document.getElementById("add-form");
+  const b=document.getElementById("add-toggle-btn");
   f.classList.remove("open");
   b.textContent="+ Add a new task";
 }
