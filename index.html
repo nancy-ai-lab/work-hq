@@ -254,7 +254,7 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
       </div>
     </div>
 
-    <button class="add-toggle" id="add-toggle-btn" onclick="toggleForm('task')">+ Add a new task</button>
+    <button class="add-toggle" id="add-toggle-btn" onclick="toggleForm(null)">+ Add a new task</button>
   <div class="quick-add-row">
     <button class="quick-btn qb-task" onclick="toggleForm('task')">&#9670; Quick task</button>
     <button class="quick-btn qb-project" onclick="toggleForm('project')">&#9632; Project</button>
@@ -345,7 +345,7 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
         <div class="steps-list" id="f-steps-list"></div>
       </div>
       <div class="form-actions">
-        <button class="btn-cancel" onclick="toggleForm()">Cancel</button>
+        <button class="btn-cancel" onclick="closeForm()">Cancel</button>
         <button class="btn-save" onclick="saveTask()">Save task</button>
       </div>
     </div>
@@ -551,13 +551,21 @@ function toggleForm(cat){
   const f=document.getElementById("add-form");const b=document.getElementById("add-toggle-btn");
   const alreadyOpen=f.classList.contains("open");
   if(alreadyOpen&&!cat){f.classList.remove("open");b.textContent="+ Add a new task";return;}
-  f.classList.add("open");
-  b.textContent="— Close form";
-  if(cat){
+  if(alreadyOpen&&cat){
     document.getElementById("f-cat").value=cat;
     toggleRecur("f-cat","f-recur-row");
+    setTimeout(()=>document.getElementById("f-title").focus(),50);
+    return;
   }
+  f.classList.add("open");
+  b.textContent="— Close form";
+  if(cat){document.getElementById("f-cat").value=cat;toggleRecur("f-cat","f-recur-row");}
   setTimeout(()=>document.getElementById("f-title").focus(),50);
+}
+function closeForm(){
+  const f=document.getElementById("add-form");const b=document.getElementById("add-toggle-btn");
+  f.classList.remove("open");
+  b.textContent="+ Add a new task";
 }
 
 function saveTask(){
@@ -572,7 +580,7 @@ function saveTask(){
   document.getElementById("f-notes").innerHTML="";document.getElementById("f-cat").value="task";
   document.getElementById("f-owner").value="mine";document.getElementById("f-energy").value="med";
   document.getElementById("f-recur-row").style.display="none";
-  renderSteps("f");save();render();suggest();toggleForm();
+  renderSteps("f");save();render();suggest();closeForm();
 }
 
 function toggleDone(id){
