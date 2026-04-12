@@ -94,9 +94,17 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 .nudge-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .nudge-btn{font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;background:var(--pk100);color:var(--pk800);border:2px solid var(--pk200);cursor:pointer;transition:transform .15s cubic-bezier(.34,1.56,.64,1)}
 .nudge-btn:hover{background:var(--pk400);color:#fff;border-color:var(--pk400);transform:scale(1.07)}
-.add-toggle{font-size:13px;font-weight:700;padding:8px 20px;border-radius:99px;border:2px solid var(--pk400);background:transparent;color:var(--pk600);cursor:pointer;margin-bottom:1.25rem;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
-.add-toggle:hover{background:var(--pk50);transform:scale(1.05)}
-.add-form{background:var(--bg2);border-radius:var(--radius);padding:16px;margin-bottom:1.5rem;border:2px solid var(--pk100);display:none}
+.quick-add-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem;margin-top:-8px}
+.quick-btn{font-size:12px;font-weight:700;padding:5px 12px;border-radius:99px;border:2px solid;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1);font-family:'Plus Jakarta Sans',-apple-system,sans-serif}
+.quick-btn:hover{transform:scale(1.08)}
+.quick-btn:active{transform:scale(0.94)}
+.qb-task{background:var(--b50);color:var(--b800);border-color:var(--b100)}.qb-task:hover{background:var(--b400);color:#fff;border-color:var(--b400)}
+.qb-project{background:var(--pk50);color:var(--pk800);border-color:var(--pk100)}.qb-project:hover{background:var(--pk400);color:#fff;border-color:var(--pk400)}
+.qb-recurring{background:var(--t50);color:var(--t600);border-color:var(--t100)}.qb-recurring:hover{background:var(--t400);color:#fff;border-color:var(--t400)}
+.qb-tracking{background:var(--a50);color:var(--a600);border-color:var(--a100)}.qb-tracking:hover{background:var(--a400);color:#fff;border-color:var(--a400)}
+.qb-idea{background:var(--c50);color:var(--c600);border-color:var(--c100)}.qb-idea:hover{background:var(--c400);color:#fff;border-color:var(--c400)}
+.add-toggle{font-size:13px;font-weight:700;padding:8px 20px;border-radius:99px;border:2px solid var(--pk400);background:transparent;color:var(--pk600);cursor:pointer;margin-bottom:8px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.add-toggle:hover{background:var(--pk50);transform:scale(1.05)}background:var(--bg2);border-radius:var(--radius);padding:16px;margin-bottom:1.5rem;border:2px solid var(--pk100);display:none}
 .add-form.open{display:block;animation:slideDown .25s cubic-bezier(.34,1.56,.64,1)}
 @keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
 @keyframes cardIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
@@ -246,7 +254,14 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
       </div>
     </div>
 
-    <button class="add-toggle" id="add-toggle-btn" onclick="toggleForm()">+ Add a new task</button>
+    <button class="add-toggle" id="add-toggle-btn" onclick="toggleForm('task')">+ Add a new task</button>
+  <div class="quick-add-row">
+    <button class="quick-btn qb-task" onclick="toggleForm('task')">&#9670; Quick task</button>
+    <button class="quick-btn qb-project" onclick="toggleForm('project')">&#9632; Project</button>
+    <button class="quick-btn qb-recurring" onclick="toggleForm('recurring')">&#8635; Recurring</button>
+    <button class="quick-btn qb-tracking" onclick="toggleForm('tracking')">&#128200; Tracking</button>
+    <button class="quick-btn qb-idea" onclick="toggleForm('idea')">&#128161; Idea</button>
+  </div>
 
     <div class="add-form" id="add-form">
       <div class="form-row">
@@ -530,11 +545,17 @@ function duePill(ds){if(!ds)return"";const d=daysUntil(ds);const cls=d<0?"pill-o
 function planPill(ds){if(!ds)return"";const d=daysUntil(ds);const txt=d<0?"Planned "+Math.abs(d)+"d ago":d===0?"Planned today":d===1?"Planned tomorrow":"Planned in "+d+"d";return`<span class="pill pill-plan">${txt}</span>`;}
 function greeting(){const h=new Date().getHours();const g=h<12?"Good morning":h<17?"Good afternoon":"Good evening";const m=["Let's get something off that list today.","One task at a time — you've got this.","What are we tackling today?","Progress, not perfection.","Even one done is a win."];document.getElementById("greeting").textContent=g+"! "+rnd(m);}
 
-function toggleForm(){
+function toggleForm(cat){
   const f=document.getElementById("add-form");const b=document.getElementById("add-toggle-btn");
-  const isOpen=f.classList.toggle("open");
-  b.textContent=isOpen?"— Close form":"+ Add a new task";
-  if(isOpen)setTimeout(()=>document.getElementById("f-title").focus(),50);
+  const alreadyOpen=f.classList.contains("open");
+  if(alreadyOpen&&!cat){f.classList.remove("open");b.textContent="+ Add a new task";return;}
+  f.classList.add("open");
+  b.textContent="— Close form";
+  if(cat){
+    document.getElementById("f-cat").value=cat;
+    toggleRecur("f-cat","f-recur-row");
+  }
+  setTimeout(()=>document.getElementById("f-title").focus(),50);
 }
 
 function saveTask(){
