@@ -446,7 +446,7 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwWOImRyEEeD02oBkjAx032e0Di8jSHEy0nQTW_jN_F2JRjPewxx-4UNp51Shor-x2Z/exec";
-let tasks=[],idC=1,activeFilter='all',activeCats=new Set(),expandedId=null,syncing=false,editingId=null;
+let tasks=[],idC=1,activeFilter='all',activeCats=new Set(),expandedId=null,syncing=false,editingId=null,dataLoaded=false;
 let fSteps=[],eSteps=[],sidebarCollapsed=false;
 
 const MSGS_THEIRS=["You did your part. Now the waiting game begins.","Sent it off! Time to hydrate and wait.","Officially their problem for now. Respectable."];
@@ -530,15 +530,17 @@ async function loadFromSheet(){
       idC=Math.max(...tasks.map(x=>x.id))+1;
     }
   }catch(e){console.log("Load error",e);}
+  dataLoaded=true;
   render();suggest();
 }
 async function saveToSheet(){
+  if(!dataLoaded){console.log("Blocked save — data not loaded yet");return;}
   if(syncing)return;syncing=true;
   try{const enc=encodeURIComponent(JSON.stringify(tasks));await fetch(SCRIPT_URL+"?action=save&tasks="+enc,{mode:"no-cors"});}
   catch(e){console.log("Save error",e);}
   syncing=false;
 }
-function save(){saveToSheet();}
+function save(){if(dataLoaded)saveToSheet();}
 
 function daysUntil(ds){if(!ds)return null;const d=new Date(ds);const n=new Date();n.setHours(0,0,0,0);return Math.ceil((d-n)/864e5);}
 function duePill(ds){if(!ds)return"";const d=daysUntil(ds);const cls=d<0?"pill-overdue":"pill-due";const txt=d<0?Math.abs(d)+"d overdue":d===0?"Due today":d===1?"Due tomorrow":"Due in "+d+"d";return`<span class="pill ${cls}">${txt}</span>`;}
