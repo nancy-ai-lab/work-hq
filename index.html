@@ -18,6 +18,7 @@
 --b50:#E6F1FB;--b100:#B5D4F4;--b400:#378ADD;--b600:#185FA5;--b800:#0C447C;
 --g50:#EAF3DE;--g100:#C0DD97;--g400:#639922;--g600:#3B6D11;
 --r50:#FCEBEB;--r100:#F7C1C1;--r400:#E24B4A;--r600:#A32D2D;
+--v50:#F0EDFB;--v100:#CFC5F4;--v400:#7C5CBF;--v600:#5A3D9A;
 --radius:12px;--radius-sm:8px;
 --sidebar:240px;
 }
@@ -32,6 +33,7 @@
 --c50:#2C2C2A;--c100:#444441;--c400:#888780;--c600:#B4B2A9;
 --t50:#04342C;--t100:#085041;--t400:#1D9E75;--t600:#5DCAA5;
 --r50:#501313;--r100:#791F1F;--r400:#E24B4A;--r600:#F09595;
+--v50:#1E1535;--v100:#3B2870;--v400:#7C5CBF;--v600:#AE93E8;
 }}
 body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
 
@@ -109,6 +111,8 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .recur-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg);border:2px solid var(--border2);border-radius:var(--radius-sm);margin-bottom:10px;flex-wrap:wrap}
 .recur-label{font-size:13px;font-weight:700;color:var(--text2);flex:1}
 .freq-select{font-size:12px;padding:4px 8px;border:2px solid var(--pk200);border-radius:var(--radius-sm);background:var(--pk50);color:var(--pk800);font-weight:700;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none}
+/* Frequency hint shown inside the recur row */
+.freq-hint{font-size:11px;font-weight:600;color:var(--text3);margin-top:4px;width:100%}
 .rich-editor-wrap{border:2px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg);overflow:hidden;transition:border-color .15s}
 .rich-editor-wrap:focus-within{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .rich-toolbar{display:flex;gap:3px;padding:6px 8px;border-bottom:2px solid var(--border);flex-wrap:wrap;align-items:center;background:var(--bg2)}
@@ -175,7 +179,15 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .cat-recurring{background:var(--t50);color:var(--t600);border:1.5px solid var(--t100)}
 .cat-tracking{background:var(--a50);color:var(--a600);border:1.5px solid var(--a100)}
 .cat-idea{background:var(--c50);color:var(--c600);border:1.5px solid var(--c100)}
-.pill-freq{background:var(--t50);color:var(--t600);border:1.5px solid var(--t100)}
+/* Frequency pills — each type gets a distinct look */
+.pill-freq-daily{background:var(--t50);color:var(--t600);border:1.5px solid var(--t100)}
+.pill-freq-weekly{background:var(--b50);color:var(--b800);border:1.5px solid var(--b100)}
+.pill-freq-monthly{background:var(--pk50);color:var(--pk800);border:1.5px solid var(--pk100)}
+.pill-freq-quarterly{background:var(--a50);color:var(--a600);border:1.5px solid var(--a100)}
+.pill-freq-yearly{background:var(--v50);color:var(--v600);border:1.5px solid var(--v100)}
+.pill-freq-asneeded{background:var(--c50);color:var(--c600);border:1.5px solid var(--c100)}
+.pill-freq-holiday{background:var(--r50);color:var(--r600);border:1.5px solid var(--r100)}
+.pill-freq-reminder{background:var(--v50);color:var(--v600);border:1.5px solid var(--v100)}
 .card-actions{display:flex;align-items:center;gap:4px;flex-shrink:0;margin-top:1px}
 .card-action-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--border2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:transform .2s cubic-bezier(.34,1.56,.64,1),background .15s}
 .card-action-btn:hover{transform:scale(1.15)}
@@ -211,6 +223,16 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .edit-modal{background:var(--bg);border-radius:var(--radius);border:2px solid var(--pk200);padding:20px;width:100%;max-width:580px;margin:auto;animation:slideDown .25s cubic-bezier(.34,1.56,.64,1)}
 .edit-modal-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:16px}
 .recur-done-note{font-size:12px;font-weight:600;color:var(--t600);background:var(--t50);border:1.5px solid var(--t100);border-radius:var(--radius-sm);padding:6px 10px;margin-top:4px}
+.sync-bar{position:fixed;bottom:20px;right:20px;z-index:200;display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:99px;font-size:12px;font-weight:700;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;border:2px solid transparent;box-shadow:0 4px 16px rgba(0,0,0,0.12);opacity:0;transform:translateY(10px);transition:opacity .25s,transform .25s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.sync-bar.visible{opacity:1;transform:translateY(0)}
+.sync-bar.saving{background:var(--bg2);border-color:var(--border2);color:var(--text2)}
+.sync-bar.saved{background:var(--g50);border-color:var(--g100);color:var(--g600)}
+.sync-bar.failed{background:var(--r50);border-color:var(--r100);color:var(--r600)}
+.sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sync-bar.saving .sync-dot{background:var(--text3);animation:syncPulse .8s ease-in-out infinite}
+.sync-bar.saved .sync-dot{background:var(--g400)}
+.sync-bar.failed .sync-dot{background:var(--r400)}
+@keyframes syncPulse{0%,100%{opacity:.3}50%{opacity:1}}
 </style>
 </head>
 <body>
@@ -267,11 +289,23 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
       </div>
       <div class="recur-row" id="f-recur-row" style="display:none">
         <span class="recur-label">How often does this repeat?</span>
-        <select class="freq-select" id="f-freq">
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
+        <select class="freq-select" id="f-freq" onchange="updateFreqHint('f-freq','f-freq-hint')">
+          <optgroup label="Short cycle">
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </optgroup>
+          <optgroup label="Long cycle">
+            <option value="quarterly">Quarterly</option>
+            <option value="yearly">Yearly</option>
+          </optgroup>
+          <optgroup label="Flexible">
+            <option value="asneeded">As Needed</option>
+            <option value="reminder">Reminder</option>
+            <option value="holiday">Holiday Prep</option>
+          </optgroup>
         </select>
+        <span class="freq-hint" id="f-freq-hint"></span>
       </div>
       <div class="form-row">
         <div class="form-group">
@@ -339,6 +373,8 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
   </div>
 </div>
 
+<div class="sync-bar" id="sync-bar"><div class="sync-dot"></div><span id="sync-msg">Saving…</span></div>
+
 <div class="edit-overlay" id="edit-overlay" onclick="closeEditOverlay(event)">
   <div class="edit-modal">
     <div class="edit-modal-title">Edit task</div>
@@ -360,11 +396,23 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
     </div>
     <div class="recur-row" id="e-recur-row" style="display:none">
       <span class="recur-label">How often does this repeat?</span>
-      <select class="freq-select" id="e-freq">
-        <option value="daily">Daily</option>
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
+      <select class="freq-select" id="e-freq" onchange="updateFreqHint('e-freq','e-freq-hint')">
+        <optgroup label="Short cycle">
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </optgroup>
+        <optgroup label="Long cycle">
+          <option value="quarterly">Quarterly</option>
+          <option value="yearly">Yearly</option>
+        </optgroup>
+        <optgroup label="Flexible">
+          <option value="asneeded">As Needed</option>
+          <option value="reminder">Reminder</option>
+          <option value="holiday">Holiday Prep</option>
+        </optgroup>
       </select>
+      <span class="freq-hint" id="e-freq-hint"></span>
     </div>
     <div class="form-row">
       <div class="form-group">
@@ -443,7 +491,40 @@ const catLabel={task:"Quick task",project:"Project",recurring:"Recurring task",t
 const catClass={task:"cat-task",project:"cat-project",recurring:"cat-recurring",tracking:"cat-tracking",idea:"cat-idea"};
 const energyLabel={high:"High focus",med:"Medium",low:"Low effort"};
 const energyPill={high:"pill-high",med:"pill-med",low:"pill-low"};
-const freqLabel={daily:"Daily",weekly:"Weekly",monthly:"Monthly"};
+
+// Expanded frequency labels and pill classes
+const freqLabel={
+  daily:"Daily",
+  weekly:"Weekly",
+  monthly:"Monthly",
+  quarterly:"Quarterly",
+  yearly:"Yearly",
+  asneeded:"As Needed",
+  reminder:"Reminder",
+  holiday:"Holiday Prep"
+};
+const freqPillClass={
+  daily:"pill-freq-daily",
+  weekly:"pill-freq-weekly",
+  monthly:"pill-freq-monthly",
+  quarterly:"pill-freq-quarterly",
+  yearly:"pill-freq-yearly",
+  asneeded:"pill-freq-asneeded",
+  reminder:"pill-freq-reminder",
+  holiday:"pill-freq-holiday"
+};
+// Hint text shown in the form when a frequency is selected
+const freqHints={
+  daily:"Resets every day — great for daily check-ins or routines.",
+  weekly:"Resets every 7 days — good for weekly reports or reviews.",
+  monthly:"Resets every month — billing cycles, monthly reports, etc.",
+  quarterly:"Resets every 3 months — Q1/Q2/Q3/Q4 tasks.",
+  yearly:"Resets every year — annual reviews, renewals, anniversaries.",
+  asneeded:"No auto-reset. Mark done whenever it happens, then it resets itself.",
+  reminder:"Like As Needed but flagged as a reminder. Good for passive nudges.",
+  holiday:"Resets yearly around the holiday season — great for prep checklists."
+};
+
 const PEOPLE_COLORS={alex:"background:var(--pk100);color:var(--pk800)",bruce:"background:var(--b100);color:var(--b800)",ryan:"background:var(--t100);color:var(--t600)",nate:"background:var(--pk100);color:var(--pk800)",matt:"background:var(--a100);color:var(--a600)",maria:"background:var(--a100);color:var(--a600)",jamie:"background:var(--c100);color:var(--c600)"};
 const HIGHLIGHTS=["#FAC775","#9FE1CB","#B5D4F4","#F4C0D1","#C0DD97"];
 const COLORS=["#D4537E","#378ADD","#1D9E75","#BA7517","#E24B4A","#1a1a18"];
@@ -451,8 +532,23 @@ const COLORS=["#D4537E","#378ADD","#1D9E75","#BA7517","#E24B4A","#1a1a18"];
 function pColor(n){return PEOPLE_COLORS[n.trim().toLowerCase()]||"background:var(--r50);color:var(--r600)";}
 function initials(n){const p=n.trim().split(/\s+/);return(p.length>1?p[0][0]+p[1][0]:n.trim().slice(0,2)).toUpperCase();}
 function escH(s){if(!s)return"";const d=document.createElement("div");d.textContent=s;return d.innerHTML;}
-function toggleRecur(catId,rowId){document.getElementById(rowId).style.display=document.getElementById(catId).value==="recurring"?"flex":"none";}
+
+function toggleRecur(catId,rowId){
+  const isRecur=document.getElementById(catId).value==="recurring";
+  document.getElementById(rowId).style.display=isRecur?"flex":"none";
+  if(isRecur){
+    const hintId=rowId.replace("recur-row","freq-hint");
+    const freqId=rowId.replace("recur-row","freq");
+    updateFreqHint(freqId,hintId);
+  }
+}
 function toggleSidebar(){sidebarCollapsed=!sidebarCollapsed;document.getElementById("sidebar").classList.toggle("collapsed",sidebarCollapsed);}
+
+function updateFreqHint(freqId,hintId){
+  const val=document.getElementById(freqId).value;
+  const hint=document.getElementById(hintId);
+  if(hint)hint.textContent=freqHints[val]||"";
+}
 
 function buildToolbar(tbId,editorId){
   const tb=document.getElementById(tbId);
@@ -517,10 +613,26 @@ async function loadFromSheet(){
   }catch(e){console.log("Load error",e);}
   render();suggest();
 }
+let syncTimer=null;
+function showSync(state,msg){
+  const bar=document.getElementById("sync-bar");
+  const txt=document.getElementById("sync-msg");
+  bar.className="sync-bar "+state+" visible";
+  txt.textContent=msg;
+  if(syncTimer)clearTimeout(syncTimer);
+  if(state!=="saving")syncTimer=setTimeout(()=>{bar.classList.remove("visible");},2800);
+}
 async function saveToSheet(){
   if(syncing)return;syncing=true;
-  try{const enc=encodeURIComponent(JSON.stringify(tasks));await fetch(SCRIPT_URL+"?action=save&tasks="+enc,{mode:"no-cors"});}
-  catch(e){console.log("Save error",e);}
+  showSync("saving","Saving…");
+  try{
+    const enc=encodeURIComponent(JSON.stringify(tasks));
+    await fetch(SCRIPT_URL+"?action=save&tasks="+enc,{mode:"no-cors"});
+    showSync("saved","Saved ✓");
+  }catch(e){
+    console.log("Save error",e);
+    showSync("failed","Save failed — check connection");
+  }
   syncing=false;
 }
 function save(){saveToSheet();}
@@ -555,12 +667,32 @@ function saveTask(){
 function toggleDone(id){
   const t=tasks.find(x=>x.id===id);if(!t)return;
   if(t.cat==="recurring"&&!t.done){
-    t.done=true;t.lastDone=new Date().toISOString().split("T")[0];t.due=nextDueDate(t.freq,t.due);
+    // "As Needed" and "Reminder" types: just mark done, no date advance
+    const noAutoReset=["asneeded","reminder"];
+    t.done=true;t.lastDone=new Date().toISOString().split("T")[0];
+    if(!noAutoReset.includes(t.freq)&&t.due){
+      t.due=nextDueDate(t.freq,t.due);
+    }
     save();render();suggest();
     setTimeout(()=>{t.done=false;save();render();suggest();},1500);
   } else {t.done=!t.done;save();render();suggest();}
 }
-function nextDueDate(freq,cur){const b=cur?new Date(cur):new Date();if(freq==="daily")b.setDate(b.getDate()+1);else if(freq==="weekly")b.setDate(b.getDate()+7);else b.setMonth(b.getMonth()+1);return b.toISOString().split("T")[0];}
+
+function nextDueDate(freq,cur){
+  const b=cur?new Date(cur):new Date();
+  switch(freq){
+    case"daily":b.setDate(b.getDate()+1);break;
+    case"weekly":b.setDate(b.getDate()+7);break;
+    case"monthly":b.setMonth(b.getMonth()+1);break;
+    case"quarterly":b.setMonth(b.getMonth()+3);break;
+    case"yearly":
+    case"holiday":b.setFullYear(b.getFullYear()+1);break;
+    // asneeded / reminder — no date advance, caller skips this
+    default:break;
+  }
+  return b.toISOString().split("T")[0];
+}
+
 function toggleSub(tid,si){const t=tasks.find(x=>x.id===tid);if(t&&t.subs[si])t.subs[si].done=!t.subs[si].done;save();render();}
 function toggleSubSub(tid,si,ssi){const t=tasks.find(x=>x.id===tid);if(t&&t.subs[si]&&t.subs[si].subs[ssi])t.subs[si].subs[ssi].done=!t.subs[si].subs[ssi].done;save();render();}
 function deleteTask(id){if(!confirm("Remove this task?"))return;tasks=tasks.filter(x=>x.id!==id);if(expandedId===id)expandedId=null;save();render();suggest();}
@@ -574,6 +706,7 @@ function editTask(id){
   document.getElementById("e-cat").value=t.cat||"task";
   document.getElementById("e-freq").value=t.freq||"daily";
   document.getElementById("e-recur-row").style.display=t.cat==="recurring"?"flex":"none";
+  if(t.cat==="recurring")updateFreqHint("e-freq","e-freq-hint");
   document.getElementById("e-owner").value=t.owner;
   document.getElementById("e-energy").value=t.energy;
   document.getElementById("e-due").value=t.due||"";
@@ -632,7 +765,6 @@ function renderSidebar(){
   const counts={all:open.length,mine:open.filter(x=>x.owner==="mine").length,theirs:open.filter(x=>x.owner==="theirs").length,both:open.filter(x=>x.owner==="both").length,hold:open.filter(x=>x.owner==="hold").length,done:tasks.filter(x=>x.done).length,today:open.filter(x=>x.due&&daysUntil(x.due)===0).length,"this-week":open.filter(x=>{const d=daysUntil(x.due);return x.due&&d>=0&&d<=6;}).length,"planned-today":open.filter(x=>x.plan&&daysUntil(x.plan)===0).length,"planned-week":open.filter(x=>{const d=daysUntil(x.plan);return x.plan&&d>=0&&d<=6;}).length};
   const catCounts={task:open.filter(x=>x.cat==="task").length,project:open.filter(x=>x.cat==="project").length,recurring:open.filter(x=>x.cat==="recurring").length,tracking:open.filter(x=>x.cat==="tracking").length,idea:open.filter(x=>x.cat==="idea").length};
   const catActiveBg={task:"var(--b400)",project:"var(--pk400)",recurring:"var(--t400)",tracking:"var(--a400)",idea:"var(--c400)"};
-  const catActiveColor={task:"#fff",project:"#fff",recurring:"#fff",tracking:"#fff",idea:"#fff"};
 
   const groups=[
     {label:"Overview",items:[
@@ -683,6 +815,13 @@ function renderSidebar(){
   </div>`;
 
   document.getElementById("sidebar-content").innerHTML=html;
+}
+
+function freqPill(t){
+  if(t.cat!=="recurring"||!t.freq)return"";
+  const cls=freqPillClass[t.freq]||"pill-freq-asneeded";
+  const lbl=freqLabel[t.freq]||t.freq;
+  return`<span class="pill ${cls}">${lbl}</span>`;
 }
 
 function render(){
@@ -748,13 +887,13 @@ function render(){
             <div class="card-title">${escH(t.title)}</div>
             <div class="card-meta">
               <span class="pill ${catClass[t.cat]||"cat-task"}">${catLabel[t.cat]||t.cat}</span>
-              ${isRecur&&t.freq?`<span class="pill pill-freq">${freqLabel[t.freq]||t.freq}</span>`:""}
+              ${freqPill(t)}
               <span class="pill ${ownerPill[t.owner]}">${ownerLabel[t.owner]}</span>
               <span class="pill ${energyPill[t.energy]}">${energyLabel[t.energy]}</span>
               ${duePill(t.due)}${planPill(t.plan)}
               ${t.people&&t.people.length?t.people.slice(0,2).map(p=>`<span class="pill pill-person">${escH(p)}</span>`).join(""):""}
             </div>
-            ${isRecur&&t.lastDone?`<div class="recur-done-note">Last completed: ${t.lastDone} — next due: ${t.due||"not set"}</div>`:""}
+            ${isRecur&&t.lastDone?`<div class="recur-done-note">Last completed: ${t.lastDone}${t.freq&&!["asneeded","reminder"].includes(t.freq)?" — next due: "+(t.due||"not set"):""}</div>`:""}
           </div>
           <div class="card-actions">
             <button class="card-action-btn edit-btn" onclick="editTask(${t.id})" title="Edit">&#9998;</button>
