@@ -312,8 +312,8 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
     </div>
 
     <div class="tab-nav">
-      <button class="tab-btn active" onclick="switchTab('tasks')">Tasks</button>
-      <button class="tab-btn" onclick="switchTab('calls')">Scheduled Calls <span id="calls-badge" style="font-size:10px;font-weight:800;padding:1px 7px;border-radius:99px;background:var(--b100);color:var(--b800);margin-left:4px"></span></button>
+      <button class="tab-btn active" onclick="switchTab('tasks')">⚡ Tasks</button>
+      <button class="tab-btn" onclick="switchTab('calls')">Scheduled Calls 📞 <span id="calls-badge" style="font-size:10px;font-weight:800;padding:1px 7px;border-radius:99px;background:var(--b100);color:var(--b800);margin-left:4px;display:none"></span></button>
     </div>
 
     <!-- TASKS TAB -->
@@ -1187,7 +1187,7 @@ function saveCalls(){
 function renderCallsBadge(){
   const upcoming=calls.filter(c=>c.status==='upcoming').length;
   const badge=document.getElementById('calls-badge');
-  if(badge)badge.textContent=upcoming||'';
+  if(badge){badge.textContent=upcoming||'';badge.style.display=upcoming?'inline':'none';}
 }
 
 function toggleCallForm(){
