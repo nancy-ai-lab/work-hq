@@ -148,10 +148,15 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 .dot-mine{background:var(--pk400)}.dot-theirs{background:var(--b400)}.dot-both{background:var(--a400)}.dot-hold{background:var(--c400)}.dot-idea{background:var(--c400)}.dot-recurring{background:var(--t400)}
 .section-count{font-size:11px;font-weight:700;color:var(--text3)}
-.card{background:var(--bg);border:2px solid var(--border2);border-radius:var(--radius);margin-bottom:6px;overflow:hidden;transition:border-color .2s,transform .2s cubic-bezier(.34,1.56,.64,1);animation:cardIn .25s cubic-bezier(.34,1.56,.64,1) both}
+.card{background:var(--bg);border:2px solid var(--border2);border-radius:var(--radius);margin-bottom:6px;overflow:hidden;transition:border-color .2s,transform .2s cubic-bezier(.34,1.56,.64,1);animation:cardIn .25s cubic-bezier(.34,1.56,.64,1) both;cursor:grab}
 .card:hover{border-color:var(--pk400);transform:translateX(3px)}
 .card.done{opacity:.5}
 .card.recurring-card{border-color:var(--t100)}
+.card.dragging{opacity:.35;transform:scale(.97);cursor:grabbing;border-color:var(--pk400)}
+.card.drag-over-top{border-top:3px solid var(--pk400)!important}
+.card.drag-over-bottom{border-bottom:3px solid var(--pk400)!important}
+.section.drop-target{background:var(--pk50);border-radius:var(--radius);transition:background .15s}
+.stat.drag-over{transform:translateY(-6px) scale(1.06)!important;outline:3px solid var(--pk400);outline-offset:2px}
 .card-main{padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
 .chk{width:18px;height:18px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 .chk:hover{transform:scale(1.2)}
@@ -832,10 +837,10 @@ function render(){
   document.getElementById("progtxt").textContent=pct+"% done";
   const open=tasks.filter(x=>!x.done);
   document.getElementById("stats").innerHTML=`
-    <div class="stat stat-mine ${activeFilter==="mine"?"active-filter":""}" onclick="setFilter('mine')"><div class="stat-n">${open.filter(x=>x.owner==="mine").length}</div><div class="stat-l">Action needed</div></div>
-    <div class="stat stat-theirs ${activeFilter==="theirs"?"active-filter":""}" onclick="setFilter('theirs')"><div class="stat-n">${open.filter(x=>x.owner==="theirs").length}</div><div class="stat-l">Awaiting others</div></div>
-    <div class="stat stat-both ${activeFilter==="both"?"active-filter":""}" onclick="setFilter('both')"><div class="stat-n">${open.filter(x=>x.owner==="both").length}</div><div class="stat-l">Collab progress</div></div>
-    <div class="stat stat-done ${activeFilter==="done"?"active-filter":""}" onclick="setFilter('done')"><div class="stat-n">${done}</div><div class="stat-l">Completed</div></div>`;
+    <div class="stat stat-mine ${activeFilter==="mine"?"active-filter":""}" onclick="setFilter('mine')" ondragover="statDragOver(event,'mine')" ondragleave="statDragLeave(event)" ondrop="statDrop(event,'mine')"><div class="stat-n">${open.filter(x=>x.owner==="mine").length}</div><div class="stat-l">Action needed</div></div>
+    <div class="stat stat-theirs ${activeFilter==="theirs"?"active-filter":""}" onclick="setFilter('theirs')" ondragover="statDragOver(event,'theirs')" ondragleave="statDragLeave(event)" ondrop="statDrop(event,'theirs')"><div class="stat-n">${open.filter(x=>x.owner==="theirs").length}</div><div class="stat-l">Awaiting others</div></div>
+    <div class="stat stat-both ${activeFilter==="both"?"active-filter":""}" onclick="setFilter('both')" ondragover="statDragOver(event,'both')" ondragleave="statDragLeave(event)" ondrop="statDrop(event,'both')"><div class="stat-n">${open.filter(x=>x.owner==="both").length}</div><div class="stat-l">Collab progress</div></div>
+    <div class="stat stat-done ${activeFilter==="done"?"active-filter":""}" onclick="setFilter('done')" ondragover="statDragOver(event,'done')" ondragleave="statDragLeave(event)" ondrop="statDrop(event,'done')"><div class="stat-n">${done}</div><div class="stat-l">Completed</div></div>`;
 
   renderSidebar();
 
@@ -874,13 +879,13 @@ function render(){
     const show=activeFilter==="all"||activeFilter==="multi-cat"||activeFilter===sec.key||activeFilter==="done"||["today","this-week","planned-today","planned-week"].includes(activeFilter);
     if(!show)continue;
     if(activeFilter==="done"&&sec.key!=="done")continue;
-    html+=`<div class="section"><div class="section-head"><div class="section-title"><div class="dot ${sec.dot}"></div>${sec.label}</div><div class="section-count">${items.length}</div></div>`;
+    html+=`<div class="section" data-sec="${sec.key}" ondragover="secDragOver(event,'${sec.key}')" ondragleave="secDragLeave(event)" ondrop="secDrop(event,'${sec.key}')"><div class="section-head"><div class="section-title"><div class="dot ${sec.dot}"></div>${sec.label}</div><div class="section-count">${items.length}</div></div>`;
     for(const t of items){
       const exp=expandedId===t.id;
       const hasSubs=t.subs&&t.subs.length>0;
       const hasD=t.notes||t.link||hasSubs||(t.people&&t.people.length);
       const isRecur=t.cat==="recurring";
-      html+=`<div class="card ${t.done?"done":""} ${isRecur?"recurring-card":""}">
+      html+=`<div class="card ${t.done?"done":""} ${isRecur?"recurring-card":""}" draggable="true" data-id="${t.id}" ondragstart="dragStart(event,${t.id})" ondragend="dragEnd(event)" ondragover="cardDragOver(event,${t.id})" ondragleave="cardDragLeave(event)" ondrop="cardDrop(event,${t.id},'${sec.key}')">
         <div class="card-main">
           <div class="chk ${t.done?"on":""}" onclick="toggleDone(${t.id})"></div>
           <div class="card-body" onclick="toggleExpand(${t.id})">
@@ -923,6 +928,111 @@ function render(){
   }
   document.getElementById("board").innerHTML=html||`<div class="empty-state">${activeFilter==="done"?"No completed tasks yet — go get that first checkmark!":"Nothing here yet. Add a task to get started!"}</div>`;
 }
+
+// ── Drag & Drop ──────────────────────────────────────────
+let dragId=null;
+
+// Section key → what owner/cat change to apply when dropped there
+const secOwnerMap={mine:"mine",both:"both",theirs:"theirs",hold:"hold",idea:null,recurring:null,done:null};
+
+function dragStart(e,id){
+  dragId=id;
+  e.dataTransfer.effectAllowed="move";
+  e.dataTransfer.setData("text/plain",id);
+  setTimeout(()=>{const el=document.querySelector(`.card[data-id="${id}"]`);if(el)el.classList.add("dragging");},0);
+}
+function dragEnd(e){
+  document.querySelectorAll(".card.dragging").forEach(el=>el.classList.remove("dragging"));
+  document.querySelectorAll(".card.drag-over-top,.card.drag-over-bottom").forEach(el=>{el.classList.remove("drag-over-top","drag-over-bottom");});
+  document.querySelectorAll(".section.drop-target").forEach(el=>el.classList.remove("drop-target"));
+  document.querySelectorAll(".stat.drag-over").forEach(el=>el.classList.remove("drag-over"));
+}
+
+// Card-level drag: shows top/bottom insertion line
+function cardDragOver(e,id){
+  if(dragId===null||dragId===id)return;
+  e.preventDefault();e.stopPropagation();
+  const el=document.querySelector(`.card[data-id="${id}"]`);if(!el)return;
+  const rect=el.getBoundingClientRect();
+  const mid=rect.top+rect.height/2;
+  el.classList.remove("drag-over-top","drag-over-bottom");
+  el.classList.add(e.clientY<mid?"drag-over-top":"drag-over-bottom");
+}
+function cardDragLeave(e){
+  const el=e.currentTarget;
+  el.classList.remove("drag-over-top","drag-over-bottom");
+}
+function cardDrop(e,targetId,secKey){
+  e.preventDefault();e.stopPropagation();
+  if(dragId===null||dragId===targetId)return;
+  const el=document.querySelector(`.card[data-id="${targetId}"]`);
+  const insertBefore=el&&el.classList.contains("drag-over-top");
+
+  const src=tasks.find(x=>x.id===dragId);
+  const tgt=tasks.find(x=>x.id===targetId);
+  if(!src||!tgt)return;
+
+  // Apply section owner change
+  applySecChange(src,secKey);
+
+  // Reorder: remove src, insert near target
+  tasks=tasks.filter(x=>x.id!==dragId);
+  const tgtIdx=tasks.findIndex(x=>x.id===targetId);
+  tasks.splice(insertBefore?tgtIdx:tgtIdx+1,0,src);
+
+  dragId=null;save();render();suggest();
+}
+
+// Section-level drop (dropping onto the section header/empty area)
+function secDragOver(e,secKey){
+  e.preventDefault();
+  const sec=document.querySelector(`.section[data-sec="${secKey}"]`);
+  if(sec)sec.classList.add("drop-target");
+}
+function secDragLeave(e){
+  // only remove if truly leaving the section
+  if(!e.currentTarget.contains(e.relatedTarget)){
+    e.currentTarget.classList.remove("drop-target");
+  }
+}
+function secDrop(e,secKey){
+  e.preventDefault();
+  document.querySelectorAll(".section.drop-target").forEach(el=>el.classList.remove("drop-target"));
+  if(dragId===null)return;
+  const src=tasks.find(x=>x.id===dragId);
+  if(!src)return;
+  applySecChange(src,secKey);
+  dragId=null;save();render();suggest();
+}
+
+// Stat box drag
+function statDragOver(e,owner){
+  e.preventDefault();
+  e.currentTarget.classList.add("drag-over");
+}
+function statDragLeave(e){e.currentTarget.classList.remove("drag-over");}
+function statDrop(e,owner){
+  e.currentTarget.classList.remove("drag-over");
+  if(dragId===null)return;
+  const src=tasks.find(x=>x.id===dragId);
+  if(!src)return;
+  if(owner==="done"){src.done=true;}
+  else{src.done=false;src.owner=owner;}
+  dragId=null;save();render();suggest();
+}
+
+function applySecChange(task,secKey){
+  // Map section key to owner/done changes
+  if(secKey==="done"){task.done=true;return;}
+  task.done=false;
+  if(secKey==="mine")task.owner="mine";
+  else if(secKey==="both")task.owner="both";
+  else if(secKey==="theirs")task.owner="theirs";
+  else if(secKey==="hold")task.owner="hold";
+  else if(secKey==="idea")task.cat="idea";
+  else if(secKey==="recurring")task.cat="recurring";
+}
+// ─────────────────────────────────────────────────────────
 
 greeting();
 buildToolbar("f-toolbar","f-notes");
