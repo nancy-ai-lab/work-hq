@@ -97,7 +97,20 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 .nudge-btn{font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;background:var(--pk100);color:var(--pk800);border:2px solid var(--pk200);cursor:pointer;transition:transform .15s cubic-bezier(.34,1.56,.64,1)}
 .nudge-btn:hover{background:var(--pk400);color:#fff;border-color:var(--pk400);transform:scale(1.07)}
 .add-toggle{font-size:13px;font-weight:700;padding:8px 20px;border-radius:99px;border:2px solid var(--pk400);background:transparent;color:var(--pk600);cursor:pointer;margin-bottom:1.25rem;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
-.add-toggle:hover{background:var(--pk50);transform:scale(1.05)}
+.quick-add-btn{font-size:12px;font-weight:700;padding:7px 14px;border-radius:99px;border:2px solid transparent;background:var(--bg2);color:var(--text2);cursor:pointer;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;transition:all .2s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.quick-add-btn .qplus{font-size:14px;font-weight:800;line-height:1}
+.quick-add-btn:hover{transform:scale(1.07)}
+.quick-add-btn[data-cat=task]{background:var(--b50);border-color:var(--b100);color:var(--b800)}
+.quick-add-btn[data-cat=task]:hover{background:var(--b100);border-color:var(--b400)}
+.quick-add-btn[data-cat=project]{background:var(--pk50);border-color:var(--pk100);color:var(--pk800)}
+.quick-add-btn[data-cat=project]:hover{background:var(--pk100);border-color:var(--pk400)}
+.quick-add-btn[data-cat=recurring]{background:var(--t50);border-color:var(--t100);color:var(--t600)}
+.quick-add-btn[data-cat=recurring]:hover{background:var(--t100);border-color:var(--t400)}
+.quick-add-btn[data-cat=tracking]{background:var(--a50);border-color:var(--a100);color:var(--a600)}
+.quick-add-btn[data-cat=tracking]:hover{background:var(--a100);border-color:var(--a400)}
+.quick-add-btn[data-cat=idea]{background:var(--c50);border-color:var(--c100);color:var(--c600)}
+.quick-add-btn[data-cat=idea]:hover{background:var(--c100);border-color:var(--c400)}
+.quick-add-btn.active{outline:3px solid currentColor;outline-offset:2px}
 .add-form{background:var(--bg2);border-radius:var(--radius);padding:16px;margin-bottom:1.5rem;border:2px solid var(--pk100);display:none}
 .add-form.open{display:block;animation:slideDown .25s cubic-bezier(.34,1.56,.64,1)}
 @keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
@@ -326,7 +339,13 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
           <button class="nudge-btn" onclick="suggest()">Refresh suggestion</button>
         </div>
       </div>
-      <button class="add-toggle" id="add-toggle-btn" onclick="toggleForm()">+ Add a new task</button>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem">
+        <button class="quick-add-btn" data-cat="task" onclick="openFormWithCat('task')"><span class="qplus">+</span><span style="font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">⚡</span> Quick task</button>
+        <button class="quick-add-btn" data-cat="project" onclick="openFormWithCat('project')"><span class="qplus">+</span><span style="font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">📁</span> Project</button>
+        <button class="quick-add-btn" data-cat="recurring" onclick="openFormWithCat('recurring')"><span class="qplus">+</span><span style="font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">🔁</span> Recurring</button>
+        <button class="quick-add-btn" data-cat="tracking" onclick="openFormWithCat('tracking')"><span class="qplus">+</span><span style="font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">📊</span> Tracking</button>
+        <button class="quick-add-btn" data-cat="idea" onclick="openFormWithCat('idea')"><span class="qplus">+</span><span style="font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">💡</span> Future idea</button>
+      </div>
       <div class="add-form" id="add-form">
       <div class="form-row">
         <div class="form-group" style="flex:2">
@@ -774,11 +793,30 @@ function duePill(ds){if(!ds)return"";const d=daysUntil(ds);const cls=d<0?"pill-o
 function planPill(ds){if(!ds)return"";const d=daysUntil(ds);const txt=d<0?"Planned "+Math.abs(d)+"d ago":d===0?"Planned today":d===1?"Planned tomorrow":"Planned in "+d+"d";return`<span class="pill pill-plan">${txt}</span>`;}
 function greeting(){const h=new Date().getHours();const g=h<12?"Good morning":h<17?"Good afternoon":"Good evening";const m=["Let's get something off that list today.","One task at a time — you've got this.","What are we tackling today?","Progress, not perfection.","Even one done is a win."];document.getElementById("greeting").textContent=g+"! "+rnd(m);}
 
+function openFormWithCat(cat){
+  const f=document.getElementById("add-form");
+  const alreadyOpen=f.classList.contains("open");
+  const currentCat=document.getElementById("f-cat").value;
+  // If form is open and same cat clicked — close it
+  if(alreadyOpen&&currentCat===cat){
+    f.classList.remove("open");
+    document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));
+    return;
+  }
+  // Set category then open
+  document.getElementById("f-cat").value=cat;
+  toggleRecur("f-cat","f-recur-row");
+  f.classList.add("open");
+  document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));
+  const idx={task:0,project:1,recurring:2,tracking:3,idea:4}[cat];
+  const btns=document.querySelectorAll(".quick-add-btn");
+  if(btns[idx])btns[idx].classList.add("active");
+  setTimeout(()=>document.getElementById("f-title").focus(),50);
+}
 function toggleForm(){
-  const f=document.getElementById("add-form");const b=document.getElementById("add-toggle-btn");
+  const f=document.getElementById("add-form");
   const isOpen=f.classList.toggle("open");
-  b.textContent=isOpen?"— Close form":"+ Add a new task";
-  if(isOpen)setTimeout(()=>document.getElementById("f-title").focus(),50);
+  if(!isOpen)document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));
 }
 
 function saveTask(){
@@ -793,6 +831,7 @@ function saveTask(){
   document.getElementById("f-notes").innerHTML="";document.getElementById("f-cat").value="task";
   document.getElementById("f-owner").value="mine";document.getElementById("f-energy").value="med";
   document.getElementById("f-recur-row").style.display="none";
+  document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));
   renderSteps("f");save();render();suggest();toggleForm();
 }
 
@@ -935,11 +974,11 @@ function renderSidebar(){
   html+=`<div class="cat-multi-wrap">
     <div class="cat-multi-label">By category <span style="font-weight:600;opacity:.7">(multi)</span></div>
     <div class="cat-pill-row">
-      ${[["task","&#9670; Quick tasks"],["project","&#9632; Projects"],["recurring","&#8635; Recurring"],["tracking","&#128200; Tracking"],["idea","&#128161; Ideas"]].map(([k,l])=>{
+      ${[["task","⚡","Quick tasks"],["project","📁","Projects"],["recurring","🔁","Recurring"],["tracking","📊","Tracking"],["idea","💡","Ideas"]].map(([k,icon,l])=>{
         const active=activeCats.has(k);
         return`<button class="cat-btn ${active?"active-cat":""}" onclick="toggleCat('${k}')" title="${catLabel[k]}" style="${active?`color:${catActiveBg[k]};background:${catActiveBg[k]}18`:""}">
-          <span style="font-size:12px;flex-shrink:0">${l.split(" ")[0]}</span>
-          <span class="f-label">${l.split(" ").slice(1).join(" ")}${active?" ✓":""}</span>
+          <span style="font-size:14px;flex-shrink:0;font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">${icon}</span>
+          <span class="f-label">${l}${active?" ✓":""}</span>
           <span class="f-count" style="${active?`background:${catActiveBg[k]};color:#fff`:""}">${catCounts[k]}</span>
         </button>`;
       }).join("")}
