@@ -238,6 +238,54 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .sync-bar.saved .sync-dot{background:var(--g400)}
 .sync-bar.failed .sync-dot{background:var(--r400)}
 @keyframes syncPulse{0%,100%{opacity:.3}50%{opacity:1}}
+/* ── Tab navigation ── */
+.tab-nav{display:flex;gap:4px;margin-bottom:1.25rem;border-bottom:2px solid var(--border);padding-bottom:0}
+.tab-btn{font-size:13px;font-weight:700;padding:8px 18px;border-radius:var(--radius-sm) var(--radius-sm) 0 0;border:2px solid transparent;border-bottom:none;background:transparent;color:var(--text2);cursor:pointer;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;transition:all .15s;margin-bottom:-2px}
+.tab-btn:hover{background:var(--bg2);color:var(--text)}
+.tab-btn.active{background:var(--bg);border-color:var(--border);border-bottom-color:var(--bg);color:var(--pk600);font-weight:800}
+.tab-panel{display:none}.tab-panel.active{display:block}
+/* ── Calls panel ── */
+.calls-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px}
+.calls-filters{display:flex;gap:6px;flex-wrap:wrap}
+.call-filter-btn{font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;border:2px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',-apple-system,sans-serif}
+.call-filter-btn:hover{background:var(--bg2)}
+.call-filter-btn.active{background:var(--b50);border-color:var(--b100);color:var(--b800)}
+.call-add-toggle{font-size:13px;font-weight:700;padding:8px 20px;border-radius:99px;border:2px solid var(--b400);background:transparent;color:var(--b600);cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1);font-family:'Plus Jakarta Sans',-apple-system,sans-serif}
+.call-add-toggle:hover{background:var(--b50);transform:scale(1.05)}
+.call-form{background:var(--bg2);border-radius:var(--radius);padding:16px;margin-bottom:1.5rem;border:2px solid var(--b100);display:none}
+.call-form.open{display:block;animation:slideDown .25s cubic-bezier(.34,1.56,.64,1)}
+.calls-list{display:flex;flex-direction:column;gap:8px}
+.call-card{background:var(--bg);border:2px solid var(--border2);border-radius:var(--radius);overflow:hidden;transition:border-color .2s,transform .2s cubic-bezier(.34,1.56,.64,1);animation:cardIn .25s both}
+.call-card:hover{border-color:var(--b400);transform:translateX(3px)}
+.call-card.status-done{opacity:.55;border-color:var(--g100)}
+.call-card.status-cancelled{opacity:.4;border-color:var(--c100)}
+.call-card.upcoming-today{border-color:var(--r400);border-width:2px}
+.call-card.upcoming-soon{border-color:var(--a100)}
+.call-main{padding:12px 14px;display:flex;align-items:flex-start;gap:12px}
+.call-date-block{display:flex;flex-direction:column;align-items:center;justify-content:center;width:44px;flex-shrink:0;background:var(--b50);border:2px solid var(--b100);border-radius:var(--radius-sm);padding:5px 4px;text-align:center}
+.call-date-block.today{background:var(--r50);border-color:var(--r100)}
+.call-date-block.past{background:var(--c50);border-color:var(--c100)}
+.call-day{font-size:20px;font-weight:800;line-height:1;color:var(--b800)}
+.call-date-block.today .call-day{color:var(--r600)}
+.call-date-block.past .call-day{color:var(--c600)}
+.call-month{font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--b600);margin-top:2px}
+.call-date-block.today .call-month{color:var(--r400)}
+.call-date-block.past .call-month{color:var(--c400)}
+.call-body{flex:1;min-width:0;cursor:pointer}
+.call-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.4}
+.call-card.status-done .call-title{text-decoration:line-through;color:var(--text3)}
+.call-meta{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.pill-call-upcoming{background:var(--b50);color:var(--b800);border:1.5px solid var(--b100)}
+.pill-call-done{background:var(--g50);color:var(--g600);border:1.5px solid var(--g100)}
+.pill-call-cancelled{background:var(--c50);color:var(--c600);border:1.5px solid var(--c100)}
+.pill-call-today{background:var(--r50);color:var(--r600);border:1.5px solid var(--r100)}
+.call-detail{padding:0 14px 14px 70px;display:none;flex-direction:column;gap:8px}
+.call-detail.open{display:flex;animation:slideDown .2s cubic-bezier(.34,1.56,.64,1)}
+.call-notes-editor{min-height:60px;padding:8px 10px;font-size:13px;font-weight:500;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);outline:none;line-height:1.6;background:var(--bg);border:2px solid var(--border2);border-radius:var(--radius-sm);width:100%}
+.call-notes-editor:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--b100)}
+.call-notes-save{font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;background:var(--b400);color:#fff;border:none;cursor:pointer;margin-top:4px;transition:transform .15s;font-family:'Plus Jakarta Sans',-apple-system,sans-serif}
+.call-notes-save:hover{background:var(--b600);transform:scale(1.05)}
+.calls-empty{padding:2.5rem;text-align:center;color:var(--text3);font-size:13px;font-weight:600;background:var(--bg2);border-radius:var(--radius);border:2px solid var(--border);animation:popIn .3s cubic-bezier(.34,1.56,.64,1)}
 </style>
 </head>
 <body>
@@ -263,19 +311,23 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
       </div>
     </div>
 
-    <div class="stats" id="stats"></div>
-
-    <div class="nudge">
-      <div class="nudge-label">what's next for you</div>
-      <div class="nudge-msg" id="nudge-msg">Add some tasks and I'll figure out where you should start.</div>
-      <div class="nudge-actions">
-        <button class="nudge-btn" onclick="suggest()">Refresh suggestion</button>
-      </div>
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('tasks')">Tasks</button>
+      <button class="tab-btn" onclick="switchTab('calls')">Scheduled Calls <span id="calls-badge" style="font-size:10px;font-weight:800;padding:1px 7px;border-radius:99px;background:var(--b100);color:var(--b800);margin-left:4px"></span></button>
     </div>
 
-    <button class="add-toggle" id="add-toggle-btn" onclick="toggleForm()">+ Add a new task</button>
-
-    <div class="add-form" id="add-form">
+    <!-- TASKS TAB -->
+    <div class="tab-panel active" id="tab-tasks">
+      <div class="stats" id="stats"></div>
+      <div class="nudge">
+        <div class="nudge-label">what's next for you</div>
+        <div class="nudge-msg" id="nudge-msg">Add some tasks and I'll figure out where you should start.</div>
+        <div class="nudge-actions">
+          <button class="nudge-btn" onclick="suggest()">Refresh suggestion</button>
+        </div>
+      </div>
+      <button class="add-toggle" id="add-toggle-btn" onclick="toggleForm()">+ Add a new task</button>
+      <div class="add-form" id="add-form">
       <div class="form-row">
         <div class="form-group" style="flex:2">
           <label class="form-label">Task title</label>
@@ -375,8 +427,83 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
     </div>
 
     <div id="board"></div>
-  </div>
-</div>
+    </div><!-- /tab-tasks -->
+
+    <!-- CALLS TAB -->
+    <div class="tab-panel" id="tab-calls">
+      <div class="calls-topbar">
+        <div class="calls-filters">
+          <button class="call-filter-btn active" onclick="setCallFilter('all',this)">All</button>
+          <button class="call-filter-btn" onclick="setCallFilter('upcoming',this)">Upcoming</button>
+          <button class="call-filter-btn" onclick="setCallFilter('done',this)">Done</button>
+          <button class="call-filter-btn" onclick="setCallFilter('cancelled',this)">Cancelled</button>
+        </div>
+        <button class="call-add-toggle" id="call-add-toggle-btn" onclick="toggleCallForm()">+ Schedule a call</button>
+      </div>
+
+      <div class="call-form" id="call-form">
+        <div class="form-row">
+          <div class="form-group" style="flex:2">
+            <label class="form-label">Call title</label>
+            <input type="text" id="cf-title" placeholder="e.g. Weekly sync with Alex">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select id="cf-status">
+              <option value="upcoming">Upcoming</option>
+              <option value="done">Done</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Date</label>
+            <input type="date" id="cf-date">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Time</label>
+            <input type="time" id="cf-time">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Duration</label>
+            <select id="cf-duration">
+              <option value="15">15 min</option>
+              <option value="30" selected>30 min</option>
+              <option value="45">45 min</option>
+              <option value="60">1 hour</option>
+              <option value="90">1.5 hours</option>
+              <option value="120">2 hours</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex:2">
+            <label class="form-label">Attendees</label>
+            <input type="text" id="cf-attendees" placeholder="e.g. Alex, Bruce, Ryan">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Google Meet / link</label>
+            <input type="text" id="cf-link" placeholder="https://meet.google.com/...">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Agenda</label>
+            <textarea id="cf-agenda" placeholder="What will be discussed? Key points, goals..." style="background:var(--bg);color:var(--text);border:2px solid var(--border2);border-radius:var(--radius-sm);padding:7px 10px;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none;width:100%;min-height:80px;resize:vertical;line-height:1.6"></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-cancel" onclick="toggleCallForm()">Cancel</button>
+          <button class="btn-save" style="background:var(--b400)" onclick="saveCall()">Save call</button>
+        </div>
+      </div>
+
+      <div class="calls-list" id="calls-list"></div>
+    </div><!-- /tab-calls -->
+
+  </div><!-- /main -->
+</div><!-- /layout -->
 
 <div class="sync-bar" id="sync-bar"><div class="sync-dot"></div><span id="sync-msg">Saving…</span></div>
 
@@ -1034,10 +1161,182 @@ function applySecChange(task,secKey){
 }
 // ─────────────────────────────────────────────────────────
 
+// ── Tab switching ─────────────────────────────────────────
+let activeTab='tasks';
+function switchTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['tasks','calls'][i]===tab));
+  document.getElementById('tab-tasks').classList.toggle('active',tab==='tasks');
+  document.getElementById('tab-calls').classList.toggle('active',tab==='calls');
+  if(tab==='calls')renderCalls();
+}
+
+// ── Calls data ────────────────────────────────────────────
+let calls=[],callIdC=1,activeCallFilter='all',expandedCallId=null,editingCallId=null;
+
+const CALLS_KEY='whq_calls';
+function loadCalls(){
+  try{const s=localStorage.getItem(CALLS_KEY);if(s){calls=JSON.parse(s);if(calls.length)callIdC=Math.max(...calls.map(x=>x.id))+1;}}catch(e){}
+  renderCallsBadge();
+}
+function saveCalls(){
+  try{localStorage.setItem(CALLS_KEY,JSON.stringify(calls));}catch(e){}
+  renderCallsBadge();
+}
+
+function renderCallsBadge(){
+  const upcoming=calls.filter(c=>c.status==='upcoming').length;
+  const badge=document.getElementById('calls-badge');
+  if(badge)badge.textContent=upcoming||'';
+}
+
+function toggleCallForm(){
+  const f=document.getElementById('call-form');
+  const b=document.getElementById('call-add-toggle-btn');
+  const isOpen=f.classList.toggle('open');
+  b.textContent=isOpen?'— Close':'+ Schedule a call';
+  if(isOpen)setTimeout(()=>document.getElementById('cf-title').focus(),50);
+}
+
+function saveCall(){
+  const title=document.getElementById('cf-title').value.trim();if(!title)return;
+  const call={
+    id:callIdC++,
+    title,
+    status:document.getElementById('cf-status').value,
+    date:document.getElementById('cf-date').value||null,
+    time:document.getElementById('cf-time').value||null,
+    duration:document.getElementById('cf-duration').value,
+    attendees:document.getElementById('cf-attendees').value.trim().split(',').map(p=>p.trim()).filter(Boolean),
+    link:document.getElementById('cf-link').value.trim(),
+    agenda:document.getElementById('cf-agenda').value.trim(),
+    notes:'',
+    created:Date.now()
+  };
+  calls.push(call);
+  ['cf-title','cf-link','cf-attendees','cf-agenda'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cf-date').value='';
+  document.getElementById('cf-time').value='';
+  document.getElementById('cf-status').value='upcoming';
+  document.getElementById('cf-duration').value='30';
+  saveCalls();renderCalls();toggleCallForm();
+}
+
+function deleteCall(id){if(!confirm('Remove this call?'))return;calls=calls.filter(x=>x.id!==id);if(expandedCallId===id)expandedCallId=null;saveCalls();renderCalls();}
+function toggleCallExpand(id){expandedCallId=expandedCallId===id?null:id;renderCalls();}
+
+function editCallStatus(id,status){
+  const c=calls.find(x=>x.id===id);if(!c)return;
+  c.status=status;saveCalls();renderCalls();
+}
+
+function saveCallNotes(id){
+  const c=calls.find(x=>x.id===id);if(!c)return;
+  const el=document.getElementById('call-notes-'+id);
+  if(el){c.notes=el.value;saveCalls();showSync('saved','Notes saved ✓');}
+}
+
+function setCallFilter(f,btn){
+  activeCallFilter=f;
+  document.querySelectorAll('.call-filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderCalls();
+}
+
+function callDaysUntil(ds){if(!ds)return null;const d=new Date(ds);const n=new Date();n.setHours(0,0,0,0);return Math.ceil((d-n)/864e5);}
+
+function formatCallDate(ds,ts){
+  if(!ds)return'No date set';
+  const d=new Date(ds);
+  const days=callDaysUntil(ds);
+  const monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const base=d.getDate()+' '+monthNames[d.getMonth()]+' '+d.getFullYear();
+  const timeStr=ts?(' at '+ts.slice(0,5)):'';
+  if(days===0)return'Today'+timeStr;
+  if(days===1)return'Tomorrow'+timeStr;
+  if(days===-1)return'Yesterday'+timeStr;
+  return base+timeStr;
+}
+
+function renderCalls(){
+  let visible=calls.filter(c=>{
+    if(activeCallFilter==='all')return true;
+    return c.status===activeCallFilter;
+  });
+  // Sort: upcoming by date asc, done/cancelled by date desc
+  visible.sort((a,b)=>{
+    if(a.status==='upcoming'&&b.status!=='upcoming')return-1;
+    if(b.status==='upcoming'&&a.status!=='upcoming')return 1;
+    if(!a.date&&!b.date)return b.created-a.created;
+    if(!a.date)return 1;if(!b.date)return-1;
+    return a.status==='upcoming'?(new Date(a.date)-new Date(b.date)):(new Date(b.date)-new Date(a.date));
+  });
+
+  if(!visible.length){
+    document.getElementById('calls-list').innerHTML=`<div class="calls-empty">${activeCallFilter==='all'?'No calls scheduled yet. Add one to get started!':'No '+activeCallFilter+' calls.'}</div>`;
+    renderCallsBadge();return;
+  }
+
+  const monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let html=visible.map(c=>{
+    const exp=expandedCallId===c.id;
+    const days=c.date?callDaysUntil(c.date):null;
+    const isToday=days===0;
+    const isPast=days!==null&&days<0;
+    const d=c.date?new Date(c.date):null;
+    const dayNum=d?d.getDate():'—';
+    const mon=d?monthNames[d.getMonth()]:'';
+    const dateBlockCls=isToday?'today':isPast?'past':'';
+    const cardCls=c.status==='done'?'status-done':c.status==='cancelled'?'status-cancelled':isToday?'upcoming-today':days!==null&&days<=3?'upcoming-soon':'';
+    const statusPillCls=c.status==='done'?'pill-call-done':c.status==='cancelled'?'pill-call-cancelled':isToday?'pill-call-today':'pill-call-upcoming';
+    const statusLabel=c.status==='done'?'Done':c.status==='cancelled'?'Cancelled':isToday?'Today!':'Upcoming';
+    const durationLabel=c.duration?c.duration+'min':'';
+    const timeStr=c.time?c.time.slice(0,5):'';
+
+    let detailHtml='';
+    if(c.agenda)detailHtml+=`<div class="detail-section"><div class="detail-label">Agenda</div><div class="detail-content" style="white-space:pre-wrap">${escH(c.agenda)}</div></div>`;
+    if(c.attendees&&c.attendees.length)detailHtml+=`<div class="detail-section"><div class="detail-label">Attendees</div><div class="people-row">${c.attendees.map(p=>`<div style="display:flex;align-items:center;gap:6px"><div class="avatar" style="${pColor(p)}">${initials(p)}</div><span class="person-name">${escH(p)}</span></div>`).join('')}</div></div>`;
+    if(c.link)detailHtml+=`<div class="detail-section"><div class="detail-label">Meet / link</div><a class="link-item" href="${escH(c.link)}" target="_blank">${escH(c.link)}</a></div>`;
+    detailHtml+=`<div class="detail-section"><div class="detail-label">Call notes &amp; summary</div><textarea class="call-notes-editor" id="call-notes-${c.id}" placeholder="Add notes during or after the call...">${escH(c.notes||'')}</textarea><button class="call-notes-save" onclick="saveCallNotes(${c.id})">Save notes</button></div>`;
+    if(c.status==='upcoming')detailHtml+=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><button class="btn-save" style="background:var(--g400);font-size:12px;padding:6px 16px" onclick="editCallStatus(${c.id},'done')">Mark as done</button><button class="btn-save" style="background:var(--c400);font-size:12px;padding:6px 16px" onclick="editCallStatus(${c.id},'cancelled')">Cancel call</button></div>`;
+    if(c.status!=='upcoming')detailHtml+=`<div><button class="btn-cancel" style="font-size:12px;padding:6px 14px" onclick="editCallStatus(${c.id},'upcoming')">Restore to upcoming</button></div>`;
+
+    return`<div class="call-card ${cardCls}">
+      <div class="call-main">
+        <div class="call-date-block ${dateBlockCls}">
+          <div class="call-day">${dayNum}</div>
+          <div class="call-month">${mon}</div>
+        </div>
+        <div class="call-body" onclick="toggleCallExpand(${c.id})">
+          <div class="call-title">${escH(c.title)}</div>
+          <div class="call-meta">
+            <span class="pill ${statusPillCls}">${statusLabel}</span>
+            ${timeStr?`<span class="pill pill-plan">${timeStr}</span>`:''}
+            ${durationLabel?`<span class="pill pill-low">${durationLabel}</span>`:''}
+            ${c.attendees&&c.attendees.length?c.attendees.slice(0,3).map(p=>`<span class="pill pill-person">${escH(p)}</span>`).join(''):''}
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="card-action-btn del-btn" onclick="deleteCall(${c.id})" title="Remove">&#128465;</button>
+          <button class="card-action-btn exp-btn" onclick="toggleCallExpand(${c.id})" title="Expand">${exp?'&#9650;':'&#9660;'}</button>
+        </div>
+      </div>
+      <div class="call-detail ${exp?'open':''}">
+        ${detailHtml}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('calls-list').innerHTML=html;
+  renderCallsBadge();
+}
+// ─────────────────────────────────────────────────────────
+
 greeting();
 buildToolbar("f-toolbar","f-notes");
 buildToolbar("e-toolbar","e-notes");
 loadFromSheet();
+loadCalls();
 </script>
 </body>
 </html>
