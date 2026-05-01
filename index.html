@@ -319,7 +319,52 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .call-notes-editor:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--b100)}
 .call-notes-save{font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;background:var(--b400);color:#fff;border:none;cursor:pointer;margin-top:4px;transition:transform .15s;font-family:'Plus Jakarta Sans',-apple-system,sans-serif}
 .call-notes-save:hover{background:var(--b600);transform:scale(1.05)}
-.calls-empty{padding:2.5rem;text-align:center;color:var(--text3);font-size:13px;font-weight:600;background:var(--bg2);border-radius:var(--radius);border:2px solid var(--border);animation:popIn .3s cubic-bezier(.34,1.56,.64,1)}
+/* ── Credits tab ── */
+.credit-summary-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.credit-brand-summary{background:var(--bg2);border:2px solid var(--border);border-radius:var(--radius);padding:10px 14px;flex:1;min-width:160px}
+.credit-brand-name{font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px}
+.credit-brand-stats{display:flex;gap:8px;flex-wrap:wrap}
+.credit-stat{font-size:11px;font-weight:700}
+.credit-stat.filed{color:var(--text2)}
+.credit-stat.received{color:var(--g600)}
+.credit-stat.pending{color:var(--a600)}
+.credit-topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;gap:10px;flex-wrap:wrap}
+.credit-filter-row{display:flex;flex-direction:column;gap:6px;flex:1}
+.credit-filter-pills{display:flex;gap:5px;flex-wrap:wrap}
+.credit-pill{font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;border:2px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;transition:all .15s}
+.credit-pill:hover{background:var(--bg2)}
+.credit-pill.active-brand{background:var(--a400);color:#fff;border-color:var(--a400)}
+.credit-pill.active-status{background:var(--b400);color:#fff;border-color:var(--b400)}
+.credit-add-btn{font-size:13px;font-weight:700;padding:8px 18px;border-radius:99px;border:2px solid var(--a400);background:transparent;color:var(--a600);cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.credit-add-btn:hover{background:var(--a50);transform:scale(1.05)}
+.credit-form{background:var(--bg2);border-radius:var(--radius);padding:16px;margin-bottom:1.5rem;border:2px solid var(--a100);display:none}
+.credit-form.open{display:block;animation:slideDown .25s cubic-bezier(.34,1.56,.64,1)}
+.credit-card{background:var(--bg);border:2px solid var(--border2);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:border-color .2s,transform .2s cubic-bezier(.34,1.56,.64,1);animation:cardIn .25s both}
+.credit-card:hover{border-color:var(--a400);transform:translateX(3px)}
+.credit-card.status-received{border-color:var(--g100)}
+.credit-card.followup-urgent{border-color:var(--r400)}
+.credit-card.followup-soon{border-color:var(--a200,var(--a100))}
+.credit-main{padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.credit-brand-badge{font-size:11px;font-weight:800;padding:4px 10px;border-radius:var(--radius-sm);flex-shrink:0;white-space:nowrap}
+.credit-body{flex:1;min-width:0;cursor:pointer}
+.credit-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.4}
+.credit-meta{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;align-items:center}
+.pill-submitted{background:var(--b50);color:var(--b800);border:1.5px solid var(--b100)}
+.pill-followup{background:var(--r50);color:var(--r600);border:1.5px solid var(--r100)}
+.pill-confirmed{background:var(--t50);color:var(--t600);border:1.5px solid var(--t100)}
+.pill-awaiting{background:var(--a50);color:var(--a600);border:1.5px solid var(--a100)}
+.pill-received{background:var(--g50);color:var(--g600);border:1.5px solid var(--g100)}
+.credit-amounts{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
+.credit-amount{font-size:12px;font-weight:700}
+.credit-amount.filed{color:var(--text2)}
+.credit-amount.received{color:var(--g600)}
+.credit-detail{padding:0 14px 14px 14px;display:none;flex-direction:column;gap:8px}
+.credit-detail.open{display:flex;animation:slideDown .2s cubic-bezier(.34,1.56,.64,1)}
+.post-receipt-section{background:var(--g50);border:2px solid var(--g100);border-radius:var(--radius-sm);padding:10px 12px}
+.post-receipt-title{font-size:10px;font-weight:800;letter-spacing:.07em;color:var(--g600);text-transform:uppercase;margin-bottom:8px}
+.post-receipt-actions{display:flex;flex-direction:column;gap:5px}
+.post-action{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text2)}
+.credits-empty{padding:2.5rem;text-align:center;color:var(--text3);font-size:13px;font-weight:600;background:var(--bg2);border-radius:var(--radius);border:2px solid var(--border)}
 </style>
 </head>
 <body>
@@ -344,6 +389,7 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
     </div>
     <div class="tab-nav">
       <button class="tab-btn active" onclick="switchTab('tasks')">⚡ Tasks</button>
+      <button class="tab-btn" onclick="switchTab('credits')">💰 Credit Tracking <span id="credits-badge" style="font-size:10px;font-weight:800;padding:1px 7px;border-radius:99px;background:var(--a100);color:var(--a600);margin-left:4px;display:none"></span></button>
       <button class="tab-btn" onclick="switchTab('calls')">Scheduled Calls 📞 <span id="calls-badge" style="font-size:10px;font-weight:800;padding:1px 7px;border-radius:99px;background:var(--b100);color:var(--b800);margin-left:4px;display:none"></span></button>
     </div>
     <div class="tab-panel active" id="tab-tasks">
@@ -832,8 +878,15 @@ function statDrop(e,owner){e.currentTarget.classList.remove("drag-over");if(drag
 function applySecChange(task,secKey){if(secKey==="done"){task.done=true;return;}task.done=false;if(secKey==="mine")task.owner="mine";else if(secKey==="both")task.owner="both";else if(secKey==="theirs")task.owner="theirs";else if(secKey==="hold")task.owner="hold";else if(secKey==="idea")task.cat="idea";else if(secKey==="recurring")task.cat="recurring";}
 
 // ── Tab switching ─────────────────────────────────────────
-let activeTab='tasks';
-function switchTab(tab){activeTab=tab;document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['tasks','calls'][i]===tab));document.getElementById('tab-tasks').classList.toggle('active',tab==='tasks');document.getElementById('tab-calls').classList.toggle('active',tab==='calls');if(tab==='calls')renderCalls();}
+function switchTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['tasks','credits','calls'][i]===tab));
+  document.getElementById('tab-tasks').classList.toggle('active',tab==='tasks');
+  document.getElementById('tab-calls').classList.toggle('active',tab==='calls');
+  document.getElementById('tab-credits').classList.toggle('active',tab==='credits');
+  if(tab==='calls')renderCalls();
+  if(tab==='credits')renderCredits();
+}
 
 // ── Calls ─────────────────────────────────────────────────
 let calls=[],callIdC=1,activeCallFilter='all',expandedCallId=null;
@@ -880,7 +933,196 @@ function renderCalls(){
   document.getElementById('calls-list').innerHTML=html;renderCallsBadge();
 }
 
-greeting();
+// ── Credits ───────────────────────────────────────────────
+let credits=[],creditIdC=1,activeCreditBrand='all',activeCreditStatus='all',expandedCreditId=null;
+
+const CREDIT_TYPES={
+  Samsung:["15% Damage Allowance","Full Credit - Scraps","Full Credit - B-Stock","Parts Request (non-credit)","Other Samsung Credit"],
+  "Brand 2":["Standard Credit","Damage Credit","Other"],
+  "Brand 3":["Standard Credit","Damage Credit","Other"],
+  "Brand 4":["Standard Credit","Damage Credit","Other"],
+};
+const BRAND_COLORS={
+  Samsung:"background:#1428A0;color:#fff",
+  "Brand 2":"background:var(--pk400);color:#fff",
+  "Brand 3":"background:var(--t400);color:#fff",
+  "Brand 4":"background:var(--v400);color:#fff",
+};
+const CREDIT_STATUS_LABEL={submitted:"Submitted",followup:"Follow-up needed",confirmed:"Confirmed",awaiting:"Awaiting",received:"Received"};
+const CREDIT_STATUS_PILL={submitted:"pill-submitted",followup:"pill-followup",confirmed:"pill-confirmed",awaiting:"pill-awaiting",received:"pill-received"};
+const POST_ACTIONS=["Track in system","Allocate credit","Update Filemaker","Notify team","File documentation"];
+
+function getBrandColor(brand){return BRAND_COLORS[brand]||"background:var(--c400);color:#fff";}
+
+function updateCreditTypes(){
+  const brand=document.getElementById("cf2-brand").value;
+  const isCustomBrand=brand==="custom";
+  document.getElementById("cf2-brand-custom-wrap").style.display=isCustomBrand?"block":"none";
+  const types=isCustomBrand?["Custom type"]:(CREDIT_TYPES[brand]||["Standard Credit","Other"]);
+  const sel=document.getElementById("cf2-type");
+  sel.innerHTML=types.map(t=>`<option value="${t}">${t}</option>`).join("")+`<option value="custom">+ Custom type</option>`;
+  document.getElementById("cf2-type-custom-wrap").style.display="none";
+  sel.onchange=()=>{document.getElementById("cf2-type-custom-wrap").style.display=sel.value==="custom"?"block":"none";};
+}
+
+function toggleCreditForm(){
+  const f=document.getElementById("credit-form");const isOpen=f.classList.toggle("open");
+  if(isOpen){updateCreditTypes();setTimeout(()=>document.getElementById("cf2-brand").focus(),50);}
+}
+
+function saveCredit(){
+  const brandSel=document.getElementById("cf2-brand").value;
+  const brand=brandSel==="custom"?document.getElementById("cf2-brand-custom").value.trim():brandSel;
+  if(!brand)return;
+  const typeSel=document.getElementById("cf2-type").value;
+  const type=typeSel==="custom"?document.getElementById("cf2-type-custom").value.trim():typeSel;
+  const credit={
+    id:creditIdC++,brand,type,
+    filed:parseFloat(document.getElementById("cf2-filed").value)||0,
+    received:parseFloat(document.getElementById("cf2-received").value)||0,
+    status:document.getElementById("cf2-status").value,
+    date:document.getElementById("cf2-date").value||null,
+    followup:document.getElementById("cf2-followup").value||null,
+    ref:document.getElementById("cf2-ref").value.trim(),
+    notes:document.getElementById("cf2-notes").value.trim(),
+    postActions:{},
+    created:Date.now()
+  };
+  credits.push(credit);
+  ["cf2-filed","cf2-received","cf2-ref","cf2-notes"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("cf2-date").value="";document.getElementById("cf2-followup").value="";
+  document.getElementById("cf2-status").value="submitted";
+  toggleCreditForm();saveCredits();renderCredits();updateCreditsBadge();
+}
+
+async function loadCredits(){
+  try{
+    const r=await fetch(SCRIPT_URL+"?action=getCredits&t="+Date.now(),{redirect:"follow"});
+    const data=await r.json();
+    if(Array.isArray(data)&&data.length){
+      credits=data.map(c=>({...c,filed:+c.filed||0,received:+c.received||0,postActions:c.postActions?JSON.parse(c.postActions):{}}));
+      creditIdC=credits.length?Math.max(...credits.map(x=>x.id))+1:1;
+    }
+  }catch(e){try{const s=localStorage.getItem("nhq_credits");if(s){credits=JSON.parse(s);creditIdC=credits.length?Math.max(...credits.map(x=>x.id))+1:1;}}catch(e2){}}
+  updateCreditsBadge();
+}
+async function saveCredits(){
+  const enc=encodeURIComponent(JSON.stringify(credits.map(c=>({...c,postActions:JSON.stringify(c.postActions||{})}))));
+  try{await fetch(SCRIPT_URL+"?action=saveCredits&credits="+enc,{mode:"no-cors"});}catch(e){}
+  localStorage.setItem("nhq_credits",JSON.stringify(credits));
+  showSync("saved","Credits saved ✓");
+}
+
+function updateCreditsBadge(){
+  const urgent=credits.filter(c=>c.status==="followup"||(c.followup&&daysUntil(c.followup)<=2&&c.status!=="received")).length;
+  const badge=document.getElementById("credits-badge");
+  if(badge){badge.textContent=urgent||"";badge.style.display=urgent?"inline":"none";}
+}
+
+function deleteCredit(id){if(!confirm("Remove this credit entry?"))return;credits=credits.filter(x=>x.id!==id);saveCredits();renderCredits();updateCreditsBadge();}
+function toggleCreditExpand(id){expandedCreditId=expandedCreditId===id?null:id;renderCredits();}
+function updateCreditStatus(id,status){const c=credits.find(x=>x.id===id);if(!c)return;c.status=status;saveCredits();renderCredits();updateCreditsBadge();}
+function togglePostAction(id,action){const c=credits.find(x=>x.id===id);if(!c)return;c.postActions[action]=!c.postActions[action];saveCredits();renderCredits();}
+function updateCreditField(id,field,val){const c=credits.find(x=>x.id===id);if(!c)return;c[field]=field==="filed"||field==="received"?parseFloat(val)||0:val;saveCredits();renderCredits();updateCreditsBadge();}
+
+function renderCredits(){
+  const allBrands=[...new Set(credits.map(c=>c.brand))];
+  const allStatuses=["submitted","followup","confirmed","awaiting","received"];
+
+  // Summary bar
+  document.getElementById("credit-summary").innerHTML=allBrands.map(brand=>{
+    const bc=credits.filter(c=>c.brand===brand);
+    const totalFiled=bc.reduce((s,c)=>s+c.filed,0);
+    const totalReceived=bc.reduce((s,c)=>s+c.received,0);
+    const totalPending=bc.filter(c=>c.status!=="received").reduce((s,c)=>s+c.filed,0);
+    return`<div class="credit-brand-summary">
+      <div class="credit-brand-name">${escH(brand)}</div>
+      <div class="credit-brand-stats">
+        <span class="credit-stat filed">Filed: ${totalFiled.toFixed(2)}</span>
+        <span class="credit-stat received">Received: ${totalReceived.toFixed(2)}</span>
+        <span class="credit-stat pending">Pending: ${totalPending.toFixed(2)}</span>
+      </div>
+    </div>`;
+  }).join("")||"";
+
+  // Brand filters
+  document.getElementById("credit-brand-filters").innerHTML=
+    `<button class="credit-pill ${activeCreditBrand==="all"?"active-brand":""}" onclick="setCreditBrand('all')">All brands</button>`+
+    allBrands.map(b=>`<button class="credit-pill ${activeCreditBrand===b?"active-brand":""}" onclick="setCreditBrand('${b}')">${escH(b)}</button>`).join("");
+
+  // Status filters
+  document.getElementById("credit-status-filters").innerHTML=
+    `<button class="credit-pill ${activeCreditStatus==="all"?"active-status":""}" onclick="setCreditStatus('all')">All statuses</button>`+
+    allStatuses.map(s=>`<button class="credit-pill ${activeCreditStatus===s?"active-status":""}" onclick="setCreditStatus('${s}')">${CREDIT_STATUS_LABEL[s]}</button>`).join("");
+
+  // Filter & sort
+  let visible=credits.filter(c=>{
+    if(activeCreditBrand!=="all"&&c.brand!==activeCreditBrand)return false;
+    if(activeCreditStatus!=="all"&&c.status!==activeCreditStatus)return false;
+    return true;
+  });
+  visible.sort((a,b)=>{
+    const urgA=a.followup?daysUntil(a.followup):999;
+    const urgB=b.followup?daysUntil(b.followup):999;
+    if(a.status==="received"&&b.status!=="received")return 1;
+    if(b.status==="received"&&a.status!=="received")return-1;
+    return urgA-urgB;
+  });
+
+  if(!visible.length){document.getElementById("credits-list").innerHTML=`<div class="credits-empty">No credit entries yet — add your first one!</div>`;return;}
+
+  document.getElementById("credits-list").innerHTML=visible.map(c=>{
+    const exp=expandedCreditId===c.id;
+    const days=c.followup?daysUntil(c.followup):null;
+    const followupUrgent=days!==null&&days<=1&&c.status!=="received";
+    const followupSoon=days!==null&&days<=5&&days>1&&c.status!=="received";
+    const cardCls=c.status==="received"?"status-received":followupUrgent?"followup-urgent":followupSoon?"followup-soon":"";
+    const followupTxt=days===null?"":(days<0?`${Math.abs(days)}d overdue`:days===0?"Follow-up today!":days===1?"Follow-up tomorrow":"Follow-up in "+days+"d");
+    const brandStyle=getBrandColor(c.brand);
+    const doneActions=POST_ACTIONS.filter(a=>c.postActions&&c.postActions[a]);
+    return`<div class="credit-card ${cardCls}">
+      <div class="credit-main">
+        <div class="credit-brand-badge" style="${brandStyle}">${escH(c.brand)}</div>
+        <div class="credit-body" onclick="toggleCreditExpand(${c.id})">
+          <div class="credit-title">${escH(c.type)}</div>
+          <div class="credit-amounts">
+            <span class="credit-amount filed">Filed: ${c.filed.toFixed(2)}</span>
+            ${c.received>0?`<span class="credit-amount received">Received: ${c.received.toFixed(2)}</span>`:""}
+          </div>
+          <div class="credit-meta">
+            <span class="pill ${CREDIT_STATUS_PILL[c.status]}">${CREDIT_STATUS_LABEL[c.status]}</span>
+            ${c.ref?`<span class="pill" style="background:var(--c50);color:var(--c600);border:1.5px solid var(--c100)">#${escH(c.ref)}</span>`:""}
+            ${followupTxt?`<span class="pill ${followupUrgent?"pill-followup":"pill-plan"}">${followupTxt}</span>`:""}
+            ${c.status==="received"&&doneActions.length<POST_ACTIONS.length?`<span class="pill" style="background:var(--a50);color:var(--a600);border:1.5px solid var(--a100)">${doneActions.length}/${POST_ACTIONS.length} actions done</span>`:""}
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="card-action-btn del-btn" onclick="deleteCredit(${c.id})" title="Remove">&#128465;</button>
+          <button class="card-action-btn exp-btn" onclick="toggleCreditExpand(${c.id})" title="Expand">${exp?"&#9650;":"&#9660;"}</button>
+        </div>
+      </div>
+      <div class="credit-detail ${exp?"open":""}">
+        <div class="detail-section">
+          <div class="detail-label">Update status</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap">
+            ${["submitted","followup","confirmed","awaiting","received"].map(s=>`<button class="credit-pill ${c.status===s?"active-status":""}" onclick="updateCreditStatus(${c.id},'${s}')">${CREDIT_STATUS_LABEL[s]}</button>`).join("")}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Amount filed ($)</label><input type="text" value="${c.filed}" onchange="updateCreditField(${c.id},'filed',this.value)" style="font-size:13px"></div>
+          <div class="form-group"><label class="form-label">Amount received ($)</label><input type="text" value="${c.received||''}" onchange="updateCreditField(${c.id},'received',this.value)" placeholder="0.00" style="font-size:13px"></div>
+          <div class="form-group"><label class="form-label">Follow-up date</label><input type="date" value="${c.followup||''}" onchange="updateCreditField(${c.id},'followup',this.value)" style="font-size:13px"></div>
+        </div>
+        ${c.notes?`<div class="detail-section"><div class="detail-label">Notes</div><div class="detail-content" style="white-space:pre-wrap">${escH(c.notes)}</div></div>`:""}
+        ${c.status==="received"?`<div class="post-receipt-section"><div class="post-receipt-title">Post-receipt actions</div><div class="post-receipt-actions">${POST_ACTIONS.map(a=>`<div class="post-action"><div class="sub-chk ${c.postActions&&c.postActions[a]?"on":""}" onclick="togglePostAction(${c.id},'${a}')"></div><span class="${c.postActions&&c.postActions[a]?"sub-done":""}">${a}</span></div>`).join("")}</div></div>`:""}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function setCreditBrand(b){activeCreditBrand=b;renderCredits();}
+function setCreditStatus(s){activeCreditStatus=s;renderCredits();}
+// ─────────────────────────────────────────────────────────
 buildToolbar("f-toolbar","f-notes");
 buildToolbar("e-toolbar","e-notes");
 loadFromSheet();
