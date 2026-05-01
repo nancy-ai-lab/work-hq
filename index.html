@@ -885,7 +885,7 @@ function switchTab(tab){
   document.getElementById('tab-calls').classList.toggle('active',tab==='calls');
   document.getElementById('tab-credits').classList.toggle('active',tab==='credits');
   if(tab==='calls')renderCalls();
-  if(tab==='credits')renderCredits();
+  if(tab==='credits'){renderCredits();}
 }
 
 // ── Calls ─────────────────────────────────────────────────
