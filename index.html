@@ -36,9 +36,7 @@
 --v50:#1E1535;--v100:#3B2870;--v400:#7C5CBF;--v600:#AE93E8;
 }}
 body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
-
 .layout{display:flex;min-height:100vh}
-
 .sidebar{width:var(--sidebar);background:var(--bg2);border-right:2px solid var(--border);padding:1rem 0;display:flex;flex-direction:column;gap:0;transition:width .3s cubic-bezier(.34,1.56,.64,1);flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;overflow-x:hidden}
 .sidebar.collapsed{width:52px}
 .sidebar-top{display:flex;align-items:center;justify-content:space-between;padding:0 12px 12px;border-bottom:2px solid var(--border);margin-bottom:8px;flex-shrink:0}
@@ -46,7 +44,6 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 .sidebar.collapsed .sidebar-title{opacity:0;width:0}
 .sidebar-toggle{width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 .sidebar-toggle:hover{background:var(--pk50);border-color:var(--pk200);color:var(--pk600);transform:scale(1.1)}
-
 .filter-group{padding:4px 8px}
 .filter-group-label{font-size:9px;font-weight:800;letter-spacing:.08em;color:var(--text3);text-transform:uppercase;padding:4px 4px 5px;white-space:nowrap;overflow:hidden;opacity:1;transition:opacity .2s}
 .sidebar.collapsed .filter-group-label{opacity:0}
@@ -59,7 +56,6 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 .filter-btn .f-count{font-size:10px;font-weight:800;padding:1px 6px;border-radius:99px;background:var(--border);color:var(--text3);flex-shrink:0;transition:opacity .2s}
 .sidebar.collapsed .filter-btn .f-count{opacity:0}
 .filter-btn.active .f-icon{color:#fff}
-
 .cat-multi-wrap{padding:4px 8px}
 .cat-multi-label{font-size:9px;font-weight:800;letter-spacing:.08em;color:var(--text3);text-transform:uppercase;padding:4px 4px 5px;white-space:nowrap;opacity:1;transition:opacity .2s}
 .sidebar.collapsed .cat-multi-label{opacity:0}
@@ -70,7 +66,6 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 .cat-btn .f-label{overflow:hidden;opacity:1;transition:opacity .2s;flex:1}
 .sidebar.collapsed .cat-btn .f-label{opacity:0;width:0}
 .sidebar-sep{height:1px;background:var(--border);margin:6px 8px}
-
 .main{flex:1;padding:1.5rem 1.5rem 4rem;min-width:0}
 .topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px}
 .app-title{font-size:24px;font-weight:800;color:var(--text)}
@@ -96,7 +91,6 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 .nudge-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .nudge-btn{font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;background:var(--pk100);color:var(--pk800);border:2px solid var(--pk200);cursor:pointer;transition:transform .15s cubic-bezier(.34,1.56,.64,1)}
 .nudge-btn:hover{background:var(--pk400);color:#fff;border-color:var(--pk400);transform:scale(1.07)}
-.add-toggle{font-size:13px;font-weight:700;padding:8px 20px;border-radius:99px;border:2px solid var(--pk400);background:transparent;color:var(--pk600);cursor:pointer;margin-bottom:1.25rem;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 .quick-add-btn{font-size:12px;font-weight:700;padding:7px 14px;border-radius:99px;border:2px solid transparent;background:var(--bg2);color:var(--text2);cursor:pointer;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;transition:all .2s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
 .quick-add-btn .qplus{font-size:14px;font-weight:800;line-height:1}
 .quick-add-btn:hover{transform:scale(1.07)}
@@ -119,12 +113,11 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--b
 .form-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .form-group{display:flex;flex-direction:column;flex:1;min-width:140px}
 .form-label{font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
-input[type=text],input[type=date],select{background:var(--bg);color:var(--text);border:2px solid var(--border2);border-radius:var(--radius-sm);padding:7px 10px;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none;width:100%;transition:border-color .15s}
+input[type=text],input[type=date],input[type=time],select{background:var(--bg);color:var(--text);border:2px solid var(--border2);border-radius:var(--radius-sm);padding:7px 10px;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none;width:100%;transition:border-color .15s}
 input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .recur-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg);border:2px solid var(--border2);border-radius:var(--radius-sm);margin-bottom:10px;flex-wrap:wrap}
 .recur-label{font-size:13px;font-weight:700;color:var(--text2);flex:1}
 .freq-select{font-size:12px;padding:4px 8px;border:2px solid var(--pk200);border-radius:var(--radius-sm);background:var(--pk50);color:var(--pk800);font-weight:700;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none}
-/* Frequency hint shown inside the recur row */
 .freq-hint{font-size:11px;font-weight:600;color:var(--text3);margin-top:4px;width:100%}
 .rich-editor-wrap{border:2px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg);overflow:hidden;transition:border-color .15s}
 .rich-editor-wrap:focus-within{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
@@ -197,7 +190,6 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .cat-recurring{background:var(--t50);color:var(--t600);border:1.5px solid var(--t100)}
 .cat-tracking{background:var(--a50);color:var(--a600);border:1.5px solid var(--a100)}
 .cat-idea{background:var(--c50);color:var(--c600);border:1.5px solid var(--c100)}
-/* Frequency pills — each type gets a distinct look */
 .pill-freq-daily{background:var(--t50);color:var(--t600);border:1.5px solid var(--t100)}
 .pill-freq-weekly{background:var(--b50);color:var(--b800);border:1.5px solid var(--b100)}
 .pill-freq-monthly{background:var(--pk50);color:var(--pk800);border:1.5px solid var(--pk100)}
@@ -251,18 +243,47 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .sync-bar.saved .sync-dot{background:var(--g400)}
 .sync-bar.failed .sync-dot{background:var(--r400)}
 @keyframes syncPulse{0%,100%{opacity:.3}50%{opacity:1}}
-/* ── Tab navigation ── */
 .tab-nav{display:flex;gap:4px;margin-bottom:1.25rem;border-bottom:2px solid var(--border);padding-bottom:0}
 .tab-btn{font-size:13px;font-weight:700;padding:8px 18px;border-radius:var(--radius-sm) var(--radius-sm) 0 0;border:2px solid transparent;border-bottom:none;background:transparent;color:var(--text2);cursor:pointer;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;transition:all .15s;margin-bottom:-2px}
 .tab-btn:hover{background:var(--bg2);color:var(--text)}
 .tab-btn.active{background:var(--bg);border-color:var(--border);border-bottom-color:var(--bg);color:var(--pk600);font-weight:800}
 .tab-panel{display:none}.tab-panel.active{display:block}
-/* ── Calls panel ── */
 .calls-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px}
+.calls-filters-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .calls-filters{display:flex;gap:6px;flex-wrap:wrap}
 .call-filter-btn{font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;border:2px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',-apple-system,sans-serif}
 .call-filter-btn:hover{background:var(--bg2)}
 .call-filter-btn.active{background:var(--b50);border-color:var(--b100);color:var(--b800)}
+/* Meet links button */
+.meet-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;border:2px solid var(--t100);background:var(--t50);color:var(--t600);cursor:pointer;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;transition:all .2s cubic-bezier(.34,1.56,.64,1)}
+.meet-btn:hover{background:var(--t400);color:#fff;border-color:var(--t400);transform:scale(1.05)}
+.meet-panel-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:150;display:none}
+.meet-panel-overlay.open{display:block}
+.meet-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:151;width:340px;background:var(--bg);border:2px solid var(--t200,var(--t100));border-radius:var(--radius);box-shadow:0 8px 40px rgba(0,0,0,0.2);display:none;flex-direction:column;overflow:hidden;animation:popIn .2s cubic-bezier(.34,1.56,.64,1)}
+.meet-panel.open{display:flex}
+.meet-panel-head{padding:14px 16px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--t50)}
+.meet-panel-title{font-size:14px;font-weight:800;color:var(--t600)}
+.meet-panel-close{background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;transition:transform .15s}
+.meet-panel-close:hover{color:var(--text);transform:scale(1.2)}
+.meet-links{display:flex;flex-direction:column;gap:6px;padding:12px;max-height:320px;overflow-y:auto}
+.meet-link-item{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--radius-sm);border:2px solid var(--t100);background:var(--t50);transition:border-color .15s}
+.meet-link-item:hover{border-color:var(--t400)}
+.meet-link-btn{flex:1;text-align:left;background:none;border:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--t600);font-family:'Plus Jakarta Sans',-apple-system,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.meet-link-btn:hover{color:var(--t400)}
+.meet-link-del{background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;flex-shrink:0;transition:transform .15s}
+.meet-link-del:hover{color:var(--r400);transform:scale(1.2)}
+.meet-empty{padding:20px;text-align:center;color:var(--text3);font-size:12px;font-weight:600}
+.meet-add-section{padding:12px;border-top:2px solid var(--border);display:flex;flex-direction:column;gap:8px}
+.meet-add-toggle{font-size:12px;font-weight:700;padding:6px 14px;border-radius:99px;background:var(--t50);color:var(--t600);border:2px solid var(--t100);cursor:pointer;align-self:flex-start;transition:all .15s}
+.meet-add-toggle:hover{background:var(--t400);color:#fff;border-color:var(--t400)}
+.meet-add-form{display:none;flex-direction:column;gap:6px}
+.meet-add-form.open{display:flex}
+.meet-add-form input{font-size:12px;padding:7px 10px;border:2px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none}
+.meet-add-form input:focus{border-color:var(--t400)}
+.meet-form-btns{display:flex;gap:6px;justify-content:flex-end}
+.meet-save-btn{font-size:12px;font-weight:700;padding:6px 14px;border-radius:99px;background:var(--t400);color:#fff;border:none;cursor:pointer}
+.meet-save-btn:hover{background:var(--t600)}
+.meet-cancel-btn{font-size:12px;font-weight:700;padding:6px 12px;border-radius:99px;background:transparent;border:1.5px solid var(--border2);color:var(--text2);cursor:pointer}
 .call-add-toggle{font-size:13px;font-weight:700;padding:8px 20px;border-radius:99px;border:2px solid var(--b400);background:transparent;color:var(--b600);cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1);font-family:'Plus Jakarta Sans',-apple-system,sans-serif}
 .call-add-toggle:hover{background:var(--b50);transform:scale(1.05)}
 .call-form{background:var(--bg2);border-radius:var(--radius);padding:16px;margin-bottom:1.5rem;border:2px solid var(--b100);display:none}
@@ -272,7 +293,7 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 .call-card:hover{border-color:var(--b400);transform:translateX(3px)}
 .call-card.status-done{opacity:.55;border-color:var(--g100)}
 .call-card.status-cancelled{opacity:.4;border-color:var(--c100)}
-.call-card.upcoming-today{border-color:var(--r400);border-width:2px}
+.call-card.upcoming-today{border-color:var(--r400)}
 .call-card.upcoming-soon{border-color:var(--a100)}
 .call-main{padding:12px 14px;display:flex;align-items:flex-start;gap:12px}
 .call-date-block{display:flex;flex-direction:column;align-items:center;justify-content:center;width:44px;flex-shrink:0;background:var(--b50);border:2px solid var(--b100);border-radius:var(--radius-sm);padding:5px 4px;text-align:center}
@@ -303,7 +324,6 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
 </head>
 <body>
 <div class="layout">
-
   <div class="sidebar" id="sidebar">
     <div class="sidebar-top">
       <span class="sidebar-title">Filters</span>
@@ -311,7 +331,6 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
     </div>
     <div id="sidebar-content"></div>
   </div>
-
   <div class="main">
     <div class="topbar">
       <div>
@@ -323,21 +342,16 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
         <span class="prog-txt" id="progtxt">0% done</span>
       </div>
     </div>
-
     <div class="tab-nav">
       <button class="tab-btn active" onclick="switchTab('tasks')">⚡ Tasks</button>
       <button class="tab-btn" onclick="switchTab('calls')">Scheduled Calls 📞 <span id="calls-badge" style="font-size:10px;font-weight:800;padding:1px 7px;border-radius:99px;background:var(--b100);color:var(--b800);margin-left:4px;display:none"></span></button>
     </div>
-
-    <!-- TASKS TAB -->
     <div class="tab-panel active" id="tab-tasks">
       <div class="stats" id="stats"></div>
       <div class="nudge">
         <div class="nudge-label">what's next for you</div>
         <div class="nudge-msg" id="nudge-msg">Add some tasks and I'll figure out where you should start.</div>
-        <div class="nudge-actions">
-          <button class="nudge-btn" onclick="suggest()">Refresh suggestion</button>
-        </div>
+        <div class="nudge-actions"><button class="nudge-btn" onclick="suggest()">Refresh suggestion</button></div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem">
         <button class="quick-add-btn" data-cat="task" onclick="openFormWithCat('task')"><span class="qplus">+</span><span style="font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">⚡</span> Quick task</button>
@@ -347,182 +361,96 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
         <button class="quick-add-btn" data-cat="idea" onclick="openFormWithCat('idea')"><span class="qplus">+</span><span style="font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">💡</span> Future idea</button>
       </div>
       <div class="add-form" id="add-form">
-      <div class="form-row">
-        <div class="form-group" style="flex:2">
-          <label class="form-label">Task title</label>
-          <input type="text" id="f-title" placeholder="What needs doing?">
+        <div class="form-row">
+          <div class="form-group" style="flex:2"><label class="form-label">Task title</label><input type="text" id="f-title" placeholder="What needs doing?"></div>
+          <div class="form-group"><label class="form-label">Category</label><select id="f-cat" onchange="toggleRecur('f-cat','f-recur-row')"><option value="task">Quick task</option><option value="project">Project</option><option value="recurring">Recurring task</option><option value="tracking">Tracking</option><option value="idea">Future idea</option></select></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Category</label>
-          <select id="f-cat" onchange="toggleRecur('f-cat','f-recur-row')">
-            <option value="task">Quick task</option>
-            <option value="project">Project</option>
-            <option value="recurring">Recurring task</option>
-            <option value="tracking">Tracking</option>
-            <option value="idea">Future idea</option>
+        <div class="recur-row" id="f-recur-row" style="display:none">
+          <span class="recur-label">How often does this repeat?</span>
+          <select class="freq-select" id="f-freq" onchange="updateFreqHint('f-freq','f-freq-hint')">
+            <optgroup label="Short cycle"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></optgroup>
+            <optgroup label="Long cycle"><option value="quarterly">Quarterly</option><option value="yearly">Yearly</option></optgroup>
+            <optgroup label="Flexible"><option value="asneeded">As Needed</option><option value="reminder">Reminder</option><option value="holiday">Holiday Prep</option></optgroup>
           </select>
+          <span class="freq-hint" id="f-freq-hint"></span>
         </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Action owner</label><select id="f-owner"><option value="mine">Action needed</option><option value="theirs">Awaiting other's action</option><option value="both">Collaborative progress</option><option value="hold">On hold</option></select></div>
+          <div class="form-group"><label class="form-label">Energy needed</label><select id="f-energy"><option value="med" selected>Medium</option><option value="high">High focus</option><option value="low">Low effort</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Due date</label><input type="date" id="f-due"></div>
+          <div class="form-group"><label class="form-label">Plan to do</label><input type="date" id="f-plan"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex:2"><label class="form-label">People involved</label><input type="text" id="f-people" placeholder="e.g. Alex, Bruce, Ryan"></div>
+          <div class="form-group"><label class="form-label">Link / reference</label><input type="text" id="f-link" placeholder="https://..."></div>
+        </div>
+        <div class="form-row"><div class="form-group"><label class="form-label">Notes / context / guides</label><div class="rich-editor-wrap"><div class="rich-toolbar" id="f-toolbar"></div><div class="rich-editor" id="f-notes" contenteditable="true" placeholder="Background info, instructions, what to keep in mind..."></div></div></div></div>
+        <div class="form-group" style="margin-bottom:10px">
+          <label class="form-label">Steps (optional)</label>
+          <div class="sub-add-row"><input type="text" id="f-sub" placeholder="Add a step and press Enter"><button class="add-sub-btn" onclick="addStep('f')">+ Add step</button></div>
+          <div class="steps-list" id="f-steps-list"></div>
+        </div>
+        <div class="form-actions"><button class="btn-cancel" onclick="toggleForm()">Cancel</button><button class="btn-save" onclick="saveTask()">Save task</button></div>
       </div>
-      <div class="recur-row" id="f-recur-row" style="display:none">
-        <span class="recur-label">How often does this repeat?</span>
-        <select class="freq-select" id="f-freq" onchange="updateFreqHint('f-freq','f-freq-hint')">
-          <optgroup label="Short cycle">
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-          </optgroup>
-          <optgroup label="Long cycle">
-            <option value="quarterly">Quarterly</option>
-            <option value="yearly">Yearly</option>
-          </optgroup>
-          <optgroup label="Flexible">
-            <option value="asneeded">As Needed</option>
-            <option value="reminder">Reminder</option>
-            <option value="holiday">Holiday Prep</option>
-          </optgroup>
-        </select>
-        <span class="freq-hint" id="f-freq-hint"></span>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Action owner</label>
-          <select id="f-owner">
-            <option value="mine">Action needed</option>
-            <option value="theirs">Awaiting other's action</option>
-            <option value="both">Collaborative progress</option>
-            <option value="hold">On hold</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Energy needed</label>
-          <select id="f-energy">
-            <option value="med" selected>Medium</option>
-            <option value="high">High focus</option>
-            <option value="low">Low effort</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Due date</label>
-          <input type="date" id="f-due">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Plan to do</label>
-          <input type="date" id="f-plan">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group" style="flex:2">
-          <label class="form-label">People involved</label>
-          <input type="text" id="f-people" placeholder="e.g. Alex, Bruce, Ryan">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Link / reference</label>
-          <input type="text" id="f-link" placeholder="https://...">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Notes / context / guides</label>
-          <div class="rich-editor-wrap">
-            <div class="rich-toolbar" id="f-toolbar"></div>
-            <div class="rich-editor" id="f-notes" contenteditable="true" placeholder="Background info, instructions, what to keep in mind..."></div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label">Steps (optional)</label>
-        <div class="sub-add-row">
-          <input type="text" id="f-sub" placeholder="Add a step and press Enter">
-          <button class="add-sub-btn" onclick="addStep('f')">+ Add step</button>
-        </div>
-        <div class="steps-list" id="f-steps-list"></div>
-      </div>
-      <div class="form-actions">
-        <button class="btn-cancel" onclick="toggleForm()">Cancel</button>
-        <button class="btn-save" onclick="saveTask()">Save task</button>
-      </div>
+      <div id="board"></div>
     </div>
-
-    <div id="board"></div>
-    </div><!-- /tab-tasks -->
-
-    <!-- CALLS TAB -->
     <div class="tab-panel" id="tab-calls">
       <div class="calls-topbar">
-        <div class="calls-filters">
-          <button class="call-filter-btn active" onclick="setCallFilter('all',this)">All</button>
-          <button class="call-filter-btn" onclick="setCallFilter('upcoming',this)">Upcoming</button>
-          <button class="call-filter-btn" onclick="setCallFilter('done',this)">Done</button>
-          <button class="call-filter-btn" onclick="setCallFilter('cancelled',this)">Cancelled</button>
+        <div class="calls-filters-row">
+          <div class="calls-filters">
+            <button class="call-filter-btn active" onclick="setCallFilter('all',this)">All</button>
+            <button class="call-filter-btn" onclick="setCallFilter('upcoming',this)">Upcoming</button>
+            <button class="call-filter-btn" onclick="setCallFilter('done',this)">Done</button>
+            <button class="call-filter-btn" onclick="setCallFilter('cancelled',this)">Cancelled</button>
+          </div>
+          <button class="meet-btn" onclick="toggleMeetPanel()">📹 Meet links</button>
         </div>
         <button class="call-add-toggle" id="call-add-toggle-btn" onclick="toggleCallForm()">+ Schedule a call</button>
       </div>
-
       <div class="call-form" id="call-form">
         <div class="form-row">
-          <div class="form-group" style="flex:2">
-            <label class="form-label">Call title</label>
-            <input type="text" id="cf-title" placeholder="e.g. Weekly sync with Alex">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Status</label>
-            <select id="cf-status">
-              <option value="upcoming">Upcoming</option>
-              <option value="done">Done</option>
-              <option value="cancelled">Cancelled</option>
-            </select>
-          </div>
+          <div class="form-group" style="flex:2"><label class="form-label">Call title</label><input type="text" id="cf-title" placeholder="e.g. Weekly sync with Alex"></div>
+          <div class="form-group"><label class="form-label">Status</label><select id="cf-status"><option value="upcoming">Upcoming</option><option value="done">Done</option><option value="cancelled">Cancelled</option></select></div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Date</label>
-            <input type="date" id="cf-date">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Time</label>
-            <input type="time" id="cf-time">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Duration</label>
-            <select id="cf-duration">
-              <option value="15">15 min</option>
-              <option value="30" selected>30 min</option>
-              <option value="45">45 min</option>
-              <option value="60">1 hour</option>
-              <option value="90">1.5 hours</option>
-              <option value="120">2 hours</option>
-            </select>
-          </div>
+          <div class="form-group"><label class="form-label">Date</label><input type="date" id="cf-date"></div>
+          <div class="form-group"><label class="form-label">Time</label><input type="time" id="cf-time"></div>
+          <div class="form-group"><label class="form-label">Duration</label><select id="cf-duration"><option value="15">15 min</option><option value="30" selected>30 min</option><option value="45">45 min</option><option value="60">1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select></div>
         </div>
         <div class="form-row">
-          <div class="form-group" style="flex:2">
-            <label class="form-label">Attendees</label>
-            <input type="text" id="cf-attendees" placeholder="e.g. Alex, Bruce, Ryan">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Google Meet / link</label>
-            <input type="text" id="cf-link" placeholder="https://meet.google.com/...">
-          </div>
+          <div class="form-group" style="flex:2"><label class="form-label">Attendees</label><input type="text" id="cf-attendees" placeholder="e.g. Alex, Bruce, Ryan"></div>
+          <div class="form-group"><label class="form-label">Google Meet / link</label><input type="text" id="cf-link" placeholder="https://meet.google.com/..."></div>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Agenda</label>
-            <textarea id="cf-agenda" placeholder="What will be discussed? Key points, goals..." style="background:var(--bg);color:var(--text);border:2px solid var(--border2);border-radius:var(--radius-sm);padding:7px 10px;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none;width:100%;min-height:80px;resize:vertical;line-height:1.6"></textarea>
-          </div>
-        </div>
-        <div class="form-actions">
-          <button class="btn-cancel" onclick="toggleCallForm()">Cancel</button>
-          <button class="btn-save" style="background:var(--b400)" onclick="saveCall()">Save call</button>
-        </div>
+        <div class="form-row"><div class="form-group"><label class="form-label">Agenda</label><textarea id="cf-agenda" placeholder="What will be discussed?" style="background:var(--bg);color:var(--text);border:2px solid var(--border2);border-radius:var(--radius-sm);padding:7px 10px;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;outline:none;width:100%;min-height:80px;resize:vertical;line-height:1.6"></textarea></div></div>
+        <div class="form-actions"><button class="btn-cancel" onclick="toggleCallForm()">Cancel</button><button class="btn-save" style="background:var(--b400)" onclick="saveCall()">Save call</button></div>
       </div>
-
       <div class="calls-list" id="calls-list"></div>
-    </div><!-- /tab-calls -->
+    </div>
+  </div>
+</div>
 
-  </div><!-- /main -->
-</div><!-- /layout -->
+<!-- Meet Panel -->
+<div class="meet-panel-overlay" id="meet-panel-overlay" onclick="closeMeetPanel()"></div>
+<div class="meet-panel" id="meet-panel">
+  <div class="meet-panel-head">
+    <div class="meet-panel-title">📹 Meet links</div>
+    <button class="meet-panel-close" onclick="closeMeetPanel()">✕</button>
+  </div>
+  <div class="meet-links" id="meet-links"></div>
+  <div class="meet-add-section">
+    <button class="meet-add-toggle" onclick="toggleMeetAddForm()">+ Add a Meet link</button>
+    <div class="meet-add-form" id="meet-add-form">
+      <input type="text" id="meet-name" placeholder="Name (e.g. My Meet, Team standup)">
+      <input type="text" id="meet-url" placeholder="https://meet.google.com/...">
+      <div class="meet-form-btns">
+        <button class="meet-cancel-btn" onclick="toggleMeetAddForm()">Cancel</button>
+        <button class="meet-save-btn" onclick="saveMeetLink()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="sync-bar" id="sync-bar"><div class="sync-dot"></div><span id="sync-msg">Saving…</span></div>
 
@@ -530,108 +458,45 @@ input:focus,select:focus{border-color:#1a1a18;box-shadow:0 0 0 3px var(--pk100)}
   <div class="edit-modal">
     <div class="edit-modal-title">Edit task</div>
     <div class="form-row">
-      <div class="form-group" style="flex:2">
-        <label class="form-label">Task title</label>
-        <input type="text" id="e-title">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Category</label>
-        <select id="e-cat" onchange="toggleRecur('e-cat','e-recur-row')">
-          <option value="task">Quick task</option>
-          <option value="project">Project</option>
-          <option value="recurring">Recurring task</option>
-          <option value="tracking">Tracking</option>
-          <option value="idea">Future idea</option>
-        </select>
-      </div>
+      <div class="form-group" style="flex:2"><label class="form-label">Task title</label><input type="text" id="e-title"></div>
+      <div class="form-group"><label class="form-label">Category</label><select id="e-cat" onchange="toggleRecur('e-cat','e-recur-row')"><option value="task">Quick task</option><option value="project">Project</option><option value="recurring">Recurring task</option><option value="tracking">Tracking</option><option value="idea">Future idea</option></select></div>
     </div>
     <div class="recur-row" id="e-recur-row" style="display:none">
       <span class="recur-label">How often does this repeat?</span>
       <select class="freq-select" id="e-freq" onchange="updateFreqHint('e-freq','e-freq-hint')">
-        <optgroup label="Short cycle">
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-        </optgroup>
-        <optgroup label="Long cycle">
-          <option value="quarterly">Quarterly</option>
-          <option value="yearly">Yearly</option>
-        </optgroup>
-        <optgroup label="Flexible">
-          <option value="asneeded">As Needed</option>
-          <option value="reminder">Reminder</option>
-          <option value="holiday">Holiday Prep</option>
-        </optgroup>
+        <optgroup label="Short cycle"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></optgroup>
+        <optgroup label="Long cycle"><option value="quarterly">Quarterly</option><option value="yearly">Yearly</option></optgroup>
+        <optgroup label="Flexible"><option value="asneeded">As Needed</option><option value="reminder">Reminder</option><option value="holiday">Holiday Prep</option></optgroup>
       </select>
       <span class="freq-hint" id="e-freq-hint"></span>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Action owner</label>
-        <select id="e-owner">
-          <option value="mine">Action needed</option>
-          <option value="theirs">Awaiting other's action</option>
-          <option value="both">Collaborative progress</option>
-          <option value="hold">On hold</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Energy needed</label>
-        <select id="e-energy">
-          <option value="med">Medium</option>
-          <option value="high">High focus</option>
-          <option value="low">Low effort</option>
-        </select>
-      </div>
+      <div class="form-group"><label class="form-label">Action owner</label><select id="e-owner"><option value="mine">Action needed</option><option value="theirs">Awaiting other's action</option><option value="both">Collaborative progress</option><option value="hold">On hold</option></select></div>
+      <div class="form-group"><label class="form-label">Energy needed</label><select id="e-energy"><option value="med">Medium</option><option value="high">High focus</option><option value="low">Low effort</option></select></div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Due date</label>
-        <input type="date" id="e-due">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Plan to do</label>
-        <input type="date" id="e-plan">
-      </div>
+      <div class="form-group"><label class="form-label">Due date</label><input type="date" id="e-due"></div>
+      <div class="form-group"><label class="form-label">Plan to do</label><input type="date" id="e-plan"></div>
     </div>
     <div class="form-row">
-      <div class="form-group" style="flex:2">
-        <label class="form-label">People involved</label>
-        <input type="text" id="e-people" placeholder="e.g. Alex, Bruce, Ryan">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Link / reference</label>
-        <input type="text" id="e-link" placeholder="https://...">
-      </div>
+      <div class="form-group" style="flex:2"><label class="form-label">People involved</label><input type="text" id="e-people" placeholder="e.g. Alex, Bruce, Ryan"></div>
+      <div class="form-group"><label class="form-label">Link / reference</label><input type="text" id="e-link" placeholder="https://..."></div>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Notes / context / guides</label>
-        <div class="rich-editor-wrap">
-          <div class="rich-toolbar" id="e-toolbar"></div>
-          <div class="rich-editor" id="e-notes" contenteditable="true" placeholder="Background info, instructions, what to keep in mind..."></div>
-        </div>
-      </div>
-    </div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Notes / context / guides</label><div class="rich-editor-wrap"><div class="rich-toolbar" id="e-toolbar"></div><div class="rich-editor" id="e-notes" contenteditable="true" placeholder="Background info, instructions, what to keep in mind..."></div></div></div></div>
     <div class="form-group" style="margin-bottom:10px">
       <label class="form-label">Steps</label>
-      <div class="sub-add-row">
-        <input type="text" id="e-sub" placeholder="Add a step and press Enter">
-        <button class="add-sub-btn" onclick="addStep('e')">+ Add step</button>
-      </div>
+      <div class="sub-add-row"><input type="text" id="e-sub" placeholder="Add a step and press Enter"><button class="add-sub-btn" onclick="addStep('e')">+ Add step</button></div>
       <div class="steps-list" id="e-steps-list"></div>
     </div>
-    <div class="form-actions">
-      <button class="btn-cancel" onclick="closeEdit()">Cancel</button>
-      <button class="btn-save" onclick="saveEdit()">Save changes</button>
-    </div>
+    <div class="form-actions"><button class="btn-cancel" onclick="closeEdit()">Cancel</button><button class="btn-save" onclick="saveEdit()">Save changes</button></div>
   </div>
 </div>
 
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwWOImRyEEeD02oBkjAx032e0Di8jSHEy0nQTW_jN_F2JRjPewxx-4UNp51Shor-x2Z/exec";
-let tasks=[],idC=1,activeFilter='all',activeCats=new Set(),expandedId=null,syncing=false,editingId=null;
+let tasks=[],idC=1,activeFilter='all',activeCats=new Set(),expandedId=null,syncing=false,editingId=null,dataLoaded=false;
 let fSteps=[],eSteps=[],sidebarCollapsed=false;
+let meetLinks=[];
 
 const MSGS_THEIRS=["You did your part. Now the waiting game begins.","Sent it off! Time to hydrate and wait.","Officially their problem for now. Respectable."];
 const MSGS_BOTH=["Everyone's working on it — nice coordination energy!","It's a collab! Keep the momentum going."];
@@ -642,40 +507,9 @@ const catLabel={task:"Quick task",project:"Project",recurring:"Recurring task",t
 const catClass={task:"cat-task",project:"cat-project",recurring:"cat-recurring",tracking:"cat-tracking",idea:"cat-idea"};
 const energyLabel={high:"High focus",med:"Medium",low:"Low effort"};
 const energyPill={high:"pill-high",med:"pill-med",low:"pill-low"};
-
-// Expanded frequency labels and pill classes
-const freqLabel={
-  daily:"Daily",
-  weekly:"Weekly",
-  monthly:"Monthly",
-  quarterly:"Quarterly",
-  yearly:"Yearly",
-  asneeded:"As Needed",
-  reminder:"Reminder",
-  holiday:"Holiday Prep"
-};
-const freqPillClass={
-  daily:"pill-freq-daily",
-  weekly:"pill-freq-weekly",
-  monthly:"pill-freq-monthly",
-  quarterly:"pill-freq-quarterly",
-  yearly:"pill-freq-yearly",
-  asneeded:"pill-freq-asneeded",
-  reminder:"pill-freq-reminder",
-  holiday:"pill-freq-holiday"
-};
-// Hint text shown in the form when a frequency is selected
-const freqHints={
-  daily:"Resets every day — great for daily check-ins or routines.",
-  weekly:"Resets every 7 days — good for weekly reports or reviews.",
-  monthly:"Resets every month — billing cycles, monthly reports, etc.",
-  quarterly:"Resets every 3 months — Q1/Q2/Q3/Q4 tasks.",
-  yearly:"Resets every year — annual reviews, renewals, anniversaries.",
-  asneeded:"No auto-reset. Mark done whenever it happens, then it resets itself.",
-  reminder:"Like As Needed but flagged as a reminder. Good for passive nudges.",
-  holiday:"Resets yearly around the holiday season — great for prep checklists."
-};
-
+const freqLabel={daily:"Daily",weekly:"Weekly",monthly:"Monthly",quarterly:"Quarterly",yearly:"Yearly",asneeded:"As Needed",reminder:"Reminder",holiday:"Holiday Prep"};
+const freqPillClass={daily:"pill-freq-daily",weekly:"pill-freq-weekly",monthly:"pill-freq-monthly",quarterly:"pill-freq-quarterly",yearly:"pill-freq-yearly",asneeded:"pill-freq-asneeded",reminder:"pill-freq-reminder",holiday:"pill-freq-holiday"};
+const freqHints={daily:"Resets every day.",weekly:"Resets every 7 days.",monthly:"Resets every month.",quarterly:"Resets every 3 months.",yearly:"Resets every year.",asneeded:"No auto-reset. Mark done whenever it happens.",reminder:"Like As Needed but flagged as a reminder.",holiday:"Resets yearly around the holiday season."};
 const PEOPLE_COLORS={alex:"background:var(--pk100);color:var(--pk800)",bruce:"background:var(--b100);color:var(--b800)",ryan:"background:var(--t100);color:var(--t600)",nate:"background:var(--pk100);color:var(--pk800)",matt:"background:var(--a100);color:var(--a600)",maria:"background:var(--a100);color:var(--a600)",jamie:"background:var(--c100);color:var(--c600)"};
 const HIGHLIGHTS=["#FAC775","#9FE1CB","#B5D4F4","#F4C0D1","#C0DD97"];
 const COLORS=["#D4537E","#378ADD","#1D9E75","#BA7517","#E24B4A","#1a1a18"];
@@ -683,23 +517,9 @@ const COLORS=["#D4537E","#378ADD","#1D9E75","#BA7517","#E24B4A","#1a1a18"];
 function pColor(n){return PEOPLE_COLORS[n.trim().toLowerCase()]||"background:var(--r50);color:var(--r600)";}
 function initials(n){const p=n.trim().split(/\s+/);return(p.length>1?p[0][0]+p[1][0]:n.trim().slice(0,2)).toUpperCase();}
 function escH(s){if(!s)return"";const d=document.createElement("div");d.textContent=s;return d.innerHTML;}
-
-function toggleRecur(catId,rowId){
-  const isRecur=document.getElementById(catId).value==="recurring";
-  document.getElementById(rowId).style.display=isRecur?"flex":"none";
-  if(isRecur){
-    const hintId=rowId.replace("recur-row","freq-hint");
-    const freqId=rowId.replace("recur-row","freq");
-    updateFreqHint(freqId,hintId);
-  }
-}
+function toggleRecur(catId,rowId){const isRecur=document.getElementById(catId).value==="recurring";document.getElementById(rowId).style.display=isRecur?"flex":"none";if(isRecur){const hintId=rowId.replace("recur-row","freq-hint");const freqId=rowId.replace("recur-row","freq");updateFreqHint(freqId,hintId);}}
 function toggleSidebar(){sidebarCollapsed=!sidebarCollapsed;document.getElementById("sidebar").classList.toggle("collapsed",sidebarCollapsed);}
-
-function updateFreqHint(freqId,hintId){
-  const val=document.getElementById(freqId).value;
-  const hint=document.getElementById(hintId);
-  if(hint)hint.textContent=freqHints[val]||"";
-}
+function updateFreqHint(freqId,hintId){const val=document.getElementById(freqId).value;const hint=document.getElementById(hintId);if(hint)hint.textContent=freqHints[val]||"";}
 
 function buildToolbar(tbId,editorId){
   const tb=document.getElementById(tbId);
@@ -716,35 +536,16 @@ function buildToolbar(tbId,editorId){
 }
 function applyColor(cmd,val,editorId){if(!val)return;document.getElementById(editorId).focus();document.execCommand(cmd,false,val);}
 
-function addStep(prefix){
-  const inp=document.getElementById(prefix+"-sub");const v=inp.value.trim();if(!v)return;
-  (prefix==="f"?fSteps:eSteps).push({text:v,done:false,subs:[]});
-  inp.value="";renderSteps(prefix);
-}
-function addSubStep(prefix,i){
-  const inp=document.getElementById(prefix+"-ss-"+i);const v=inp.value.trim();if(!v)return;
-  (prefix==="f"?fSteps:eSteps)[i].subs.push({text:v,done:false});
-  inp.value="";renderSteps(prefix);
-}
+function addStep(prefix){const inp=document.getElementById(prefix+"-sub");const v=inp.value.trim();if(!v)return;(prefix==="f"?fSteps:eSteps).push({text:v,done:false,subs:[]});inp.value="";renderSteps(prefix);}
+function addSubStep(prefix,i){const inp=document.getElementById(prefix+"-ss-"+i);const v=inp.value.trim();if(!v)return;(prefix==="f"?fSteps:eSteps)[i].subs.push({text:v,done:false});inp.value="";renderSteps(prefix);}
 function removeStep(prefix,i){(prefix==="f"?fSteps:eSteps).splice(i,1);renderSteps(prefix);}
 function removeSubStep(prefix,i,j){(prefix==="f"?fSteps:eSteps)[i].subs.splice(j,1);renderSteps(prefix);}
 function renderSteps(prefix){
   const arr=prefix==="f"?fSteps:eSteps;
   document.getElementById(prefix+"-steps-list").innerHTML=arr.map((s,i)=>`
-    <div class="step-item">
-      <div class="step-main">
-        <span style="color:var(--pk400);font-size:12px">&#9658;</span>
-        <span style="flex:1">${escH(s.text)}</span>
-        <button class="step-del" onclick="removeStep('${prefix}',${i})">&#x2715;</button>
-      </div>
-      <div class="substeps">
-        ${s.subs.map((ss,j)=>`<div class="substep-item"><span style="color:var(--text3);font-size:11px">&#8627;</span><span style="flex:1">${escH(ss.text)}</span><button class="step-del" onclick="removeSubStep('${prefix}',${i},${j})">&#x2715;</button></div>`).join("")}
-        <div class="substep-add-row">
-          <input type="text" id="${prefix}-ss-${i}" placeholder="Add sub-step..." onkeydown="if(event.key==='Enter'){event.preventDefault();addSubStep('${prefix}',${i})}">
-          <button class="substep-add-btn" onclick="addSubStep('${prefix}',${i})">+ Sub-step</button>
-        </div>
-      </div>
-    </div>`).join("");
+    <div class="step-item"><div class="step-main"><span style="color:var(--pk400);font-size:12px">&#9658;</span><span style="flex:1">${escH(s.text)}</span><button class="step-del" onclick="removeStep('${prefix}',${i})">&#x2715;</button></div>
+    <div class="substeps">${s.subs.map((ss,j)=>`<div class="substep-item"><span style="color:var(--text3);font-size:11px">&#8627;</span><span style="flex:1">${escH(ss.text)}</span><button class="step-del" onclick="removeSubStep('${prefix}',${i},${j})">&#x2715;</button></div>`).join("")}
+    <div class="substep-add-row"><input type="text" id="${prefix}-ss-${i}" placeholder="Add sub-step..." onkeydown="if(event.key==='Enter'){event.preventDefault();addSubStep('${prefix}',${i})}"><button class="substep-add-btn" onclick="addSubStep('${prefix}',${i})">+ Sub-step</button></div></div></div>`).join("");
 }
 
 document.addEventListener("keydown",e=>{
@@ -753,40 +554,90 @@ document.addEventListener("keydown",e=>{
   if(e.key==="Escape"&&document.getElementById("edit-overlay").classList.contains("open"))closeEdit();
 });
 
+// ── Meet links ────────────────────────────────────────────
+async function loadMeetLinks(){
+  try{
+    const r=await fetch(SCRIPT_URL+"?action=getMeet&t="+Date.now(),{redirect:"follow"});
+    const data=await r.json();
+    if(Array.isArray(data))meetLinks=data;
+  }catch(e){
+    try{const s=localStorage.getItem("nhq_meet");if(s)meetLinks=JSON.parse(s);}catch(e2){}
+  }
+  renderMeetLinks();
+}
+async function saveMeetLinks(){
+  try{
+    const enc=encodeURIComponent(JSON.stringify(meetLinks));
+    await fetch(SCRIPT_URL+"?action=saveMeet&meet="+enc,{mode:"no-cors"});
+    localStorage.setItem("nhq_meet",JSON.stringify(meetLinks));
+  }catch(e){localStorage.setItem("nhq_meet",JSON.stringify(meetLinks));}
+}
+function toggleMeetPanel(){
+  const panel=document.getElementById("meet-panel");
+  const overlay=document.getElementById("meet-panel-overlay");
+  const isOpen=panel.classList.toggle("open");
+  overlay.classList.toggle("open",isOpen);
+}
+function closeMeetPanel(){
+  document.getElementById("meet-panel").classList.remove("open");
+  document.getElementById("meet-panel-overlay").classList.remove("open");
+  document.getElementById("meet-add-form").classList.remove("open");
+}
+function toggleMeetAddForm(){
+  const f=document.getElementById("meet-add-form");
+  const isOpen=f.classList.toggle("open");
+  if(isOpen)setTimeout(()=>document.getElementById("meet-name").focus(),50);
+}
+function saveMeetLink(){
+  const name=document.getElementById("meet-name").value.trim();
+  const url=document.getElementById("meet-url").value.trim();
+  if(!name||!url)return;
+  meetLinks.push({name,url});
+  document.getElementById("meet-name").value="";
+  document.getElementById("meet-url").value="";
+  document.getElementById("meet-add-form").classList.remove("open");
+  saveMeetLinks();renderMeetLinks();
+  showSync("saved","Meet link saved ✓");
+}
+function deleteMeetLink(i){if(!confirm("Remove this Meet link?"))return;meetLinks.splice(i,1);saveMeetLinks();renderMeetLinks();}
+function renderMeetLinks(){
+  const el=document.getElementById("meet-links");
+  if(!meetLinks.length){el.innerHTML=`<div class="meet-empty">No links yet — add your first Meet link!</div>`;return;}
+  el.innerHTML=meetLinks.map((m,i)=>`
+    <div class="meet-link-item">
+      <button class="meet-link-btn" onclick="window.open('${escH(m.url)}','_blank')" title="${escH(m.url)}">📹 ${escH(m.name)}</button>
+      <button class="meet-link-del" onclick="deleteMeetLink(${i})" title="Remove">✕</button>
+    </div>`).join("");
+}
+
+// ── Sheet load/save ───────────────────────────────────────
 async function loadFromSheet(){
   try{
     const r=await fetch(SCRIPT_URL+"?t="+Date.now(),{redirect:"follow"});
     const data=await r.json();
     if(Array.isArray(data)&&data.length){
       tasks=data.map(t=>({id:+t.id,title:t.title,cat:t.cat||t.type||"task",freq:t.freq||"",owner:t.owner,energy:t.energy,due:t.due||null,plan:t.plan||null,people:t.people?JSON.parse(t.people):[],notes:t.notes||"",link:t.link||"",subs:t.subs?JSON.parse(t.subs):[],done:t.done==="TRUE"||t.done===true,created:+t.created}));
-      idC=Math.max(...tasks.map(x=>x.id))+1;
+      idC=tasks.length?Math.max(...tasks.map(x=>x.id))+1:1;
     }
   }catch(e){console.log("Load error",e);}
+  dataLoaded=true;
   render();suggest();
 }
 let syncTimer=null;
 function showSync(state,msg){
-  const bar=document.getElementById("sync-bar");
-  const txt=document.getElementById("sync-msg");
-  bar.className="sync-bar "+state+" visible";
-  txt.textContent=msg;
+  const bar=document.getElementById("sync-bar");const txt=document.getElementById("sync-msg");
+  bar.className="sync-bar "+state+" visible";txt.textContent=msg;
   if(syncTimer)clearTimeout(syncTimer);
   if(state!=="saving")syncTimer=setTimeout(()=>{bar.classList.remove("visible");},2800);
 }
 async function saveToSheet(){
-  if(syncing)return;syncing=true;
+  if(!dataLoaded)return;if(syncing)return;syncing=true;
   showSync("saving","Saving…");
-  try{
-    const enc=encodeURIComponent(JSON.stringify(tasks));
-    await fetch(SCRIPT_URL+"?action=save&tasks="+enc,{mode:"no-cors"});
-    showSync("saved","Saved ✓");
-  }catch(e){
-    console.log("Save error",e);
-    showSync("failed","Save failed — check connection");
-  }
+  try{const enc=encodeURIComponent(JSON.stringify(tasks));await fetch(SCRIPT_URL+"?action=save&tasks="+enc,{mode:"no-cors"});showSync("saved","Saved ✓");}
+  catch(e){showSync("failed","Save failed — check connection");}
   syncing=false;
 }
-function save(){saveToSheet();}
+function save(){if(dataLoaded)saveToSheet();}
 
 function daysUntil(ds){if(!ds)return null;const d=new Date(ds);const n=new Date();n.setHours(0,0,0,0);return Math.ceil((d-n)/864e5);}
 function duePill(ds){if(!ds)return"";const d=daysUntil(ds);const cls=d<0?"pill-overdue":"pill-due";const txt=d<0?Math.abs(d)+"d overdue":d===0?"Due today":d===1?"Due tomorrow":"Due in "+d+"d";return`<span class="pill ${cls}">${txt}</span>`;}
@@ -797,27 +648,15 @@ function openFormWithCat(cat){
   const f=document.getElementById("add-form");
   const alreadyOpen=f.classList.contains("open");
   const currentCat=document.getElementById("f-cat").value;
-  // If form is open and same cat clicked — close it
-  if(alreadyOpen&&currentCat===cat){
-    f.classList.remove("open");
-    document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));
-    return;
-  }
-  // Set category then open
-  document.getElementById("f-cat").value=cat;
-  toggleRecur("f-cat","f-recur-row");
+  if(alreadyOpen&&currentCat===cat){f.classList.remove("open");document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));return;}
+  document.getElementById("f-cat").value=cat;toggleRecur("f-cat","f-recur-row");
   f.classList.add("open");
   document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));
   const idx={task:0,project:1,recurring:2,tracking:3,idea:4}[cat];
-  const btns=document.querySelectorAll(".quick-add-btn");
-  if(btns[idx])btns[idx].classList.add("active");
+  const btns=document.querySelectorAll(".quick-add-btn");if(btns[idx])btns[idx].classList.add("active");
   setTimeout(()=>document.getElementById("f-title").focus(),50);
 }
-function toggleForm(){
-  const f=document.getElementById("add-form");
-  const isOpen=f.classList.toggle("open");
-  if(!isOpen)document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));
-}
+function toggleForm(){const f=document.getElementById("add-form");const isOpen=f.classList.toggle("open");if(!isOpen)document.querySelectorAll(".quick-add-btn").forEach(b=>b.classList.remove("active"));}
 
 function saveTask(){
   const title=document.getElementById("f-title").value.trim();if(!title)return;
@@ -838,32 +677,18 @@ function saveTask(){
 function toggleDone(id){
   const t=tasks.find(x=>x.id===id);if(!t)return;
   if(t.cat==="recurring"&&!t.done){
-    // "As Needed" and "Reminder" types: just mark done, no date advance
     const noAutoReset=["asneeded","reminder"];
     t.done=true;t.lastDone=new Date().toISOString().split("T")[0];
-    if(!noAutoReset.includes(t.freq)&&t.due){
-      t.due=nextDueDate(t.freq,t.due);
-    }
+    if(!noAutoReset.includes(t.freq)&&t.due)t.due=nextDueDate(t.freq,t.due);
     save();render();suggest();
     setTimeout(()=>{t.done=false;save();render();suggest();},1500);
   } else {t.done=!t.done;save();render();suggest();}
 }
-
 function nextDueDate(freq,cur){
   const b=cur?new Date(cur):new Date();
-  switch(freq){
-    case"daily":b.setDate(b.getDate()+1);break;
-    case"weekly":b.setDate(b.getDate()+7);break;
-    case"monthly":b.setMonth(b.getMonth()+1);break;
-    case"quarterly":b.setMonth(b.getMonth()+3);break;
-    case"yearly":
-    case"holiday":b.setFullYear(b.getFullYear()+1);break;
-    // asneeded / reminder — no date advance, caller skips this
-    default:break;
-  }
+  switch(freq){case"daily":b.setDate(b.getDate()+1);break;case"weekly":b.setDate(b.getDate()+7);break;case"monthly":b.setMonth(b.getMonth()+1);break;case"quarterly":b.setMonth(b.getMonth()+3);break;case"yearly":case"holiday":b.setFullYear(b.getFullYear()+1);break;default:break;}
   return b.toISOString().split("T")[0];
 }
-
 function toggleSub(tid,si){const t=tasks.find(x=>x.id===tid);if(t&&t.subs[si])t.subs[si].done=!t.subs[si].done;save();render();}
 function toggleSubSub(tid,si,ssi){const t=tasks.find(x=>x.id===tid);if(t&&t.subs[si]&&t.subs[si].subs[ssi])t.subs[si].subs[ssi].done=!t.subs[si].subs[ssi].done;save();render();}
 function deleteTask(id){if(!confirm("Remove this task?"))return;tasks=tasks.filter(x=>x.id!==id);if(expandedId===id)expandedId=null;save();render();suggest();}
@@ -871,37 +696,27 @@ function toggleExpand(id){expandedId=expandedId===id?null:id;render();}
 
 function editTask(id){
   const t=tasks.find(x=>x.id===id);if(!t)return;
-  editingId=id;
-  eSteps=t.subs?t.subs.map(s=>({...s,subs:s.subs?[...s.subs]:[]})):[];
-  document.getElementById("e-title").value=t.title;
-  document.getElementById("e-cat").value=t.cat||"task";
+  editingId=id;eSteps=t.subs?t.subs.map(s=>({...s,subs:s.subs?[...s.subs]:[]})):[];
+  document.getElementById("e-title").value=t.title;document.getElementById("e-cat").value=t.cat||"task";
   document.getElementById("e-freq").value=t.freq||"daily";
   document.getElementById("e-recur-row").style.display=t.cat==="recurring"?"flex":"none";
   if(t.cat==="recurring")updateFreqHint("e-freq","e-freq-hint");
-  document.getElementById("e-owner").value=t.owner;
-  document.getElementById("e-energy").value=t.energy;
-  document.getElementById("e-due").value=t.due||"";
-  document.getElementById("e-plan").value=t.plan||"";
+  document.getElementById("e-owner").value=t.owner;document.getElementById("e-energy").value=t.energy;
+  document.getElementById("e-due").value=t.due||"";document.getElementById("e-plan").value=t.plan||"";
   document.getElementById("e-people").value=t.people?t.people.join(", "):"";
-  document.getElementById("e-link").value=t.link||"";
-  document.getElementById("e-notes").innerHTML=t.notes||"";
-  renderSteps("e");
-  document.getElementById("edit-overlay").classList.add("open");
+  document.getElementById("e-link").value=t.link||"";document.getElementById("e-notes").innerHTML=t.notes||"";
+  renderSteps("e");document.getElementById("edit-overlay").classList.add("open");
 }
 function closeEditOverlay(e){if(e.target===document.getElementById("edit-overlay"))closeEdit();}
 function closeEdit(){document.getElementById("edit-overlay").classList.remove("open");editingId=null;}
 function saveEdit(){
   const t=tasks.find(x=>x.id===editingId);if(!t)return;
-  t.title=document.getElementById("e-title").value.trim()||t.title;
-  t.cat=document.getElementById("e-cat").value;
-  t.freq=t.cat==="recurring"?document.getElementById("e-freq").value:"";
-  t.owner=document.getElementById("e-owner").value;
-  t.energy=document.getElementById("e-energy").value;
-  t.due=document.getElementById("e-due").value||null;
+  t.title=document.getElementById("e-title").value.trim()||t.title;t.cat=document.getElementById("e-cat").value;
+  t.freq=t.cat==="recurring"?document.getElementById("e-freq").value:"";t.owner=document.getElementById("e-owner").value;
+  t.energy=document.getElementById("e-energy").value;t.due=document.getElementById("e-due").value||null;
   t.plan=document.getElementById("e-plan").value||null;
   t.people=document.getElementById("e-people").value.trim().split(",").map(p=>p.trim()).filter(Boolean);
-  t.link=document.getElementById("e-link").value.trim();
-  t.notes=document.getElementById("e-notes").innerHTML;
+  t.link=document.getElementById("e-link").value.trim();t.notes=document.getElementById("e-notes").innerHTML;
   t.subs=eSteps.map(s=>({...s,subs:[...s.subs]}));
   closeEdit();save();render();suggest();
 }
@@ -918,116 +733,49 @@ function suggest(){
   if(overdue.length)msg=`Heads up — "${overdue[0].title}" is overdue! That's first on the list, no arguments.`;
   else if(today.length&&today.some(x=>x.owner==="mine")){const t=today.find(x=>x.owner==="mine");msg=`"${t.title}" is due TODAY and it's your move. Go go go.`;}
   else if(myMove.length)msg=`${myMove.length} task${myMove.length>1?"s need":" needs"} YOUR action. Start with "${myMove[0].title}" — ${myMove[0].energy==="low"?"it's a quick one!":myMove[0].energy==="high"?"grab a coffee first.":"you've got this."}`;
-  else if(both.length)msg=`"${both[0].title}" is in collaborative progress — check in and keep it moving. ${rnd(MSGS_BOTH)}`;
+  else if(both.length)msg=`"${both[0].title}" is in collaborative progress — check in. ${rnd(MSGS_BOTH)}`;
   else if(waiting.length)msg=`${waiting.length} item${waiting.length>1?"s are":" is"} awaiting other's action. ${rnd(MSGS_THEIRS)} Maybe follow up on "${waiting[0].title}"?`;
   else{const pick=open[Math.floor(Math.random()*Math.min(3,open.length))];msg=`No fires today! "${pick.title}" could be a good one to pick up.`;}
   document.getElementById("nudge-msg").textContent=msg;
 }
 
 function setFilter(f){activeFilter=f;activeCats.clear();render();}
-function toggleCat(cat){
-  if(activeCats.has(cat))activeCats.delete(cat);else activeCats.add(cat);
-  activeFilter=activeCats.size>0?"multi-cat":"all";
-  render();
-}
+function toggleCat(cat){if(activeCats.has(cat))activeCats.delete(cat);else activeCats.add(cat);activeFilter=activeCats.size>0?"multi-cat":"all";render();}
 
 function renderSidebar(){
   const open=tasks.filter(x=>!x.done);
   const counts={all:open.length,mine:open.filter(x=>x.owner==="mine").length,theirs:open.filter(x=>x.owner==="theirs").length,both:open.filter(x=>x.owner==="both").length,hold:open.filter(x=>x.owner==="hold").length,done:tasks.filter(x=>x.done).length,today:open.filter(x=>x.due&&daysUntil(x.due)===0).length,"this-week":open.filter(x=>{const d=daysUntil(x.due);return x.due&&d>=0&&d<=6;}).length,"planned-today":open.filter(x=>x.plan&&daysUntil(x.plan)===0).length,"planned-week":open.filter(x=>{const d=daysUntil(x.plan);return x.plan&&d>=0&&d<=6;}).length};
   const catCounts={task:open.filter(x=>x.cat==="task").length,project:open.filter(x=>x.cat==="project").length,recurring:open.filter(x=>x.cat==="recurring").length,tracking:open.filter(x=>x.cat==="tracking").length,idea:open.filter(x=>x.cat==="idea").length};
   const catActiveBg={task:"var(--b400)",project:"var(--pk400)",recurring:"var(--t400)",tracking:"var(--a400)",idea:"var(--c400)"};
-
   const groups=[
-    {label:"Overview",items:[
-      {key:"all",icon:"&#9776;",label:"All tasks",color:"var(--pk400)"},
-      {key:"done",icon:"&#10003;",label:"Completed",color:"var(--g400)"},
-    ]},
-    {label:"By ownership",items:[
-      {key:"mine",icon:"&#9654;",label:"Action needed",color:"var(--pk400)"},
-      {key:"theirs",icon:"&#8987;",label:"Awaiting others",color:"var(--b400)"},
-      {key:"both",icon:"&#9900;",label:"Collab progress",color:"var(--a400)"},
-      {key:"hold",icon:"&#8214;",label:"On hold",color:"var(--c400)"},
-    ]},
-    {label:"By date",items:[
-      {key:"today",icon:"&#9888;",label:"Due today",color:"var(--r400)"},
-      {key:"this-week",icon:"&#128197;",label:"Due this week",color:"var(--a400)"},
-      {key:"planned-today",icon:"&#9998;",label:"Planned today",color:"var(--b400)"},
-      {key:"planned-week",icon:"&#128336;",label:"Planned this week",color:"var(--t400)"},
-    ]},
+    {label:"Overview",items:[{key:"all",icon:"&#9776;",label:"All tasks",color:"var(--pk400)"},{key:"done",icon:"&#10003;",label:"Completed",color:"var(--g400)"}]},
+    {label:"By ownership",items:[{key:"mine",icon:"&#9654;",label:"Action needed",color:"var(--pk400)"},{key:"theirs",icon:"&#8987;",label:"Awaiting others",color:"var(--b400)"},{key:"both",icon:"&#9900;",label:"Collab progress",color:"var(--a400)"},{key:"hold",icon:"&#8214;",label:"On hold",color:"var(--c400)"}]},
+    {label:"By date",items:[{key:"today",icon:"&#9888;",label:"Due today",color:"var(--r400)"},{key:"this-week",icon:"&#128197;",label:"Due this week",color:"var(--a400)"},{key:"planned-today",icon:"&#9998;",label:"Planned today",color:"var(--b400)"},{key:"planned-week",icon:"&#128336;",label:"Planned this week",color:"var(--t400)"}]},
   ];
-
-  let html=groups.map(g=>`
-    <div class="filter-group">
-      <div class="filter-group-label">${g.label}</div>
-      ${g.items.map(item=>{
-        const isActive=activeFilter===item.key;
-        return`<button class="filter-btn ${isActive?"active":""}" onclick="setFilter('${item.key}')" title="${item.label}" style="${isActive?`background:${item.color}20`:""}">
-          <div class="f-icon" style="background:${item.color};color:#fff">${item.icon}</div>
-          <span class="f-label">${item.label}</span>
-          ${counts[item.key]!==undefined?`<span class="f-count">${counts[item.key]}</span>`:""}
-        </button>`;
-      }).join("")}
-    </div>
-    <div class="sidebar-sep"></div>
-  `).join("");
-
-  html+=`<div class="cat-multi-wrap">
-    <div class="cat-multi-label">By category <span style="font-weight:600;opacity:.7">(multi)</span></div>
-    <div class="cat-pill-row">
-      ${[["task","⚡","Quick tasks"],["project","📁","Projects"],["recurring","🔁","Recurring"],["tracking","📊","Tracking"],["idea","💡","Ideas"]].map(([k,icon,l])=>{
-        const active=activeCats.has(k);
-        return`<button class="cat-btn ${active?"active-cat":""}" onclick="toggleCat('${k}')" title="${catLabel[k]}" style="${active?`color:${catActiveBg[k]};background:${catActiveBg[k]}18`:""}">
-          <span style="font-size:14px;flex-shrink:0;font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">${icon}</span>
-          <span class="f-label">${l}${active?" ✓":""}</span>
-          <span class="f-count" style="${active?`background:${catActiveBg[k]};color:#fff`:""}">${catCounts[k]}</span>
-        </button>`;
-      }).join("")}
-    </div>
-  </div>`;
-
+  let html=groups.map(g=>`<div class="filter-group"><div class="filter-group-label">${g.label}</div>${g.items.map(item=>{const isActive=activeFilter===item.key;return`<button class="filter-btn ${isActive?"active":""}" onclick="setFilter('${item.key}')" title="${item.label}" style="${isActive?`background:${item.color}20`:""}"><div class="f-icon" style="background:${item.color};color:#fff">${item.icon}</div><span class="f-label">${item.label}</span>${counts[item.key]!==undefined?`<span class="f-count">${counts[item.key]}</span>`:""}</button>`;}).join("")}</div><div class="sidebar-sep"></div>`).join("");
+  html+=`<div class="cat-multi-wrap"><div class="cat-multi-label">By category <span style="font-weight:600;opacity:.7">(multi)</span></div><div class="cat-pill-row">${[["task","⚡","Quick tasks"],["project","📁","Projects"],["recurring","🔁","Recurring"],["tracking","📊","Tracking"],["idea","💡","Ideas"]].map(([k,icon,l])=>{const active=activeCats.has(k);return`<button class="cat-btn ${active?"active-cat":""}" onclick="toggleCat('${k}')" title="${catLabel[k]}" style="${active?`color:${catActiveBg[k]};background:${catActiveBg[k]}18`:""}"><span style="font-size:14px;flex-shrink:0;font-family:Apple Color Emoji,Segoe UI Emoji,sans-serif">${icon}</span><span class="f-label">${l}${active?" ✓":""}</span><span class="f-count" style="${active?`background:${catActiveBg[k]};color:#fff`:""}">${catCounts[k]}</span></button>`;}).join("")}</div></div>`;
   document.getElementById("sidebar-content").innerHTML=html;
 }
 
-function freqPill(t){
-  if(t.cat!=="recurring"||!t.freq)return"";
-  const cls=freqPillClass[t.freq]||"pill-freq-asneeded";
-  const lbl=freqLabel[t.freq]||t.freq;
-  return`<span class="pill ${cls}">${lbl}</span>`;
-}
+function freqPill(t){if(t.cat!=="recurring"||!t.freq)return"";const cls=freqPillClass[t.freq]||"pill-freq-asneeded";const lbl=freqLabel[t.freq]||t.freq;return`<span class="pill ${cls}">${lbl}</span>`;}
 
 function render(){
-  const done=tasks.filter(x=>x.done).length;
-  const total=tasks.length;
-  const pct=total?Math.round(done/total*100):0;
-  document.getElementById("progfill").style.width=pct+"%";
-  document.getElementById("progtxt").textContent=pct+"% done";
+  const done=tasks.filter(x=>x.done).length;const total=tasks.length;const pct=total?Math.round(done/total*100):0;
+  document.getElementById("progfill").style.width=pct+"%";document.getElementById("progtxt").textContent=pct+"% done";
   const open=tasks.filter(x=>!x.done);
   document.getElementById("stats").innerHTML=`
     <div class="stat stat-mine ${activeFilter==="mine"?"active-filter":""}" onclick="setFilter('mine')" ondragover="statDragOver(event,'mine')" ondragleave="statDragLeave(event)" ondrop="statDrop(event,'mine')"><div class="stat-n">${open.filter(x=>x.owner==="mine").length}</div><div class="stat-l">Action needed</div></div>
     <div class="stat stat-theirs ${activeFilter==="theirs"?"active-filter":""}" onclick="setFilter('theirs')" ondragover="statDragOver(event,'theirs')" ondragleave="statDragLeave(event)" ondrop="statDrop(event,'theirs')"><div class="stat-n">${open.filter(x=>x.owner==="theirs").length}</div><div class="stat-l">Awaiting others</div></div>
     <div class="stat stat-both ${activeFilter==="both"?"active-filter":""}" onclick="setFilter('both')" ondragover="statDragOver(event,'both')" ondragleave="statDragLeave(event)" ondrop="statDrop(event,'both')"><div class="stat-n">${open.filter(x=>x.owner==="both").length}</div><div class="stat-l">Collab progress</div></div>
     <div class="stat stat-done ${activeFilter==="done"?"active-filter":""}" onclick="setFilter('done')" ondragover="statDragOver(event,'done')" ondragleave="statDragLeave(event)" ondrop="statDrop(event,'done')"><div class="stat-n">${done}</div><div class="stat-l">Completed</div></div>`;
-
   renderSidebar();
-
   let visible=tasks.filter(t=>{
-    if(activeFilter==="all")return!t.done;
-    if(activeFilter==="done")return t.done;
-    if(activeFilter==="multi-cat")return activeCats.has(t.cat)&&!t.done;
-    if(activeFilter==="today")return t.due&&daysUntil(t.due)===0&&!t.done;
-    if(activeFilter==="this-week"){const d=daysUntil(t.due);return t.due&&d>=0&&d<=6&&!t.done;}
-    if(activeFilter==="planned-today")return t.plan&&daysUntil(t.plan)===0&&!t.done;
-    if(activeFilter==="planned-week"){const d=daysUntil(t.plan);return t.plan&&d>=0&&d<=6&&!t.done;}
+    if(activeFilter==="all")return!t.done;if(activeFilter==="done")return t.done;if(activeFilter==="multi-cat")return activeCats.has(t.cat)&&!t.done;
+    if(activeFilter==="today")return t.due&&daysUntil(t.due)===0&&!t.done;if(activeFilter==="this-week"){const d=daysUntil(t.due);return t.due&&d>=0&&d<=6&&!t.done;}
+    if(activeFilter==="planned-today")return t.plan&&daysUntil(t.plan)===0&&!t.done;if(activeFilter==="planned-week"){const d=daysUntil(t.plan);return t.plan&&d>=0&&d<=6&&!t.done;}
     return t.owner===activeFilter&&!t.done;
   });
-  visible=[...visible].sort((a,b)=>{
-    if(a.done!==b.done)return a.done?1:-1;
-    const p={mine:0,both:1,theirs:2,hold:3};
-    if(p[a.owner]!==p[b.owner])return p[a.owner]-p[b.owner];
-    const da=a.due?daysUntil(a.due):999,db=b.due?daysUntil(b.due):999;
-    return da-db;
-  });
-
+  visible=[...visible].sort((a,b)=>{if(a.done!==b.done)return a.done?1:-1;const p={mine:0,both:1,theirs:2,hold:3};if(p[a.owner]!==p[b.owner])return p[a.owner]-p[b.owner];const da=a.due?daysUntil(a.due):999,db=b.due?daysUntil(b.due):999;return da-db;});
   const secs=[
     {key:"recurring",label:"Recurring tasks",dot:"dot-recurring",fn:x=>x.cat==="recurring"&&!x.done},
     {key:"mine",label:"Action needed",dot:"dot-mine",fn:x=>x.owner==="mine"&&!x.done&&x.cat!=="recurring"&&x.cat!=="idea"},
@@ -1037,53 +785,26 @@ function render(){
     {key:"idea",label:"Future ideas",dot:"dot-idea",fn:x=>x.cat==="idea"&&!x.done},
     {key:"done",label:"Completed",dot:"",fn:x=>x.done&&x.cat!=="recurring"},
   ];
-
   let html="";
   for(const sec of secs){
-    const items=visible.filter(sec.fn);
-    if(!items.length)continue;
+    const items=visible.filter(sec.fn);if(!items.length)continue;
     const show=activeFilter==="all"||activeFilter==="multi-cat"||activeFilter===sec.key||activeFilter==="done"||["today","this-week","planned-today","planned-week"].includes(activeFilter);
-    if(!show)continue;
-    if(activeFilter==="done"&&sec.key!=="done")continue;
+    if(!show)continue;if(activeFilter==="done"&&sec.key!=="done")continue;
     html+=`<div class="section" data-sec="${sec.key}" ondragover="secDragOver(event,'${sec.key}')" ondragleave="secDragLeave(event)" ondrop="secDrop(event,'${sec.key}')"><div class="section-head"><div class="section-title"><div class="dot ${sec.dot}"></div>${sec.label}</div><div class="section-count">${items.length}</div></div>`;
     for(const t of items){
-      const exp=expandedId===t.id;
-      const hasSubs=t.subs&&t.subs.length>0;
-      const hasD=t.notes||t.link||hasSubs||(t.people&&t.people.length);
-      const isRecur=t.cat==="recurring";
+      const exp=expandedId===t.id;const hasSubs=t.subs&&t.subs.length>0;const hasD=t.notes||t.link||hasSubs||(t.people&&t.people.length);const isRecur=t.cat==="recurring";
       html+=`<div class="card ${t.done?"done":""} ${isRecur?"recurring-card":""}" draggable="true" data-id="${t.id}" ondragstart="dragStart(event,${t.id})" ondragend="dragEnd(event)" ondragover="cardDragOver(event,${t.id})" ondragleave="cardDragLeave(event)" ondrop="cardDrop(event,${t.id},'${sec.key}')">
-        <div class="card-main">
-          <div class="chk ${t.done?"on":""}" onclick="toggleDone(${t.id})"></div>
-          <div class="card-body" onclick="toggleExpand(${t.id})">
-            <div class="card-title">${escH(t.title)}</div>
-            <div class="card-meta">
-              <span class="pill ${catClass[t.cat]||"cat-task"}">${catLabel[t.cat]||t.cat}</span>
-              ${freqPill(t)}
-              <span class="pill ${ownerPill[t.owner]}">${ownerLabel[t.owner]}</span>
-              <span class="pill ${energyPill[t.energy]}">${energyLabel[t.energy]}</span>
-              ${duePill(t.due)}${planPill(t.plan)}
-              ${t.people&&t.people.length?t.people.slice(0,2).map(p=>`<span class="pill pill-person">${escH(p)}</span>`).join(""):""}
-            </div>
-            ${isRecur&&t.lastDone?`<div class="recur-done-note">Last completed: ${t.lastDone}${t.freq&&!["asneeded","reminder"].includes(t.freq)?" — next due: "+(t.due||"not set"):""}</div>`:""}
-          </div>
-          <div class="card-actions">
-            <button class="card-action-btn edit-btn" onclick="editTask(${t.id})" title="Edit">&#9998;</button>
-            <button class="card-action-btn del-btn" onclick="deleteTask(${t.id})" title="Remove">&#128465;</button>
-            ${hasD?`<button class="card-action-btn exp-btn" onclick="toggleExpand(${t.id})" title="Expand">${exp?"&#9650;":"&#9660;"}</button>`:`<div style="width:32px"></div>`}
-          </div>
-        </div>`;
+        <div class="card-main"><div class="chk ${t.done?"on":""}" onclick="toggleDone(${t.id})"></div>
+        <div class="card-body" onclick="toggleExpand(${t.id})">
+          <div class="card-title">${escH(t.title)}</div>
+          <div class="card-meta"><span class="pill ${catClass[t.cat]||"cat-task"}">${catLabel[t.cat]||t.cat}</span>${freqPill(t)}<span class="pill ${ownerPill[t.owner]}">${ownerLabel[t.owner]}</span><span class="pill ${energyPill[t.energy]}">${energyLabel[t.energy]}</span>${duePill(t.due)}${planPill(t.plan)}${t.people&&t.people.length?t.people.slice(0,2).map(p=>`<span class="pill pill-person">${escH(p)}</span>`).join(""):""}</div>
+          ${isRecur&&t.lastDone?`<div class="recur-done-note">Last completed: ${t.lastDone}${t.freq&&!["asneeded","reminder"].includes(t.freq)?" — next due: "+(t.due||"not set"):""}</div>`:""}
+        </div>
+        <div class="card-actions"><button class="card-action-btn edit-btn" onclick="editTask(${t.id})" title="Edit">&#9998;</button><button class="card-action-btn del-btn" onclick="deleteTask(${t.id})" title="Remove">&#128465;</button>${hasD?`<button class="card-action-btn exp-btn" onclick="toggleExpand(${t.id})" title="Expand">${exp?"&#9650;":"&#9660;"}</button>`:`<div style="width:32px"></div>`}</div></div>`;
       if(hasD){
         html+=`<div class="card-detail ${exp?"open":""}">`;
         if(t.notes)html+=`<div class="detail-section"><div class="detail-label">Notes &amp; context</div><div class="detail-content">${t.notes}</div></div>`;
-        if(hasSubs){
-          html+=`<div class="detail-section"><div class="detail-label">Steps</div><div style="display:flex;flex-direction:column;gap:6px">`;
-          t.subs.forEach((s,i)=>{
-            html+=`<div class="card-step"><div class="card-step-main"><div class="sub-chk ${s.done?"on":""}" onclick="toggleSub(${t.id},${i})"></div><span class="${s.done?"sub-done":""}">${escH(s.text)}</span></div>`;
-            if(s.subs&&s.subs.length)s.subs.forEach((ss,j)=>{html+=`<div class="card-substep"><div class="sub-chk sm ${ss.done?"on":""}" onclick="toggleSubSub(${t.id},${i},${j})"></div><span class="${ss.done?"sub-done":""}">${escH(ss.text)}</span></div>`;});
-            html+=`</div>`;
-          });
-          html+=`</div></div>`;
-        }
+        if(hasSubs){html+=`<div class="detail-section"><div class="detail-label">Steps</div><div style="display:flex;flex-direction:column;gap:6px">`;t.subs.forEach((s,i)=>{html+=`<div class="card-step"><div class="card-step-main"><div class="sub-chk ${s.done?"on":""}" onclick="toggleSub(${t.id},${i})"></div><span class="${s.done?"sub-done":""}">${escH(s.text)}</span></div>`;if(s.subs&&s.subs.length)s.subs.forEach((ss,j)=>{html+=`<div class="card-substep"><div class="sub-chk sm ${ss.done?"on":""}" onclick="toggleSubSub(${t.id},${i},${j})"></div><span class="${ss.done?"sub-done":""}">${escH(ss.text)}</span></div>`;});html+=`</div>`;});html+=`</div></div>`;}
         if(t.people&&t.people.length)html+=`<div class="detail-section"><div class="detail-label">People involved</div><div class="people-row">${t.people.map(p=>`<div style="display:flex;align-items:center;gap:6px"><div class="avatar" style="${pColor(p)}">${initials(p)}</div><span class="person-name">${escH(p)}</span></div>`).join("")}</div></div>`;
         if(t.link)html+=`<div class="detail-section"><div class="detail-label">Reference / link</div><a class="link-item" href="${escH(t.link)}" target="_blank">${escH(t.link)}</a></div>`;
         html+=`</div>`;
@@ -1095,243 +816,58 @@ function render(){
   document.getElementById("board").innerHTML=html||`<div class="empty-state">${activeFilter==="done"?"No completed tasks yet — go get that first checkmark!":"Nothing here yet. Add a task to get started!"}</div>`;
 }
 
-// ── Drag & Drop ──────────────────────────────────────────
+// ── Drag & Drop ───────────────────────────────────────────
 let dragId=null;
-
-// Section key → what owner/cat change to apply when dropped there
-const secOwnerMap={mine:"mine",both:"both",theirs:"theirs",hold:"hold",idea:null,recurring:null,done:null};
-
-function dragStart(e,id){
-  dragId=id;
-  e.dataTransfer.effectAllowed="move";
-  e.dataTransfer.setData("text/plain",id);
-  setTimeout(()=>{const el=document.querySelector(`.card[data-id="${id}"]`);if(el)el.classList.add("dragging");},0);
-}
-function dragEnd(e){
-  document.querySelectorAll(".card.dragging").forEach(el=>el.classList.remove("dragging"));
-  document.querySelectorAll(".card.drag-over-top,.card.drag-over-bottom").forEach(el=>{el.classList.remove("drag-over-top","drag-over-bottom");});
-  document.querySelectorAll(".section.drop-target").forEach(el=>el.classList.remove("drop-target"));
-  document.querySelectorAll(".stat.drag-over").forEach(el=>el.classList.remove("drag-over"));
-}
-
-// Card-level drag: shows top/bottom insertion line
-function cardDragOver(e,id){
-  if(dragId===null||dragId===id)return;
-  e.preventDefault();e.stopPropagation();
-  const el=document.querySelector(`.card[data-id="${id}"]`);if(!el)return;
-  const rect=el.getBoundingClientRect();
-  const mid=rect.top+rect.height/2;
-  el.classList.remove("drag-over-top","drag-over-bottom");
-  el.classList.add(e.clientY<mid?"drag-over-top":"drag-over-bottom");
-}
-function cardDragLeave(e){
-  const el=e.currentTarget;
-  el.classList.remove("drag-over-top","drag-over-bottom");
-}
-function cardDrop(e,targetId,secKey){
-  e.preventDefault();e.stopPropagation();
-  if(dragId===null||dragId===targetId)return;
-  const el=document.querySelector(`.card[data-id="${targetId}"]`);
-  const insertBefore=el&&el.classList.contains("drag-over-top");
-
-  const src=tasks.find(x=>x.id===dragId);
-  const tgt=tasks.find(x=>x.id===targetId);
-  if(!src||!tgt)return;
-
-  // Apply section owner change
-  applySecChange(src,secKey);
-
-  // Reorder: remove src, insert near target
-  tasks=tasks.filter(x=>x.id!==dragId);
-  const tgtIdx=tasks.findIndex(x=>x.id===targetId);
-  tasks.splice(insertBefore?tgtIdx:tgtIdx+1,0,src);
-
-  dragId=null;save();render();suggest();
-}
-
-// Section-level drop (dropping onto the section header/empty area)
-function secDragOver(e,secKey){
-  e.preventDefault();
-  const sec=document.querySelector(`.section[data-sec="${secKey}"]`);
-  if(sec)sec.classList.add("drop-target");
-}
-function secDragLeave(e){
-  // only remove if truly leaving the section
-  if(!e.currentTarget.contains(e.relatedTarget)){
-    e.currentTarget.classList.remove("drop-target");
-  }
-}
-function secDrop(e,secKey){
-  e.preventDefault();
-  document.querySelectorAll(".section.drop-target").forEach(el=>el.classList.remove("drop-target"));
-  if(dragId===null)return;
-  const src=tasks.find(x=>x.id===dragId);
-  if(!src)return;
-  applySecChange(src,secKey);
-  dragId=null;save();render();suggest();
-}
-
-// Stat box drag
-function statDragOver(e,owner){
-  e.preventDefault();
-  e.currentTarget.classList.add("drag-over");
-}
+function dragStart(e,id){dragId=id;e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",id);setTimeout(()=>{const el=document.querySelector(`.card[data-id="${id}"]`);if(el)el.classList.add("dragging");},0);}
+function dragEnd(e){document.querySelectorAll(".card.dragging").forEach(el=>el.classList.remove("dragging"));document.querySelectorAll(".card.drag-over-top,.card.drag-over-bottom").forEach(el=>{el.classList.remove("drag-over-top","drag-over-bottom");});document.querySelectorAll(".section.drop-target").forEach(el=>el.classList.remove("drop-target"));document.querySelectorAll(".stat.drag-over").forEach(el=>el.classList.remove("drag-over"));}
+function cardDragOver(e,id){if(dragId===null||dragId===id)return;e.preventDefault();e.stopPropagation();const el=document.querySelector(`.card[data-id="${id}"]`);if(!el)return;const rect=el.getBoundingClientRect();const mid=rect.top+rect.height/2;el.classList.remove("drag-over-top","drag-over-bottom");el.classList.add(e.clientY<mid?"drag-over-top":"drag-over-bottom");}
+function cardDragLeave(e){const el=e.currentTarget;el.classList.remove("drag-over-top","drag-over-bottom");}
+function cardDrop(e,targetId,secKey){e.preventDefault();e.stopPropagation();if(dragId===null||dragId===targetId)return;const el=document.querySelector(`.card[data-id="${targetId}"]`);const insertBefore=el&&el.classList.contains("drag-over-top");const src=tasks.find(x=>x.id===dragId);const tgt=tasks.find(x=>x.id===targetId);if(!src||!tgt)return;applySecChange(src,secKey);tasks=tasks.filter(x=>x.id!==dragId);const tgtIdx=tasks.findIndex(x=>x.id===targetId);tasks.splice(insertBefore?tgtIdx:tgtIdx+1,0,src);dragId=null;save();render();suggest();}
+function secDragOver(e,secKey){e.preventDefault();const sec=document.querySelector(`.section[data-sec="${secKey}"]`);if(sec)sec.classList.add("drop-target");}
+function secDragLeave(e){if(!e.currentTarget.contains(e.relatedTarget))e.currentTarget.classList.remove("drop-target");}
+function secDrop(e,secKey){e.preventDefault();document.querySelectorAll(".section.drop-target").forEach(el=>el.classList.remove("drop-target"));if(dragId===null)return;const src=tasks.find(x=>x.id===dragId);if(!src)return;applySecChange(src,secKey);dragId=null;save();render();suggest();}
+function statDragOver(e,owner){e.preventDefault();e.currentTarget.classList.add("drag-over");}
 function statDragLeave(e){e.currentTarget.classList.remove("drag-over");}
-function statDrop(e,owner){
-  e.currentTarget.classList.remove("drag-over");
-  if(dragId===null)return;
-  const src=tasks.find(x=>x.id===dragId);
-  if(!src)return;
-  if(owner==="done"){src.done=true;}
-  else{src.done=false;src.owner=owner;}
-  dragId=null;save();render();suggest();
-}
-
-function applySecChange(task,secKey){
-  // Map section key to owner/done changes
-  if(secKey==="done"){task.done=true;return;}
-  task.done=false;
-  if(secKey==="mine")task.owner="mine";
-  else if(secKey==="both")task.owner="both";
-  else if(secKey==="theirs")task.owner="theirs";
-  else if(secKey==="hold")task.owner="hold";
-  else if(secKey==="idea")task.cat="idea";
-  else if(secKey==="recurring")task.cat="recurring";
-}
-// ─────────────────────────────────────────────────────────
+function statDrop(e,owner){e.currentTarget.classList.remove("drag-over");if(dragId===null)return;const src=tasks.find(x=>x.id===dragId);if(!src)return;if(owner==="done")src.done=true;else{src.done=false;src.owner=owner;}dragId=null;save();render();suggest();}
+function applySecChange(task,secKey){if(secKey==="done"){task.done=true;return;}task.done=false;if(secKey==="mine")task.owner="mine";else if(secKey==="both")task.owner="both";else if(secKey==="theirs")task.owner="theirs";else if(secKey==="hold")task.owner="hold";else if(secKey==="idea")task.cat="idea";else if(secKey==="recurring")task.cat="recurring";}
 
 // ── Tab switching ─────────────────────────────────────────
 let activeTab='tasks';
-function switchTab(tab){
-  activeTab=tab;
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['tasks','calls'][i]===tab));
-  document.getElementById('tab-tasks').classList.toggle('active',tab==='tasks');
-  document.getElementById('tab-calls').classList.toggle('active',tab==='calls');
-  if(tab==='calls')renderCalls();
-}
+function switchTab(tab){activeTab=tab;document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['tasks','calls'][i]===tab));document.getElementById('tab-tasks').classList.toggle('active',tab==='tasks');document.getElementById('tab-calls').classList.toggle('active',tab==='calls');if(tab==='calls')renderCalls();}
 
-// ── Calls data ────────────────────────────────────────────
-let calls=[],callIdC=1,activeCallFilter='all',expandedCallId=null,editingCallId=null;
-
+// ── Calls ─────────────────────────────────────────────────
+let calls=[],callIdC=1,activeCallFilter='all',expandedCallId=null;
 const CALLS_KEY='whq_calls';
-function loadCalls(){
-  try{const s=localStorage.getItem(CALLS_KEY);if(s){calls=JSON.parse(s);if(calls.length)callIdC=Math.max(...calls.map(x=>x.id))+1;}}catch(e){}
-  renderCallsBadge();
-}
-function saveCalls(){
-  try{localStorage.setItem(CALLS_KEY,JSON.stringify(calls));}catch(e){}
-  renderCallsBadge();
-}
-
-function renderCallsBadge(){
-  const upcoming=calls.filter(c=>c.status==='upcoming').length;
-  const badge=document.getElementById('calls-badge');
-  if(badge){badge.textContent=upcoming||'';badge.style.display=upcoming?'inline':'none';}
-}
-
-function toggleCallForm(){
-  const f=document.getElementById('call-form');
-  const b=document.getElementById('call-add-toggle-btn');
-  const isOpen=f.classList.toggle('open');
-  b.textContent=isOpen?'— Close':'+ Schedule a call';
-  if(isOpen)setTimeout(()=>document.getElementById('cf-title').focus(),50);
-}
-
+function loadCalls(){try{const s=localStorage.getItem(CALLS_KEY);if(s){calls=JSON.parse(s);if(calls.length)callIdC=Math.max(...calls.map(x=>x.id))+1;}}catch(e){}renderCallsBadge();}
+function saveCalls(){try{localStorage.setItem(CALLS_KEY,JSON.stringify(calls));}catch(e){}renderCallsBadge();}
+function renderCallsBadge(){const upcoming=calls.filter(c=>c.status==='upcoming').length;const badge=document.getElementById('calls-badge');if(badge){badge.textContent=upcoming||'';badge.style.display=upcoming?'inline':'none';}}
+function toggleCallForm(){const f=document.getElementById('call-form');const b=document.getElementById('call-add-toggle-btn');const isOpen=f.classList.toggle('open');b.textContent=isOpen?'— Close':'+ Schedule a call';if(isOpen)setTimeout(()=>document.getElementById('cf-title').focus(),50);}
 function saveCall(){
   const title=document.getElementById('cf-title').value.trim();if(!title)return;
-  const call={
-    id:callIdC++,
-    title,
-    status:document.getElementById('cf-status').value,
-    date:document.getElementById('cf-date').value||null,
-    time:document.getElementById('cf-time').value||null,
-    duration:document.getElementById('cf-duration').value,
-    attendees:document.getElementById('cf-attendees').value.trim().split(',').map(p=>p.trim()).filter(Boolean),
-    link:document.getElementById('cf-link').value.trim(),
-    agenda:document.getElementById('cf-agenda').value.trim(),
-    notes:'',
-    created:Date.now()
-  };
+  const call={id:callIdC++,title,status:document.getElementById('cf-status').value,date:document.getElementById('cf-date').value||null,time:document.getElementById('cf-time').value||null,duration:document.getElementById('cf-duration').value,attendees:document.getElementById('cf-attendees').value.trim().split(',').map(p=>p.trim()).filter(Boolean),link:document.getElementById('cf-link').value.trim(),agenda:document.getElementById('cf-agenda').value.trim(),notes:'',created:Date.now()};
   calls.push(call);
   ['cf-title','cf-link','cf-attendees','cf-agenda'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('cf-date').value='';
-  document.getElementById('cf-time').value='';
-  document.getElementById('cf-status').value='upcoming';
-  document.getElementById('cf-duration').value='30';
+  document.getElementById('cf-date').value='';document.getElementById('cf-time').value='';document.getElementById('cf-status').value='upcoming';document.getElementById('cf-duration').value='30';
   saveCalls();renderCalls();toggleCallForm();
 }
-
 function deleteCall(id){if(!confirm('Remove this call?'))return;calls=calls.filter(x=>x.id!==id);if(expandedCallId===id)expandedCallId=null;saveCalls();renderCalls();}
 function toggleCallExpand(id){expandedCallId=expandedCallId===id?null:id;renderCalls();}
-
-function editCallStatus(id,status){
-  const c=calls.find(x=>x.id===id);if(!c)return;
-  c.status=status;saveCalls();renderCalls();
-}
-
-function saveCallNotes(id){
-  const c=calls.find(x=>x.id===id);if(!c)return;
-  const el=document.getElementById('call-notes-'+id);
-  if(el){c.notes=el.value;saveCalls();showSync('saved','Notes saved ✓');}
-}
-
-function setCallFilter(f,btn){
-  activeCallFilter=f;
-  document.querySelectorAll('.call-filter-btn').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  renderCalls();
-}
-
+function editCallStatus(id,status){const c=calls.find(x=>x.id===id);if(!c)return;c.status=status;saveCalls();renderCalls();}
+function saveCallNotes(id){const c=calls.find(x=>x.id===id);if(!c)return;const el=document.getElementById('call-notes-'+id);if(el){c.notes=el.value;saveCalls();showSync('saved','Notes saved ✓');}}
+function setCallFilter(f,btn){activeCallFilter=f;document.querySelectorAll('.call-filter-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderCalls();}
 function callDaysUntil(ds){if(!ds)return null;const d=new Date(ds);const n=new Date();n.setHours(0,0,0,0);return Math.ceil((d-n)/864e5);}
-
-function formatCallDate(ds,ts){
-  if(!ds)return'No date set';
-  const d=new Date(ds);
-  const days=callDaysUntil(ds);
-  const monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const base=d.getDate()+' '+monthNames[d.getMonth()]+' '+d.getFullYear();
-  const timeStr=ts?(' at '+ts.slice(0,5)):'';
-  if(days===0)return'Today'+timeStr;
-  if(days===1)return'Tomorrow'+timeStr;
-  if(days===-1)return'Yesterday'+timeStr;
-  return base+timeStr;
-}
-
 function renderCalls(){
-  let visible=calls.filter(c=>{
-    if(activeCallFilter==='all')return true;
-    return c.status===activeCallFilter;
-  });
-  // Sort: upcoming by date asc, done/cancelled by date desc
-  visible.sort((a,b)=>{
-    if(a.status==='upcoming'&&b.status!=='upcoming')return-1;
-    if(b.status==='upcoming'&&a.status!=='upcoming')return 1;
-    if(!a.date&&!b.date)return b.created-a.created;
-    if(!a.date)return 1;if(!b.date)return-1;
-    return a.status==='upcoming'?(new Date(a.date)-new Date(b.date)):(new Date(b.date)-new Date(a.date));
-  });
-
-  if(!visible.length){
-    document.getElementById('calls-list').innerHTML=`<div class="calls-empty">${activeCallFilter==='all'?'No calls scheduled yet. Add one to get started!':'No '+activeCallFilter+' calls.'}</div>`;
-    renderCallsBadge();return;
-  }
-
+  let visible=calls.filter(c=>activeCallFilter==='all'||c.status===activeCallFilter);
+  visible.sort((a,b)=>{if(a.status==='upcoming'&&b.status!=='upcoming')return-1;if(b.status==='upcoming'&&a.status!=='upcoming')return 1;if(!a.date&&!b.date)return b.created-a.created;if(!a.date)return 1;if(!b.date)return-1;return a.status==='upcoming'?(new Date(a.date)-new Date(b.date)):(new Date(b.date)-new Date(a.date));});
+  if(!visible.length){document.getElementById('calls-list').innerHTML=`<div class="calls-empty">${activeCallFilter==='all'?'No calls scheduled yet. Add one to get started!':'No '+activeCallFilter+' calls.'}</div>`;renderCallsBadge();return;}
   const monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   let html=visible.map(c=>{
-    const exp=expandedCallId===c.id;
-    const days=c.date?callDaysUntil(c.date):null;
-    const isToday=days===0;
-    const isPast=days!==null&&days<0;
-    const d=c.date?new Date(c.date):null;
-    const dayNum=d?d.getDate():'—';
-    const mon=d?monthNames[d.getMonth()]:'';
-    const dateBlockCls=isToday?'today':isPast?'past':'';
+    const exp=expandedCallId===c.id;const days=c.date?callDaysUntil(c.date):null;const isToday=days===0;const isPast=days!==null&&days<0;const d=c.date?new Date(c.date):null;
+    const dayNum=d?d.getDate():'—';const mon=d?monthNames[d.getMonth()]:'';const dateBlockCls=isToday?'today':isPast?'past':'';
     const cardCls=c.status==='done'?'status-done':c.status==='cancelled'?'status-cancelled':isToday?'upcoming-today':days!==null&&days<=3?'upcoming-soon':'';
     const statusPillCls=c.status==='done'?'pill-call-done':c.status==='cancelled'?'pill-call-cancelled':isToday?'pill-call-today':'pill-call-upcoming';
     const statusLabel=c.status==='done'?'Done':c.status==='cancelled'?'Cancelled':isToday?'Today!':'Upcoming';
-    const durationLabel=c.duration?c.duration+'min':'';
-    const timeStr=c.time?c.time.slice(0,5):'';
-
+    const timeStr=c.time?c.time.slice(0,5):'';const durationLabel=c.duration?c.duration+'min':'';
     let detailHtml='';
     if(c.agenda)detailHtml+=`<div class="detail-section"><div class="detail-label">Agenda</div><div class="detail-content" style="white-space:pre-wrap">${escH(c.agenda)}</div></div>`;
     if(c.attendees&&c.attendees.length)detailHtml+=`<div class="detail-section"><div class="detail-label">Attendees</div><div class="people-row">${c.attendees.map(p=>`<div style="display:flex;align-items:center;gap:6px"><div class="avatar" style="${pColor(p)}">${initials(p)}</div><span class="person-name">${escH(p)}</span></div>`).join('')}</div></div>`;
@@ -1339,43 +875,17 @@ function renderCalls(){
     detailHtml+=`<div class="detail-section"><div class="detail-label">Call notes &amp; summary</div><textarea class="call-notes-editor" id="call-notes-${c.id}" placeholder="Add notes during or after the call...">${escH(c.notes||'')}</textarea><button class="call-notes-save" onclick="saveCallNotes(${c.id})">Save notes</button></div>`;
     if(c.status==='upcoming')detailHtml+=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><button class="btn-save" style="background:var(--g400);font-size:12px;padding:6px 16px" onclick="editCallStatus(${c.id},'done')">Mark as done</button><button class="btn-save" style="background:var(--c400);font-size:12px;padding:6px 16px" onclick="editCallStatus(${c.id},'cancelled')">Cancel call</button></div>`;
     if(c.status!=='upcoming')detailHtml+=`<div><button class="btn-cancel" style="font-size:12px;padding:6px 14px" onclick="editCallStatus(${c.id},'upcoming')">Restore to upcoming</button></div>`;
-
-    return`<div class="call-card ${cardCls}">
-      <div class="call-main">
-        <div class="call-date-block ${dateBlockCls}">
-          <div class="call-day">${dayNum}</div>
-          <div class="call-month">${mon}</div>
-        </div>
-        <div class="call-body" onclick="toggleCallExpand(${c.id})">
-          <div class="call-title">${escH(c.title)}</div>
-          <div class="call-meta">
-            <span class="pill ${statusPillCls}">${statusLabel}</span>
-            ${timeStr?`<span class="pill pill-plan">${timeStr}</span>`:''}
-            ${durationLabel?`<span class="pill pill-low">${durationLabel}</span>`:''}
-            ${c.attendees&&c.attendees.length?c.attendees.slice(0,3).map(p=>`<span class="pill pill-person">${escH(p)}</span>`).join(''):''}
-          </div>
-        </div>
-        <div class="card-actions">
-          <button class="card-action-btn del-btn" onclick="deleteCall(${c.id})" title="Remove">&#128465;</button>
-          <button class="card-action-btn exp-btn" onclick="toggleCallExpand(${c.id})" title="Expand">${exp?'&#9650;':'&#9660;'}</button>
-        </div>
-      </div>
-      <div class="call-detail ${exp?'open':''}">
-        ${detailHtml}
-      </div>
-    </div>`;
+    return`<div class="call-card ${cardCls}"><div class="call-main"><div class="call-date-block ${dateBlockCls}"><div class="call-day">${dayNum}</div><div class="call-month">${mon}</div></div><div class="call-body" onclick="toggleCallExpand(${c.id})"><div class="call-title">${escH(c.title)}</div><div class="call-meta"><span class="pill ${statusPillCls}">${statusLabel}</span>${timeStr?`<span class="pill pill-plan">${timeStr}</span>`:''}${durationLabel?`<span class="pill pill-low">${durationLabel}</span>`:''}${c.attendees&&c.attendees.length?c.attendees.slice(0,3).map(p=>`<span class="pill pill-person">${escH(p)}</span>`).join(''):''}</div></div><div class="card-actions"><button class="card-action-btn del-btn" onclick="deleteCall(${c.id})" title="Remove">&#128465;</button><button class="card-action-btn exp-btn" onclick="toggleCallExpand(${c.id})" title="Expand">${exp?'&#9650;':'&#9660;'}</button></div></div><div class="call-detail ${exp?'open':''}">${detailHtml}</div></div>`;
   }).join('');
-
-  document.getElementById('calls-list').innerHTML=html;
-  renderCallsBadge();
+  document.getElementById('calls-list').innerHTML=html;renderCallsBadge();
 }
-// ─────────────────────────────────────────────────────────
 
 greeting();
 buildToolbar("f-toolbar","f-notes");
 buildToolbar("e-toolbar","e-notes");
 loadFromSheet();
 loadCalls();
+loadMeetLinks();
 </script>
 </body>
 </html>
